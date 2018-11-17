@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <%/*   include include.ejs  */%>
+    	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>Smart metter</title>
+</head>
+
+<body>
+<%# include nav.ejs %>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                 <a class="navbar-brand" href="">Smart Metter System</a>
+            </div>
+             <div id="navbar" class="navbar-collapse collapse">
+                <div class="nav navbar-nav navbar-right">
+
+                    <li><a href="#">Cài đặt</a></li>
+                    <!-- <li><a href="#">Trợ giúp</a></li> -->
+                    <li><a href="/login/logout">Đăng xuất</a></li>
+                </div>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search.......">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </form>
+
+            </div>
+        </div>
+    </nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12" >
+            <!--<h2 class="sub-header">Static</h2>-->
+            <div class="row" >
+                <div class="col-xs-6 col-sm-3">   
+                    <p class="count-text "> Điện áp</p>
+                    <h2 class="up_voltage" id='voltage'> 220 V</h2>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                    <p class="count-text ">Cường độ dòng điện</p>
+                    <h2 class="up_current" id='current'>1 A</h2>
+                </div>
+                <div class="col-xs-6 col-sm-3">                 
+                    <p class="count-text "> Công Suất</p>
+                    <h2 class="up_consumption" id='power'>0.2 kw</h2>
+                </div>
+                <div class="col-xs-6 col-sm-3">
+                    <p class="count-text ">  Điện Năng Tiêu Thụ</p>
+                    <h2 class="up_consumpH" id='energy'>700 kwh</h2>
+                </div>              
+            </div>
+            <h4 class="sub-header" id="chart-1" style="text-align: left; padding-left: 0.2%">Hiển thị/ẩn</h4>
+
+
+            <%# include chart_vol.ejs%>
+            <div class="row">
+                <div class="col-xs-2 col-sm-8">
+                        <h4 class="sub-header">Thông tin khách hàng</h4>
+                </div>
+                <div class="col-xs-2 col-sm-4">
+                    <!--<h4 class="sub-header">Thông báo</h4>-->
+                    <ul class="nav nav-tabs btn btn-danger">
+                        <li ><a href="#recomment"  role="button" id="aa">Phản hồi</a></li>
+                        <li ><a href="#notice" role="button" >Thông báo</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                    <div class="col-xs-6 col-sm-3">
+                        <p class="count-text text-left">Mã Khách Hàng:</p>
+                        <p class="count-text text-left">Họ và tên khách hàng:</p>
+                        <p class="count-text text-left">Địa chỉ:</p>
+                        <p class="count-text text-left">Số điện thoại:</p>
+                        <p class="count-text text-left">Email:</p>
+                    </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <p class="count-text text-left ID" id='customerId'> <%=user.customerId %> <br></p>
+                            <p class="count-text text-left customer" id='displayName'> <%=user.displayName %> <br></p>
+                            <p class="count-text text-left address_user" id='address'><%=user.address %> <br></p>
+                            <p class="count-text text-left phone" id='phoneNumber'> <%= user.phoneNumber %> <br></p>
+                            <p class="count-text text-left email" id='email'> <%= user.email %> <br></p>
+                        </div>
+          
+                </div>
+                <div class="col-sm-4" style="margin: auto;">
+               		 <!--<iframe src="thongbao.html" width="400" height="145">-->
+               		 <!--</iframe>-->
+                    <div class="tab-content">
+                        <div id="recomment" class="tab-pane fade">
+                            <p>có thắc mắc gì xin vui lòng phản hồi tại đây, hệ thống sẽ tự động chuyển phản hồi qua email</p>
+                        </div>
+                        <div id="notice" class="tab-pane fade">
+                           <p>Cty điện xin thông báo đến quý khách hàng tiền điện tháng này là 220.000vnđ
+                           vui lòng quý khách thanh toán trước 20/10 ko là sẽ bị cắt điện.
+                           </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Thời Gian</th>
+                            <th>Lượng điện tiêu thụ</th>
+                            <th>Số tiền phải thanh toán</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script/TabNoticeUser.js"></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<!-- BEGIN USER MANAGE -->
+<p id='userServer'    hidden > <%= JSON.stringify(user) %> </p>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-functions.js"></script> --> <!-- KHÔNG ĐƯỢC  -->
+<script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
+
+<script src="script/userFrontEnd.js"></script>
+<!-- END USER MANAGE -->
+</body>
+</html>
+

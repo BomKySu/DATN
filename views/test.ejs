@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<title> TEST TEST TEST </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebase/5.5.3/firebase-auth.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+	<body style="height:100%; background-color:#eee;">
+
+    <!-- Popup Thông báo khi đăng nhập lỗi, phải viết ở Client -->
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+    <% alertMessage_ = 0 %>
+    <p href="click" id='myVarFromServer'> <%= alertMessage %></p>
+    <!-- <p id='myVarFromServer' hidden><%= alertMessage %></p> -->
+
+            
+    <p id='outputText'> Đây </p>
+    <p id='outputText2'> <br> Đây2    </p>
+
+
+    <script src="script/testFrontEnd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+ 
+    <script>
+        // axios.get("http://thoigian.epizy.com/")
+        // axios.get("/user/changePass/a")
+        // .then(function (response)
+        // {
+        //     console.log(response);
+        // });
+    </script>
+    <script>
+            var myElement2 = document.getElementById('outputText');
+            var myText2 = myElement2.innerHTML = "111111";
+            // if (myText.length > 0)
+            var i = 0;
+            myLoop();    // có cái này mới chạy loop
+            function myLoop()  
+            {
+                // myElement2.innerHTML = "222";
+                setTimeout(function () 
+                { 
+                    myElement2.innerHTML = "3333";
+                    // JSAlert.alert(myText);
+                    // console.log(myText);
+                    // JSAlert.confirm("Mày có thấy số này không: " + i).then(function(result) 
+                    {
+                        // if (result)
+                        {
+                            // JSAlert.alert(i); //.dismissIn(1000 * 10);;
+                            myElement2.innerHTML = JSON.stringify(i);;;;;;;;;;;;
+                            i ++;   
+                        }
+                        // else return;    
+                        myLoop();
+                    }
+                    // );
+                }, 1000)
+            };
+    </script>
+
+    <script>
+            var myElement = document.getElementById('outputText2');
+            var myText = myElement.innerHTML;
+            // if (myText.length > 0)
+            var i2 = null; 
+            myLoop2();    // có cái này mới chạy loop 
+            function myLoop2()  
+            { 
+                setTimeout(function () 
+                { 
+                    // JSAlert.alert(myText);
+                    // console.log(myText);
+                    // JSAlert.confirm("Mày có thấy số này không: " + i).then(function(result) 
+                    {
+                        // if (result)
+                        {
+                            // JSAlert.alert(i); //.dismissIn(1000 * 10);;
+                            myElement.innerHTML = JSON.stringify(i2);
+                            i2 ++;
+                        }
+                        // else return;    
+                        myLoop2();
+                    }
+                    // );
+                }, 1000)
+            };
+    </script>
+   
+</body>
+</html>

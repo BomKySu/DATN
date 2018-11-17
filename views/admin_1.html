@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.x-git.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <title>ADMIN</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Smart Metter System</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="nav navbar-nav navbar-right">
+                <!--<form class="navbar-form navbar-left">-->
+                    <!--<button class="btn btn-success">Gửi thông báo</button>-->
+                    <!--<button class="btn btn-success">Cài đặt</button>-->
+                    <!--<button class="btn btn-success">Trợ giúp</button>-->
+                    <!--<button class="btn btn-success">Đăng xuất</button>-->
+
+                <!--</form>-->
+                <li><a  href="#" data-toggle="modal" type="button" data-target="#Modal_thongbao">Gửi thông báo</a></li>
+                <li><a href="#">Cài đặt</a></li>
+                <li><a href="#">Trợ giúp</a></li>
+                <li><a href="/login/logout" id="logout">Đăng xuất</a></li>
+            </div>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search.......">
+                <button class="btn btn-default" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="row">
+                    <button class="btn-lg btn-danger">Nguyễn Hữu Nghĩa</button>
+                </div>
+                <div class="row">
+                    <br>
+                    <button id="btn_hn" class="btn btn-primary" data-toggle="collapse" data-target="#toggle_hn">Thông tin khách hàng</button>
+                    <label><input type="checkbox" checked data-toggle="toggle" data-onstyle="warning"></label>
+                </div>
+                <div  id="toggle_hn" class="row collapse dropdown-toggle">
+                    <br>
+                   <table class="table table-striped" >
+                       <tr>
+                           <td style="font-weight: bold">Họ và tên:</td>
+                           <td>Nguyễn Hữu Nghĩa</td>
+                       </tr>
+                       <tr>
+                           <td style="font-weight: bold">Mã khách hàng:</td>
+                           <td>14141211</td>
+                       </tr>
+                       <tr>
+                           <td style="font-weight: bold">Địa chỉ:</td>
+                           <td>45/6 đường Dân Chủ, bình Thọ, Thủ Đức,Tp.HCM</td>
+                       </tr>
+                       <tr>
+                           <td style="font-weight: bold">số điện thoại:</td>
+                           <td>097345643</td>
+                       </tr>
+                       <tr>
+                           <td style="font-weight: bold">Email liên hệ:</td>
+                           <td>huunghia@gmail.com</td>
+                       </tr>
+                       <tr>
+                           <td style="font-weight: bold">Lượng điện đang tiêu thụ</td>
+                           <td> 20 kwh</td>
+                       </tr>
+                   </table>
+
+                </div>
+                <div class="row">
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Thời gian</th>
+                            <th>Lượng điện tiêu thụ</th>
+                            <th>Số tiền cần thanh toán</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <button class="btn-lg btn-danger">Phạm Văn Hiến</button>
+                </div>
+                <div class="row">
+                    <br>
+                    <button id="btn_vh" class="btn btn-primary" data-toggle="collapse" data-target="#toggle_vh">Thông tin khách hàng</button>
+                    <label><input type="checkbox" checked data-toggle="toggle" data-onstyle="warning"></label>
+                </div>
+                <div class="row collapse dropdown-toggle" id="toggle_vh">
+                    <br>
+                    <table class="table table-striped">
+                        <tr>
+                            <td style="font-weight: bold">Họ và tên:</td>
+                            <td>Phạm Văn Hiến</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold">Mã khách hàng:</td>
+                            <td>14141222</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold">Địa chỉ:</td>
+                            <td>số 1,Võ Văn Ngân, Linh Chiểu, Thủ Đức,Tp.HCM</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold">số điện thoại:</td>
+                            <td>0972325552</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold">Email liên hệ:</td>
+                            <td>vanhien2403@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold">Lượng điện đang tiêu thụ</td>
+                            <td> 40 kwh</td>
+
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="row">
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Thời gian</th>
+                            <th>Lượng điện tiêu thụ</th>
+                            <th>Số tiền cần thanh toán</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal-->
+<div class="modal fade" id="Modal_thongbao" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông báo mới</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Thông báo:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Gửi thông báo</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--modal-->
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script type="text/javascript" src="script/myButton.js"></script>
+</body>
+</html>
+

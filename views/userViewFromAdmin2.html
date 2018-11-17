@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta charset="utf-8"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1  shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!--<%/*   include include.ejs  */%>-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+
+    <title>Trang cá nhân</title>
+
+</head>
+
+<body data-spy="scroll" data-target="#navbar-thongbao" style="background-color: rgba(245,239,211,0.64)">
+<!--<%# include nav.ejs %>-->
+<nav class="navbar sticky-top navbar-expand-xl py-1" style="background-color:#1F3A93">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="text-white navbar-brand" href="/">HỆ THỐNG QUẢN LÝ ĐIỆN NĂNG THÔNG MINH</a>
+
+    <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03" style="font-size: 16px">
+
+        <ul class="navbar-nav ml-6 ml-auto">
+            <li class="text-right">
+                <a class="nav-link text-white" href="/login/logout">Đăng xuất</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-sm-2 card">
+            <p class="text-center">Điện áp</p>
+            <h4 id='voltage' class="text-center">-- (V)</h4>
+        </div>
+        <div class=" col-sm-3 card">
+            <p class="text-center">Cường độ dòng điện</p>
+            <h4 id='current' class="text-center">-- (A)</h4>
+        </div>
+        <div class="col-sm-2 card">
+            <p  class="text-center"> Công suất</p>
+            <h4 id='power' class="text-center">-- (kW)</h4>
+        </div>
+        <div class="col-sm-3 card">
+            <p class="text-center" >  Điện năng tiêu thụ</p>
+            <h4 id='energy' class="text-center">-- (kWh)</h4>
+        </div>
+        <div class="col-sm-2 card">
+            <p class="text-center" style="color: blue">Cài đặt điện năng <br>tiêu thụ định mức</p>
+            <h4 id='limited' class="text-center" >
+                300 kWh
+                <div class="text-center" href="" data-toggle="modal" data-target="#ModalCenter" style="color: blue ; display: inline; font-size: 16px">
+                    <a class="fas fa-edit" ></a>
+                    <a>Sửa</a>
+                </div>
+            </h4>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8 col-md-4">
+            <div class="table card">
+                <table class="table table-bordered" style="height: 300px" >
+                    <tbody>
+                        <tr>
+                            <td class="font-weight-bold">Tên khách hàng</td>
+                            <td id="displayName"><%=user.displayName %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Mã khách hàng</td>
+                            <td id="customerId"><%=user.customerId %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Địa chỉ</td>
+                            <td id="address"><%=user.address %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Số điện thoại</td>
+                            <td id="phoneNumber"><%= user.phoneNumber %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Email</td>
+                            <td id="email"><%= user.email %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-8" style="background-color: #e0a800">
+            <div class="card">
+                <div class="card-body" >
+                    <div id="chartContainer" style="height: 300px; width: 100%;">
+                        <h2 class="text-center">Biểu Đồ Nằm Ở Đây</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="table-striped">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Thời Gian</th>
+                    <th>Lượng điện tiêu thụ</th>
+                    <th>Số tiền phải thanh toán</th>
+                    <th>Trạng thái</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div style="background-color:  #1F3A93;position: absolute" class="container-fluid">
+    <footer>
+        <p class="text-center text-white" style="padding-right: 60px;">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p>
+        <p class="text-center text-white">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p>
+        <p class="text-center text-white" style="padding-right: 80px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>
+    </footer>
+</div>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+</body>
+</html>
+

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <title>ĐIỆN LỰC HIẾN-NGHĨA-NAM | Đăng nhập</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta name="description">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!--<%/*   include include.ejs  */%>-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.x-git.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebase/5.5.3/firebase-auth.js"></script> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body background="IMAGE/background_login.jpg" style="background-color:#eee;height: 100%; background-size: auto; background-position: center">
+<nav href="/" class="" style="background: rgba(114,171,255,0.9); text-align:center; align-items: center">
+    <div class="container-fluid">
+        <div class="navbar navbar-text" >
+            <div>
+                <a href="/" class="navbar-brand" style="font-weight: bold; font-size: large">ĐỒ ÁN TỐT NGHIỆP</a>
+            </div>
+            <div style="text-align:center">
+                <a href="/" class="navbar-brand" style="color: rgb(255,0,0);font-weight: bold; font-size: xx-large ; ">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH</a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+<marquee style="background: rgba(255,239,219,0.7); color: rgba(45,62,72,1);font-weight: bold;">Tổng công ty điện lực Hiến-Nghĩa-Nam xin kính chào quý khách!</marquee>
+<div class="container container-fluid">
+    <!--<img src="./IMAGE/BACKGROUND.png" class="img-fluid" alt="Responsive image">-->
+        <div class="row" style="padding-top: 80px;padding-right: 100px;padding-left: 100px; ">
+            <div class="col-sm-3"></div>
+                <div  class="col-sm-6">
+
+            <!--<div class="col-12" style="background-color: #fff;">-->
+                <!-- <form class="form-horizontal" role="form"  method="POST" action="/login" accept-charset="UTF-8"> -->
+                <!-- <form class="form-horizontal" role="form"  method="POST" action="/user.html" accept-charset="UTF-8"> -->
+                <!-- <form class="form-control-range" role="form"  method="POST" action="/login/submit" accept-charset="UTF-8"> -->
+                    <div class="form-group">
+                        <div class="input-group col-sm-12">
+                            <span class="input-group-text"><span class="fas fa-user"></span></span>
+                            <input type="text" class="form-control" placeholder="Nhập email hoặc tên đăng nhập" id="usernameLogin" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group col-sm-12">
+                            <span class="input-group-text"><span class="fas fa-lock"></span></span>
+                            <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="passwordLogin" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12" style="text-align: center">
+                            <button type="submit" id="submitLogin" name="submit" class="btn btn-primary">
+                                Đăng nhập<!-- span class="glyphicon glyphicon-log-in"></span> Login</button> -->
+                            </button>
+                        </div>
+
+                    </div>
+                <!-- </form> -->
+            <!--</div>-->
+            <div class="col-sm-3"></div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+
+<!-- Popup Thông báo khi có lỗi, phải viết ở Client -->
+<script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script> 
+<!-- <p id='myVarFromServer'> <%= alertMessage %></p> -->
+<p id='myVarForAlert' hidden><%= alertMessage %></p>
+<script src="script/myAlert.js" ></script>
+<!-- Popup Thông báo khi có lỗi, phải viết ở Client -->
+
+<!-- login controler --> <!-- not use -->
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-auth.js"></script>
+<script src="script/init.js"></script>
+
+<script>
+    // var email = $("#usernameLogin").val();       // k được 20181109
+    // var password = ($("#passwordLogin")).val();  // k được 20181109
+    // $("#submitLogin").click                      // k được 20181109
+    (
+    document.getElementById("submitLogin").onclick = 
+    function() 
+    {
+        var email = document.getElementById("usernameLogin").value;
+        console.log(email);
+        var password = document.getElementById("passwordLogin").value;
+        console.log(password);
+        if (firebase.auth().currentUser) 
+        {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        } 
+        else 
+        {
+            if (email.length < 2) 
+            {
+                JSAlert.alert("Email hoặc tên người dùng không hợp lệ!");
+                return; 
+            }
+            if (password.length < 8) 
+            {
+                JSAlert.alert("Mật khẩu không hợp lệ!");
+                return;
+            }
+            if  (validateEmail(email) == false)
+            {
+                email = LoginUserName[email];
+                if (email == null)
+                {
+                    JSAlert.alert("Tên người dùng này chưa được đăng ký!");
+                    return;
+                }
+            }
+            // Sign in with email and pass.
+            // [START authwithemail]
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // [START_EXCLUDE]
+            if (errorCode)
+            {
+                if (errorCode == 'auth/user-not-found') errorMessage = 'Không tìm thấy người dùng này!';
+                else if (errorCode == 'auth/invalid-email')  errorMessage = 'Email không hợp lệ!';
+                else if (errorCode == 'auth/wrong-password')  errorMessage = 'Email/Tên đăng nhập hoặc mật khẩu không đúng!';   
+                else if (errorMessage.includes("network error")) errorMessage = "Lỗi mạng! Hãy kiểm tra kết nối và thử lại...";
+                JSAlert.alert(errorMessage);
+            }
+            console.log(error);
+            // document.getElementById('quickstart-sign-in').disabled = false;
+            // [END_EXCLUDE]
+            });
+            // [END authwithemail]
+        }
+        // document.getElementById('quickstart-sign-in').disabled = true;
+    }
+    );
+</script>
+<script>
+// on auth change
+
+    firebase.auth().onAuthStateChanged(function(user)
+    {
+        console.log('\nAuthState changed');
+        // httpGet("/");
+        if ( (user !== null && user !== undefined) )
+        {
+            window.location = "/user"; 
+            return;
+            console.log('current user: ', user.email);
+            var pathUserType = '/UserInfo/' + user.uid + '/type';
+            firebase_0.database().ref(pathUserType).once('value').then(function(userType)       
+            {
+                console.log(userType.val());
+                req.session.userType = userType.val();
+                req.session.sessUser = user;
+                // console.log("req.session.userType LOGIN.JS", req.session);
+                try
+                {
+                    res.redirect('/user');
+                }
+                catch(error) { console.log(error.message)};
+            });
+        };
+    });
+</script>
+<script>
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+</script>
+<script>
+    // load login user name
+    var LoginUserName = {};
+    firebase.database().ref('/LoginUserName').once('value').then(function(snapshot) 
+    {   
+        // console.log(snapshot.val());
+        LoginUserName = snapshot.val();
+    });
+</script>
+<script>
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+</script>
+
+</body>
+</html>

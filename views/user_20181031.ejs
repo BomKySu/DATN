@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1  shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!--<%/*   include include.ejs  */%>-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+
+
+    <title>Trang cá nhân</title>
+
+</head>
+
+<body data-spy="scroll" data-target="#navbar-thongbao">
+<!--<%# include nav.ejs %>-->
+<nav class="navbar navbar-expand-xl" style="background-color: #3667fd">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="text-white navbar-brand" href="#">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH</a>
+
+    <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03">
+        <ul class="navbar-nav ml-4 ml-auto">
+            <li class=" dropdown">
+                <a class="nav-link dropdown-toggle text-white"  href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cài đặt
+                </a>
+                <div class="dropdown-menu" >
+                    <a class="dropdown-item" href="#">Định mức sử dụng điện</a>
+                </div>
+            </li>
+            <li class="text-white">
+                    <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#Modal_phanhoi">Gửi phản hồi</a>
+                </li>
+            <li class="">
+                <a class="nav-link text-white" href="/login/logout">Đăng xuất</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<main>
+
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-sm-3">
+                <p>Điện áp</p>
+                <h4 id='voltage'>220 V</h4>
+            </div>
+            <div class=" col-sm-3">
+                <p>Cường độ dòng điện</p>
+                <h4 id='current'>1 A</h4>
+            </div>
+            <div class="col-sm-3">
+                <p > Công suất</p>
+                <h4 id='power'>0.2 kW</h4>
+            </div>
+            <div class="col-sm-3">
+                <p >  Điện năng tiêu thụ</p>
+                <h4 id='energy'>700 kWh</h4>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    Hiển thị/ẩn
+                </div>
+
+                <div class="table">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td class="font-weight-bold">Tên khách hàng</td>
+                            <td id="displayName"><%=user.displayName %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Mã khách hàng</td>
+                            <td id="customerId"><%=user.customerId %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Địa chỉ</td>
+                            <td id="address"><%=user.address %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Số điện thoại</td>
+                            <td id="phoneNumber"><%= user.phoneNumber %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Email</td>
+                            <td id="email"><%= user.email %></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Tên đăng nhập</td>
+                            <td>
+                                <a id="loginUserName"> </a>
+                                <a class="fas fa-edit" data-toggle="modal" data-target="#loginUserNameForm"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="panel">
+                    <h3 class="text-center" style="color:orangered">Thông báo</h3>
+                </div>
+                <div class="panel">
+                    <div class="list-group">
+                        <div>
+                            <!-- <label> <span class="fas fa-angle-double-right"></span> screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label> -->
+                            <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 1</b><br>Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ</label>
+                        </div>
+                        <div>
+                            <!-- <label> <span class="fas fa-angle-double-right"></span> Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label> -->
+                            <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 2</b><br>Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ</label>
+                        </div>
+                        <div>
+                            <!-- <label> <span class="fas fa-angle-double-right"></span> Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label> -->
+                            <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 3</b><br>Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ</label>
+                        </div>
+                        <div>
+                            <!-- <label> <span class="fas fa-angle-double-right"></span>Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label> -->
+                            <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 4</b><br> Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
+                            <label> <span class="fas fa-angle-double-right"></span> </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-striped">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Thời Gian</th>
+                        <th>Lượng điện tiêu thụ</th>
+                        <th>Số tiền phải thanh toán</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Footer -->
+<!-- CỬA SỔ PHẢN HỒI -->
+<div class="modal fade" id="Modal_phanhoi" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Phản hồi:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Gửi phản hồi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- HẾT CỬA SỔ PHẢN HỒI -->
+<!-- CỬA SỔ NHẬP LOGIN USER NAME -->
+<div class="modal fade" id="loginUserNameForm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Nhập tên đăng nhập mới:</label>
+                        <textarea class="form-control rounded-0 " rows="1" id="loginUserNameInput"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- HẾT CỬA SỔ NHẬP USER LOGIN NAME -->
+    
+
+<script src="./Script/TabNoticeUser.js"></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<!-- BEGIN USER MANAGE -->
+<p id='userServer'    hidden > <%= JSON.stringify(user) %> </p>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-functions.js"></script> -->
+<script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
+<script src="script/userFrontEnd.js"></script>
+<!-- END USER MANAGE -->
+</body>
+</html>
+
