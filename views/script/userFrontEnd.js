@@ -108,7 +108,7 @@ getElec = function()
     // database_Elec.ref(path).once('value').then(function(snapshot) 
     database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
     {   
-        console.log(snapshot.val()); 
+        // console.log(snapshot.val()); 
         if (snapshot.val() != null)
             displayElec(snapshot.val());
         else
