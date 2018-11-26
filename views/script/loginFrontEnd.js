@@ -19,12 +19,12 @@
         {
             if (email.length < 2) 
             {
-                JSAlert.alert("Email hoặc tên người dùng không hợp lệ!");
+                JSAlert.alert("Email hoặc tên người dùng không hợp lệ!", null, JSAlert.Icons.Failed);
                 return; 
             }
             if (password.length < 8) 
             {
-                JSAlert.alert("Mật khẩu không hợp lệ!");
+                JSAlert.alert("Mật khẩu không hợp lệ!", null, JSAlert.Icons.Failed);
                 return;
             }
             if  (validateEmail(email) == false)
@@ -32,10 +32,11 @@
                 email = LoginUserName[email];
                 if (email == null)
                 {
-                    JSAlert.alert("Tên người dùng này chưa được đăng ký!");
+                    JSAlert.alert("Tên người dùng này chưa được đăng ký!", null, JSAlert.Icons.Failed);
                     return;
                 }
             }
+            JSAlert.alert("Đang kiểm tra...").dismissIn(1000 * 1);;
             // Sign in with email and pass.
             // [START authwithemail]
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -49,7 +50,7 @@
                 else if (errorCode == 'auth/invalid-email')  errorMessage = 'Email không hợp lệ!';
                 else if (errorCode == 'auth/wrong-password')  errorMessage = 'Email/Tên đăng nhập hoặc mật khẩu không đúng!';   
                 else if (errorMessage.includes("network error")) errorMessage = "Lỗi mạng! Hãy kiểm tra kết nối và thử lại...";
-                JSAlert.alert(errorMessage);
+                JSAlert.alert(errorMessage, null, JSAlert.Icons.Failed);
             }
             console.log(error);
             // document.getElementById('quickstart-sign-in').disabled = false;
@@ -68,19 +69,32 @@
         // httpGet("/");
         if ( (user !== null && user !== undefined) )
         {
-            window.location = "/user"; 
-            return;
+            // window.location = "/user"; 
+            // return;
             console.log('current user: ', user.email);
             var pathUserType = '/UserInfo/' + user.uid + '/type';
-            firebase_0.database().ref(pathUserType).once('value').then(function(userType)       
+            firebase.database().ref(pathUserType).on('value', function(userType)       
             {
                 console.log(userType.val());
-                req.session.userType = userType.val();
-                req.session.sessUser = user;
-                // console.log("req.session.userType LOGIN.JS", req.session);
+                JSAlert.alert("Đang đăng nhập...");
                 try
                 {
-                    res.redirect('/user');
+                    if (userType.val() == "Customer")
+                    {
+                        window.location = "/user"; 
+                    }
+                    else if (userType.val() == "AdminKV")
+                    {
+                        window.location = "/user/admin_2"; 
+                    }
+                    else if (userType.val() == "AdminTong")
+                    {
+                        window.location = "/user/admin_1"; 
+                    }
+                    else
+                    {
+                        JSAlert.alert("Thông tin tài khoản không đầy đủ, liên hệ quản trị viên để biết thêm thông tin.");
+                    }
                 }
                 catch(error) { console.log(error.message)};
             });

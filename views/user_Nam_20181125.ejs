@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta charset="utf-8"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1  shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!--<%/*   include include.ejs  */%>-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+
+    <title>Trang cá nhân</title>
+
+</head>
+
+<body data-spy="scroll" data-target="#navbar-thongbao" style="background-color: rgba(245,239,211,0.64)">
+<!--<%# include nav.ejs %>-->
+<nav class="navbar sticky-top navbar-expand-xl py-1" style="background-color:#1F3A93">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="text-white navbar-brand" href="/">HỆ THỐNG QUẢN LÝ ĐIỆN NĂNG THÔNG MINH</a>
+
+    <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03" style="font-size: 16px">
+
+        <ul class="navbar-nav ml-6 ml-auto">
+            <li class="text-white">
+                <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#Modal_TK">Thông tin tài khoản</a>
+            </li>
+            <li class="text-white">
+                <a class="nav-link text-white" href="#">Thanh toán</a>
+            </li>
+            <li class="text-white">
+                <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#Modal_phanhoi">Gửi phản hồi</a>
+            </li>
+            <li class="text-right">
+                <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#Modal_changePass">Đổi mật khẩu</a>
+            </li>
+            <li class="text-right">
+                <a class="nav-link text-white" href="/login" id="logout">Đăng xuất</a>
+                <script>
+                    document.getElementById("logout").onclick =
+                    function()
+                    {
+                        firebase.auth().signOut();
+                    }
+                </script>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-sm-2 card">
+            <p class="text-center">Điện áp</p>
+            <h4 id='voltage' class="text-center">-- (V)</h4>
+        </div>
+        <div class=" col-sm-3 card">
+            <p class="text-center">Cường độ dòng điện</p>
+            <h4 id='current' class="text-center">-- (A)</h4>
+        </div>
+        <div class="col-sm-2 card">
+            <p  class="text-center"> Công suất</p>
+            <h4 id='power' class="text-center">-- (kW)</h4>
+        </div>
+        <div class="col-sm-3 card">
+            <p class="text-center" >  Điện năng tiêu thụ</p>
+            <h4 id='energy' class="text-center">-- (kWh)</h4>
+        </div>
+        <div class="col-sm-2 card">
+            <p class="text-center" style="color: blue">Cài đặt điện năng <br>tiêu thụ định mức</p>
+            <h4 id='limited' class="text-center" >
+                300 kWh
+                <div class="text-center" href="" data-toggle="modal" data-target="#ModalCenter" style="color: blue ; display: inline; font-size: 16px">
+                    <a class="fas fa-edit" ></a>
+                    <a>Sửa</a>
+                </div>
+            </h4>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="row my-0">
+                <div class="col-md-12" >
+                    <div class="card">
+                        <div class="card-body" >
+                            <div id="chartContainer" style="height: 280px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="table card">-->
+                <!--<table class="table table-bordered" >-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td class="font-weight-bold">Tên khách hàng</td>-->
+                        <!--<td id="displayName"><%=user.displayName %></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="font-weight-bold">Mã khách hàng</td>-->
+                        <!--<td id="customerId"><%=user.customerId %></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="font-weight-bold">Địa chỉ</td>-->
+                        <!--<td id="address"><%=user.address %></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="font-weight-bold">Số điện thoại</td>-->
+                        <!--<td id="phoneNumber"><%= user.phoneNumber %></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="font-weight-bold">Email</td>-->
+                        <!--<td id="email"><%= user.email %></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="font-weight-bold">Tên đăng nhập</td>-->
+                        <!--<td>-->
+                            <!--<a id="loginUserName"> </a>-->
+                            <!--<div href="" data-toggle="modal" data-target="#loginUserNameForm" style="color: blue; display: inline">-->
+                                <!--<a class="fas fa-edit" ></a>-->
+                                <!--<a>Sửa</a>-->
+                            <!--</div>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        </div>
+        <div class="col-6 col-md-4 card ">
+            <div class="panel">
+                <h4 class="text-center" style="color: orangered">Thông báo</h4>
+            </div>
+            <div class="panel card">
+                <div class="list-group" style="height: 550px;">
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 1</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 2</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 3</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 4</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 5</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 6</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 7</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 8</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 9</b><br></label>
+                    </div>
+                    <div>
+                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao">Thông báo 10</b><br></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-striped">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Thời Gian</th>
+                    <th>Lượng điện tiêu thụ</th>
+                    <th>Số tiền phải thanh toán</th>
+                    <th>Trạng thái</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div style="background-color:  #1F3A93;position: absolute" class="container-fluid">
+    <footer>
+        <p class="text-center text-white" style="padding-right: 60px;">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p>
+        <p class="text-center text-white">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p>
+        <p class="text-center text-white" style="padding-right: 80px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>
+
+    </footer>
+</div>
+<!-- CỬA SỔ PHẢN HỒI -->
+<!--modal_phanhoi-->
+<div class="modal fade" id="Modal_phanhoi" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Phản hồi:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+                <input type="file" accept="image/*" onchange="loadFile(event)">
+                <img id="output" style="max-width: 200px"/>
+                <script>
+                  var loadFile = function(event) {
+                    var reader = new FileReader();
+                    reader.onload = function(){
+                      var output = document.getElementById('output');
+                      output.src = reader.result;
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                  };
+                </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitFeedback">Gửi phản hồi</button>
+            </div>
+        </div>
+        <script>
+            var submitFeedback = document.getElementById("submitFeedback");
+            var textFeedback = document.getElementById("textFeedback");
+            submitFeedback.onclick = 
+            function()
+            {
+                // JSAlert.alert(textFeedback.value);
+                var nowMils = Date.now();
+                var time = moment(nowMils).format("YYYYMMDDHHmm");
+                var path = "/AdminThuDuc/feedback/" + time;
+                firebase.database().ref(path + "/content").set(textFeedback.value, function(error) 
+                {
+                    if (error) {
+                        // The write failed...
+                        // console.log("Update False");
+                        // return false;
+                    } else {
+                        // Data saved successfully!
+                        // return true;
+                    }
+                });
+                firebase.database().ref(path + "/time").set(time, function(error) {});
+            }
+        </script>
+    </div>
+</div>
+<!--modal center-->
+
+
+<div class="modal fade" id="Modal_TK" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3>Thông tin tài khoản</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table card">
+                            <table class="table table-bordered" >
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">Tên khách hàng</td>
+                                    <td id="displayName"><%/* user.displayName */%></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Mã khách hàng</td>
+                                    <td id="customerId"><%=user.customerId %></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Địa chỉ</td>
+                                    <td id="address"><%=user.address %></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Số điện thoại</td>
+                                    <td id="phoneNumber"><%= user.phoneNumber %></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Email</td>
+                                    <td id="email"><%= user.email %></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Tên đăng nhập</td>
+                                    <td>
+                                        <a id="loginUserName"> </a>
+                                        <div href="" data-toggle="modal" data-target="#loginUserNameForm" style="color: blue; display: inline">
+                                            <a class="fas fa-edit" ></a>
+                                            <a>Sửa</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CỬA SỔ CÀI ĐẶT GIỚI HẠN -->
+<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Thay đổi giới hạn sử dụng điện</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <input type="number">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CỬA SỔ NHẬP LOGIN USER NAME -->
+<div class="modal fade" id="loginUserNameForm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Nhập tên đăng nhập mới:</label>
+                        <textarea class="form-control rounded-0 " rows="1" id="loginUserNameInput"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitLoginUserName">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- HẾT CỬA SỔ NHẬP USER LOGIN NAME -->
+
+<!-- CỬA SỔ XÁC NHẬN ĐỔI MẬT KHẨU -->
+<!-- PHẢI ĐẶT ĐOẠN CODE NÀY Ở NGOÀI CÙNG,
+KHI NÓ XUẤT HIỆN THÌ NỀN SẼ MỜ ĐI,
+NẾU ĐẶT Ở TRONG THÌ KHI NÓ XUẤT HIỆN
+NÓ CŨNG MỜ THEO NỀN VÀ KHÔNG THAO TÁC ĐƯỢC -->
+<div class="modal fade" id="Modal_changePass_OLD" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label"><b>Bây giờ, bạn sẽ được chuyển tới trang đăng nhập.</b> <br>Sau đó, một liên kết sẽ được gửi tới email của bạn, <br>hãy truy cập liên kết đó để đổi mật khẩu mới! <br></label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <form action="/user/changePass/<%= user.email %>" method="GET" target="">
+                    <!-- <a href="/user/changePass/<%= user.email %>" > -->
+                    <button type="submit" class="btn btn-primary" >Xác nhận</button>
+                    <!-- </a> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- HẾT CỬA SỔ XÁC NHẬN ĐỔI MẬT KHẨU -->
+
+<!-- CỬA SỔ XÁC NHẬN ĐỔI MẬT KHẨU 2 -->
+<div class="modal fade" id="Modal_changePass" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- <form action="/user/changePass2/<%= user.email %>" method="GET" target=""> -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Đổi mật khẩu</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group" hidden>
+                                    <span class="input-group-text">Email (ẨN) </span>
+                                    <input id="email__" name="email" value="<%= user.email %>">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-lg" style="width: 200px">
+                                    <span class="input-group-text">Nhập mật khẩu cũ:</span>
+                                </div>
+                                <input id="oldPass" name="oldPass" type="password" aria-label="First name" class="form-control">
+                            </div>
+                            <p style="color:red; text-align: right" id="notifyOldPassWrong" hidden>Mật khẩu cũ không đúng!</p>
+                            <div class="input-group">
+                                <div class="input-group-lg" style="width: 200px">
+                                    <span class="input-group-text">Nhập mật khẩu mới:</span>
+                                </div>
+                                <input id="newPass" oninput="myFunction()" type="password" aria-label="First name" class="form-control">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-lg" style="width: 200px">
+                                    <span class="input-group-text">Nhập lại mật khẩu mới:</span>
+                                </div>
+                                <input id="newPassRetype" oninput="myFunction()" type="password" aria-label="First name" class="form-control">
+                            </div>
+                            <p style="color:red; text-align: right" id="notMatch" hidden>Mật khẩu mới không khớp!<br></p>
+                            <p style="color:red; text-align: right" id="notify8Char" hidden>Chiều dài mật khẩu ít nhất 8 ký tự!<br></p>
+                            <p style="color:green; text-align: center" id="notifySuccess" hidden>Đổi mật khẩu thành công!<br></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary" id="submitChangePass" >Xác nhận</button>
+                </div>
+                <script src="script/changePassModal.js"></script>
+            </div>
+        </div>
+    <!-- </form> -->
+</div>
+<!-- HẾT CỬA SỔ XÁC NHẬN ĐỔI MẬT KHẨU -->
+<!--modal thông tin tài khoản-->
+<!--modal xem thong báo\-->
+
+<div class="modal fade" id="Modal_xemthongbao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<h5 class="modal-title" id="exampleModalLabel">Tiêu đề</h5>-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card border-success mb-3">
+                    <div class="card-header bg-transparent border-success text-center">Tiêu đề hiện ở đây</div>
+                    <div class="card-body text-success">
+                        <p class="card-text">trong đây là nội dung thông báo</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">Thời gian và người gửi hiện ở đây</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<!-- BEGIN USER MANAGE -->
+<p id='userServer'    hidden > <%= JSON.stringify(user) %> </p>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-functions.js"></script><!--20181114-->>
+<script src="script/init.js"></script>
+
+<script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
+<script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+<script src="script/userFrontEnd.js"></script>
+<!-- END USER MANAGE -->
+<!-- CHART -->
+<!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+<script src="js/canvasjs.min.js"></script>
+<script src="script/myCanvasChart.js"> </script>
+<!-- <script src="script/myCanvasChart_20181105_ThangNayThangTruoc_OkOkOk.js"> </script> -->
+<!-- <script src="script/chart.js"></script> -->
+<!-- HẾT CHART -->
+
+
+
+<!-- SOCKET IO -->
+<!-- <script src="js/socket.io.js"></script>
+<script src="script/mySocketIO.js"></script> -->
+<!-- HẾT SOCKET IO -->
+
+</body>
+
+</html>
+

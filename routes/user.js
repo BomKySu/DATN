@@ -34,6 +34,15 @@ router.get('/', function(req, res, next) {
     console.log('redirected /login from user.js');
   }
 });
+router.get("/admin_2", function(req, res, next) {
+  res.render('admin_2');
+});
+router.get("/admin_1", function(req, res, next) {
+  res.render('admin_1');
+});
+
+
+
 router.get("/changePass/:email", function(req, res, next) 
 {
   console.log("GET /changePass/:email");

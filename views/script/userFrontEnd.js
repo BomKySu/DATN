@@ -21,94 +21,157 @@ var current = document.getElementById('current');
 var power = document.getElementById('power');
 var energy = document.getElementById('energy');
 
-var allLoginUserName = {};
-getLoginUserName();
-function getLoginUserName()     
+var customerId_payment = document.getElementById('customerId_payment');
+var phoneNumber_payment = document.getElementById('phoneNumber_payment');
+
+var user = {customerId:""};
+function getInfo()
 {
-    firebase.database().ref('/LoginUserName').once('value').then(function(snapshot) 
+    getDisplayName();
+    getCustomerId();
+    getAddress();
+    getEmail();
+    getPhoneNumber();
+    getNotification();
+}
+function getCustomerId()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/customerId").on('value', function(snapshot) 
     {   
-        // console.log(snapshot.val());
-        allLoginUserName = snapshot.val();
+        user.customerId = snapshot.val();
+        customerId_payment.value = 
+        customerId.innerHTML = user.customerId;
+        getElec();
+        getEnergyChartData();
+        getLimit();
     });
 }
-
-var user = {};
-getInfo = function()
+function getAddress()
 {
-    // firebase.database().ref('/UserInfo/' + userServer.uid).once('value').then(function(snapshot) 
-    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) 
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/address").on('value', function(snapshot) 
     {   
-        console.log(snapshot.val());
-        displayInfo(snapshot.val());
-        user = snapshot.val();
+        user.address = snapshot.val();
+        address.innerHTML = user.address;
     });
 }
-
+function getDisplayName()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/displayName").on('value', function(snapshot) 
+    {   
+        user.displayName = snapshot.val();
+        displayName.innerHTML = user.displayName;
+    });
+}
+function getEmail()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/email").on('value', function(snapshot) 
+    {   
+        user.email = snapshot.val();
+        var email__ = document.getElementById("email__"); // email for change pass
+        email__.value = 
+        email.innerHTML = user.email;
+        getLoginUserName();
+    }); 
+}
+function getPhoneNumber()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/phoneNumber").on('value', function(snapshot) 
+    {   
+        user.phoneNumber = snapshot.val();
+        phoneNumber_payment.value = 
+        phoneNumber.innerHTML = user.phoneNumber;
+        getElec();
+        getEnergyChartData();
+    });
+}
 displayInfo = function(user)
 {
+    customerId_payment.value = 
     customerId.innerHTML = user.customerId;
     displayName.innerHTML = user.displayName;
     address.innerHTML = user.address;
+    phoneNumber_payment.value = 
     phoneNumber.innerHTML = user.phoneNumber;
     email.innerHTML = user.email;
     var email__ = document.getElementById("email__");
     email__.value = user.email;
-    for (var name in allLoginUserName)
-    {
-        if (allLoginUserName[name] == user.email)
-        {
-            loginUserName.innerHTML = name;
-            loginUserNameInput.value = name;
-        }
-    }
 }
 
-myLoop();    // có cái này mới chạy loop
-function myLoop()  
+var allLoginUserName = {};
+function getLoginUserName()     
 {
-    setTimeout(function () 
-    {
-        // if (user.email == null)
-        if (firebase.auth().currentUser == null)
+    // firebase.database().ref('/LoginUserName').once('value').then(function(snapshot) 
+    firebase.database().ref('/LoginUserName').on('value', function(snapshot) 
+    {   
+        // console.log(snapshot.val());
+        allLoginUserName = snapshot.val();
+        for (var name in allLoginUserName)
         {
-            // khởi tạo firebase chưa ổn định
-            console.log("haven't got currentUser");
-            myLoop(); 
+            if (allLoginUserName[name] == user.email)
+            {
+                loginUserName.innerHTML = name;
+                loginUserNameInput.value = name;
+            }
         }
-        else if (user.email == null)
-        {
-            // đã có currentUser nhưng chưa đọc được thông tin từ thư mục uid của realtime db
-            console.log("haven't got user info");
-            getInfo(); 
-            myLoop(); 
-        }
-        else
-        {
-            // đã có currentUser, đã đọc được thông tin từ thư mục uid của realtime db
-            // getInfo();
-            getElec();
-            getEnergyChartData();
-        }
-    }, 1000)
-};  
+    });
+}
 
-voltage.onclick =
-getElec = function()
+
+firebase.auth().onAuthStateChanged(function(userChanged)
 {
-    var nowMils = Date.now();
-    var sec = moment(nowMils).format('ss');
-    // if (sec < 30) return;   // Node MCU chậm hơn
-    // console.log(sec);
-    // var path = "/" + user.customerId + moment(nowMils).format('/YYYY/MM/DD/HH/mm');
-    // 20181109
-    // var path = "/" + firebase.auth().currentUser.uid + moment(nowMils).format('/YYYY/MM/DD/HH/mm');
-    // 20181114
+    console.log("\nonAuthStateChanged");
+    if (userChanged != null)
+    {
+        console.log('current user: ', userChanged.email);
+        var pathUserType = '/UserInfo/' + userChanged.uid + '/type';
+        firebase.database().ref(pathUserType).on('value', function(userType)       
+        {
+            console.log(userType.val());
+            try
+            {
+                if (userType.val() == "Customer")
+                {
+                    // do not redirect, it's here now
+                    // window.location = "/user"; 
+                    document.getElementById("myMain").hidden="";
+                    document.getElementById("myWait").hidden="hidden";
+                    getInfo();
+                }
+                else if (userType.val() == "AdminKV")
+                {
+                    JSAlert.alert("Đang mở trang quản trị viên khu vực...").dismissIn(1000*5);
+                    window.location = "/user/admin_2"; 
+                }
+                else if (userType.val() == "AdminTong")
+                {
+                    JSAlert.alert("Đang mở trang quản trị viên tổng công ty...").dismissIn(1000*5);
+                    window.location = "/user/admin_1"; 
+                }
+                else
+                {
+                    JSAlert.alert("Thông tin tài khoản không đầy đủ, liên hệ quản trị viên để biết thêm thông tin.");
+                }
+            }
+            catch(error) { console.log(error.message)};
+        });
+    }
+    else
+    {
+        JSAlert.alert("Đang mở trang đăng nhập...").dismissIn(1000*5);
+        window.location = "/login";
+    }
+
+});
+
+function getElec()
+{
     const pathRealtimeValue = "/" + user.customerId + "/RealtimeValue";
-    console.log(pathRealtimeValue);
-    // database_Elec.ref(path).once('value').then(function(snapshot) 
     database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
     {   
-        // console.log(snapshot.val()); 
+        console.log("RealtimeValue on value called"); 
+        var nowMils = Date.now();
+        var sec = moment(nowMils).format('ss');
+        console.log(pathRealtimeValue);
         if (snapshot.val() != null)
             displayElec(snapshot.val());
         else
@@ -224,7 +287,144 @@ function updateNewLoginUserName(inputName)
                 // console.log("Update Success");
                 // return true;
             }
-        });
+    });
+    $("#loginUserNameForm").modal("hide");
 }   
+function mySize(obj)
+{
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+}
+var allNotification = {};
+function getNotification()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notification").on('value', function(snapshot) 
+    {   
+        console.log("/notification change");
+        user.notification = null;
+        user.notification = snapshot.val();
+        user.notification.size = mySize(user.notification)
+        var count = user.notification.size - 1;
+        for (var time in user.notification)
+        {
+            allNotification[count] = user.notification[time];
+            allNotification[count].time = time;
+            count--;
+            // if 
+        }        
+        // $('#buttonNotification_0').text(allNotification["0"].title);
+        for (i = 0; i < 100; i++)
+        {  
+            if(allNotification[i*1])
+            {
+                $('#divForEachNotification_' + i)["0"].hidden="";
+                $('#buttonNotification_' + i).text(allNotification[i*1].title);
+                $('#buttonNotification_' + i).data("title", allNotification[i*1].title);
+                $('#buttonNotification_' + i).data("content", allNotification[i*1].content);
+                $('#buttonNotification_' + i).data("sender", allNotification[i*1].sender);
+                $('#buttonNotification_' + i).data("time", allNotification[i*1].time);
+                $('#buttonNotification_' + i).text(allNotification[i*1].title);
+                if (allNotification[i*1].read == 1)
+                {
+                    $('#buttonNotification_' + i).css({'color' : 'grey', 'font-size': '90%'});
+                }
+                else
+                {
+                    $('#buttonNotification_' + i).css({'color' : 'black', 'font-size': '100%'});
+                }
+            }
+            else
+            {
+                $('#divForEachNotification_' + i)["0"].hidden="hidden";
+            }
+        }
+    });
+}
+$('#Modal_xemthongbao').on('show.bs.modal', function (event) 
+{
+    console.log("Modal_xemthongbao event...");
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var time = button.data("time");
+    var timeFormated = moment(time*1).format("HH:mm:ss, DD-MM-YYYY");
+    var modal = $(this)
+    modal.find('.card-header').text(button.data("title"));
+    modal.find('.card-text').text(button.data("content"));
+    modal.find('.card-footer').text("Được gửi bởi: " 
+                        + button.data("sender")
+                        + ". Vào lúc: " 
+                        + timeFormated);
+    markRead(time);
+})
+function markRead(time)
+{
+    var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
+    firebase.database().ref(path).set(1, function(error) {});
+}
+function markUnRead(time)
+{
+    var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
+    firebase.database().ref(path).set(0, function(error) {});
+}
+    
+//// limit
+var energyLimit;
+function getLimit()
+{
+    var path = "/" + user.customerId + "/limitValue/Energy";
+    database_Elec.ref(path).on('value', function(snapshot) 
+    {   
+        energyLimit = snapshot.val();
+        $("#iLimitValue").val(energyLimit);  
+        $("#textLimitValue")[0].innerHTML = energyLimit + " (kWh)";
+        getEnergy();
+    });
+}
 
+$("#Modal_limit").find(".btn-primary").click(function()
+{
+    var limitValue = $("#iLimitValue").val();
+    var path = "/" + user.customerId + "/limitValue/Energy";
+    database_Elec.ref(path).set(limitValue*1, function(error) {});
+    JSAlert.alert("Đang lưu...").dismissIn(1000*.5);
+    $("#Modal_limit").modal("hide");
+});
+
+var energyRealTime;
+function getEnergy()
+{
+    const pathRealtimeValue = "/" + user.customerId + "/RealtimeValue/Energy";
+    database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
+    {   
+        energyRealTime = snapshot.val();
+        checkLimit();
+    });
+}
+
+function checkLimit()
+{
+    if (energyRealTime/energyLimit >= 1)
+    {
+        var beep500 = setInterval(function(){ $("#audioAlert")[0].play() }, 500);
+        JSAlert.alert("Điện năng tiêu thụ đã đạt tới định mức đặt trước!", null, JSAlert.Icons.Failed)
+        .then(function() {
+            clearInterval(beep500);     
+        });;
+    }
+    else if (energyRealTime/energyLimit >= 0.8)
+    {
+        var beep1000 = setInterval(function(){ $("#audioAlert")[0].play() }, 1000);
+        JSAlert.alert("Điện năng tiêu thụ đã đạt 80% so với định mức đặt trước!", null, JSAlert.Icons.Failed)
+        .then(function() {
+            clearInterval(beep1000);     
+        });;
+    }
+    else 
+    {   
+        // nothing 
+        // JSAlert.alert("");
+    }
+}
 

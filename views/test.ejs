@@ -27,7 +27,14 @@
             
     <p id='outputText'> Đây </p>
     <p id='outputText2'> <br> Đây2    </p>
-
+    <script>
+        fTestEJS();// k chạy
+    </script>
+    <% fTestEJS(); 
+     function fTestEJS() {for (i = 0; i < 100; i ++)
+     { %>
+        <p>Test FOR... <%= i %></p>
+    <% }}; %>
 
     <script src="script/testFrontEnd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>

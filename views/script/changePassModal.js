@@ -66,6 +66,10 @@ function()
             notify8Char.hidden = "hidden";    // ẩn TB 8 ký tự
             notifySuccess.hidden = ""; // hiện TB thành công
             submitChangePass.disabled = true;
+            setTimeout(function()
+            {
+                $("#Modal_changePass").modal("hide");// ẩn modal
+            }, 1200);
         })
         .catch(function(error)
         {
