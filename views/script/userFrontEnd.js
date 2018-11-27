@@ -303,6 +303,7 @@ function getNotification()
 {
     firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notification").on('value', function(snapshot) 
     {   
+        // $("#audioAlert_Notification")[0].play(); // không ổn // 20181127
         console.log("/notification change");
         user.notification = null;
         user.notification = snapshot.val();
@@ -399,6 +400,9 @@ function getEnergy()
     database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
     {   
         energyRealTime = snapshot.val();
+        energy.innerHTML = energyRealTime + " (kWh)";
+        $("#thangNay_DienNang").text(energyRealTime);
+        $("#thangNay_Tien").text(energyRealTime*1549);
         checkLimit();
     });
 }
@@ -423,8 +427,6 @@ function checkLimit()
     }
     else 
     {   
-        // nothing 
-        // JSAlert.alert("");
-    }
+    }   
 }
 

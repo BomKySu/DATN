@@ -66,7 +66,7 @@
             <p class="text-center">Điện áp</p>
             <h4 id='voltage' class="text-center">-- (V)</h4>
         </div>
-        <div class=" col-sm-3 card">
+        <div class=" col-sm-2 card">
             <p class="text-center">Cường độ dòng điện</p>
             <h4 id='current' class="text-center">-- (A)</h4>
         </div>
@@ -78,7 +78,7 @@
             <p class="text-center" >  Điện năng tiêu thụ</p>
             <h4 id='energy' class="text-center">-- (kWh)</h4>
         </div>
-        <div class="col-sm-2 card">
+        <div class="col-sm-3 card">
             <p class="text-center" style="color: blue">Điện năng tiêu thụ định mức</p>
             <h4 id='textLimitValue' class="text-center" >
                 -- (kWh)
@@ -93,122 +93,79 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-8">
-            <div class="row my-0">
-                <div class="col-md-12" >
-                    <div class="card">
-                        <div class="card-body" >
-                            <div id="chartContainer" style="height: 280px; width: 100%;"></div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="row my-0">
+                    <div class="col-md-12" >
+                        <div class="card">
+                            <div class="card-body" >
+                                <div id="chartContainer" style="height: 276px; width: 100%;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--<div class="table card">-->
-                <!--<table class="table table-bordered" >-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td class="font-weight-bold">Tên khách hàng</td>-->
-                        <!--<td id="displayName"><%=user.displayName %></td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="font-weight-bold">Mã khách hàng</td>-->
-                        <!--<td id="customerId"><%=user.customerId %></td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="font-weight-bold">Địa chỉ</td>-->
-                        <!--<td id="address"><%=user.address %></td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="font-weight-bold">Số điện thoại</td>-->
-                        <!--<td id="phoneNumber"><%= user.phoneNumber %></td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="font-weight-bold">Email</td>-->
-                        <!--<td id="email"><%= user.email %></td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="font-weight-bold">Tên đăng nhập</td>-->
-                        <!--<td>-->
-                            <!--<a id="loginUserName"> </a>-->
-                            <!--<div href="" data-toggle="modal" data-target="#loginUserNameForm" style="color: blue; display: inline">-->
-                                <!--<a class="fas fa-edit" ></a>-->
-                                <!--<a>Sửa</a>-->
-                            <!--</div>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
+            </div>  
         </div>
-        <div class="col-6 col-md-4 card ">
-            <div class="panel">
-                <h4 class="text-center" style="color: orangered">Thông báo</h4>
-            </div>
-            <div class="panel card">
-                <!--
-                <div class="list-group" style="height: 550px;">
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_1">Thông báo 1</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_2">Thông báo 2</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_3">Thông báo 3</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_4">Thông báo 4</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_5">Thông báo 5</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_6">Thông báo 6</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_7">Thông báo 7</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_8">Thông báo 8</b><br></label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_9">Thông báo 9</b><br></label>
-                    </div>
-                    <div>       
-                        <label> <span class="fas fa-angle-double-right"></span><b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_10">Thông báo 10</b><br></label>
-                    </div>
+        <!-- <div class="col-6 col-md-4 card "> -->
+        <div class="col-md-7">
+            <div class="card">
+                        <div class="panel">
+                    <h4 class="text-center" style="color: orangered">Thông báo</h4>
                 </div>
-                -->
-                <div class="list-group" style="height: 550px;">
-                    <% loadNotificationEJS(); 
-                    function loadNotificationEJS() {for (i = 0; i < 100; i ++)
-                    { %>
-                        <div id="divForEachNotification_<%=i%>">   
-                            <label> 
-                                <span class="fas fa-angle-double-right">
-                                </span>
-                                <b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_<%=i%>" data-title="Thông báo <%=i%>">
-                                    Thông báo <%=i%>
-                                </b>
-                                <br>
-                            </label>
-                        </div>
-                    <% }}; %>
+                <div class="panel card">
+                    <div class="list-group" style="height: 550px;">
+                        <% loadNotificationEJS(); 
+                        function loadNotificationEJS() {for (i = 0; i < 100; i ++)
+                        { %>
+                            <div id="divForEachNotification_<%=i%>">   
+                                <label> 
+                                    <span class="fas fa-angle-double-right">
+                                    </span>
+                                    <b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_<%=i%>" data-title="Thông báo <%=i%>">
+                                        Thông báo <%=i%>
+                                    </b>
+                                    <br>
+                                </label>
+                            </div>
+                        <% }}; %>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="table-striped">
         <div class="table-responsive">
+            <br>
+            <h4 style="text-align: center">Trạng thái thanh toán 3 tháng gần nhất</h4>
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Thời Gian</th>
-                    <th>Lượng điện tiêu thụ</th>
-                    <th>Số tiền phải thanh toán</th>
-                    <th>Trạng thái</th>
-                </tr>
+                    <tr>
+                            <th>Thời Gian</th>
+                            <th>Lượng điện tiêu thụ (kWh)</th>
+                            <th>Số tiền phải thanh toán (đồng)</th>
+                            <th>Trạng thái</th>
+                    </tr>
                 </thead>
+                <tbody>
+                    <tr>
+                        <td id="thangNay">Tháng 11</td>
+                        <td id="thangNay_DienNang">30</td>
+                        <td id="thangNay_Tien">46470</td>
+                        <td id="thangNay_TrangThai">Chưa thanh toán</td>
+                    </tr>
+                    <tr>
+                        <td id="thangTruoc">Tháng 10</td>
+                        <td id="thangTruoc_DienNang">0</td>
+                        <td id="thangTruoc_Tien">0</td>
+                        <td id="thangTruoc_TrangThai">Đã thanh toán</td>
+                    </tr>
+                    <tr>
+                        <td id="thangTruocTruoc">Tháng 9</td>
+                        <td id="thangTruocTruoc_DienNang">0</td>
+                        <td id="thangTruocTruoc_Tien">0</td>
+                        <td id="thangTruocTruoc_TrangThai">Đã thanh toán</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -258,7 +215,8 @@
                 </div>
             </div>
             <script>
-                $('body').on('click','img',function()
+                // $('body').on('click','img',function()
+                $('body').on('click','.mx-auto.d-block',function()
                 {
                     JSAlert.alert("Đang xử lý...").dismissIn(1000*.5);
                     JSAlert.alert("Thanh toán thành công!");
@@ -272,10 +230,9 @@
 
 <div style="background-color:  #1F3A93;position: absolute" class="container-fluid">
     <footer>
-        <p class="text-center text-white" style="padding-right: 60px;">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p>
-        <p class="text-center text-white">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p>
-        <p class="text-center text-white" style="padding-right: 60px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>
-
+        <p class="text-center text-white" style="text-align: center">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p>
+        <p class="text-center text-white" style="text-align: center">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p>
+        <p class="text-center text-white" style="text-align: center">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>
     </footer>
 </div>
 <!-- CỬA SỔ PHẢN HỒI -->
@@ -293,8 +250,13 @@
                         <textarea class="form-control" id="message-text"></textarea>
                     </div>
                 </form>
-                <input type="file" accept="image/*" onchange="loadFile(event)">
-                <img id="output" style="max-width: 200px"/>
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Chọn ảnh đính kèm liên quan:</label>
+                        <input type="file" accept="image/*" onchange="loadFile(event)">
+                        <img id="output" style="max-width: 200px"/>
+                    </div>
+                </form>
                 <script>
                   var loadFile = function(event) {
                     var reader = new FileReader();
@@ -403,22 +365,24 @@
 <div class="modal fade" id="Modal_limit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Thay đổi giới hạn sử dụng điện</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="form-group">
-                    <p>Khi cài đặt giới hạn sử dụng điện, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% hoặc 100% định mức.</p>
-                    <input class="form-control rounded-0 " type="number" id="iLimitValue">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
-            </div>
+            <!-- <form> -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Thay đổi giới hạn sử dụng điện</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- <form class="form-group"> -->
+                        <p>Khi cài đặt giới hạn sử dụng điện, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% hoặc 100% định mức.</p>
+                        <input class="form-control rounded-0 " type="number" id="iLimitValue">
+                    <!-- </form> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu</button>
+                </div>
+            <!-- </form> --> 
         </div>
     </div>
 </div>
@@ -601,6 +565,11 @@ NÓ CŨNG MỜ THEO NỀN VÀ KHÔNG THAO TÁC ĐƯỢC -->
     <script src="script/threeDots.js"></script>            
 </myWait>
 <audio id="audioAlert">
+        <source src="SOUND/beep-04.mp3" type="audio/mpeg">
+        <source src="SOUND/beep-04.wav" type="audio/wav">
+        Your browser does not support the audio element.
+</audio>
+<audio id="audioAlert_Notification">
         <source src="SOUND/beep-04.mp3" type="audio/mpeg">
         <source src="SOUND/beep-04.wav" type="audio/wav">
         Your browser does not support the audio element.
