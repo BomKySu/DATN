@@ -23,12 +23,29 @@
 <!--<%# include nav.ejs %>-->
 <myMain id="myMain" hidden>
 <nav class="navbar sticky-top navbar-expand-xl py-1" style="background-color:#1F3A93">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
     <a class="text-white navbar-brand" href="/">HỆ THỐNG QUẢN LÝ ĐIỆN NĂNG THÔNG MINH</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <style>
+            .navbar-toggler
+            {
+                background-color:white;
+               border-radius: 3px;
+            }
+            .icon-bar
+            {
+                width: 18px;
+               height: 4px;
+               background-color: blue;
+                  margin: 3px 0px;
+               border-radius: 3px;
+            }
+            </style>
+    </button>
 
-    <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03" style="font-size: 16px">
+    <div class="navbar-collapse navbar-brand collapse" id="navbarTogglerDemo03" style="font-size: 16px">
 
         <ul class="navbar-nav ml-6 ml-auto">
             <span style="color: white;" >
@@ -43,10 +60,10 @@
             <li class="text-white">
                 <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#Modal_phanhoi">Gửi phản hồi</a>
             </li>
-            <li class="text-right">
+            <li class="text-white">
                 <a class="nav-link text-white" href="#"  data-toggle="modal" data-target="#Modal_changePass">Đổi mật khẩu</a>
             </li>
-            <li class="text-right">
+            <li class="text-white">
                 <a class="nav-link text-white" href="/login" id="logout">Đăng xuất</a>
                 <script>
                     document.getElementById("logout").onclick =
@@ -93,7 +110,7 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card">
                 <div class="row my-0">
                     <div class="col-md-12" >
@@ -107,8 +124,8 @@
             </div>  
         </div>
         <!-- <div class="col-6 col-md-4 card "> -->
-        <div class="col-md-7">
-            <div class="card">
+        <div class="col-md-6">
+            <div class="card" style="padding-left:10px; padding-right:10px">
                         <div class="panel">
                     <h4 class="text-center" style="color: orangered">Thông báo</h4>
                 </div>
@@ -136,13 +153,14 @@
     <div class="table-striped">
         <div class="table-responsive">
             <br>
-            <h4 style="text-align: center">Trạng thái thanh toán 3 tháng gần nhất</h4>
+            <!-- <h4 style="text-align: center">Trạng thái thanh toán 3 tháng gần nhất</h4> -->
             <table class="table">
                 <thead>
+                    <tr><td colspan="4"><h4 style="text-align: center">Trạng thái thanh toán 3 tháng gần nhất</h4></td></tr>
                     <tr>
                             <th>Thời Gian</th>
                             <th>Lượng điện tiêu thụ (kWh)</th>
-                            <th>Số tiền phải thanh toán (đồng)</th>
+                            <th>Số tiền phải thanh toán (VNĐ)</th>
                             <th>Trạng thái</th>
                     </tr>
                 </thead>
@@ -247,7 +265,7 @@
                 <form>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Phản hồi:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <textarea class="form-control" id="textFeedback"></textarea>
                     </div>
                 </form>
                 <form>

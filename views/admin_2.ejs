@@ -13,16 +13,7 @@
     <!--<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-
-
-
-    <title>Điện lực Thủ Đức</title>
-    <style type="text/css">
-        .example{
-            margin: 10px;
-        }
-    </style>
-
+    <title>Điện lực ---</title>
 </head>
 
 <body>
@@ -32,7 +23,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     </button>
     <a class="text-white navbar-brand" href="">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH
-        <div class="text-center">KHU VỰC THỦ ĐỨC</div>
+        <div class="text-center" id="titleKhuVuc">KHU VỰC ---</div>
     </a>
     <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03">
         <form class="form-inline ml-auto">
@@ -86,11 +77,11 @@
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Công suất tổng</p>
-                <h4 id='power' class="text-center">456544 KW</h4>
+                <h4 id='power' class="text-center">456544 kW</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Tổng điện năng tiêu thụ</p>
-                <h4 id='energy' class="text-center">345678 KWh</h4>
+                <h4 id='energy' class="text-center">345678 kWh</h4>
             </div>
 
         </div>
@@ -110,11 +101,11 @@
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Công suất tổng</p>
-                <h4 id='power_2' class="text-center">23424 KW</h4>
+                <h4 id='power_2' class="text-center">23424 kW</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Tổng điện năng tiêu thụ</p>
-                <h4 id='energy_2' class="text-center">34353 KWh</h4>
+                <h4 id='energy_2' class="text-center">34353 kWh</h4>
             </div>
 
         </div>
@@ -134,11 +125,11 @@
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Công suất tổng</p>
-                <h4 id='power_3' class="text-center">1456544 KW</h4>
+                <h4 id='power_3' class="text-center">1456544 kW</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Tổng điện năng tiêu thụ</p>
-                <h4 id='energy_3' class="text-center">5443678 KWh</h4>
+                <h4 id='energy_3' class="text-center">5443678 kWh</h4>
             </div>
         </div>
     </div>
@@ -163,7 +154,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <% loadUserEJS(); 
+                            function loadUserEJS() {for (i = 1; i < 100; i ++)
+                            { %>
+                                <div >
+                                <tr id="trForEachCustomer_<%=i%>">
+                                        <th scope="row" class="text-center"><%=i%></th>
+                                        <td class="text-center" id="customerId_<%=i%>">PExxxxxxxxxx<%=i%></td>
+                                        <td class="text-center" id="customerName_<%=i%>">Tên Khách Hàng <%=i%></td>
+                                        <td class="text-center" id="customerEnergy_<%=i%>">Điện năng <%=i%></td>
+                                        <td class="text-center" id="customerMoney_<%=i%>">Số tiền <%=i%></td>
+                                        <td class="text-center" id="customerStatus_<%=i%>">Trạng thái thanh toán <%=i%></td>
+                                </tr>
+                            <% }}; %>
+                            <!-- <tr>
                                 <th scope="row" class="text-center">1</th>
                                 <td class="text-center">PK124645</td>
                                 <td class="text-center">Phạm Tội Lỗi</td>
@@ -210,7 +214,7 @@
                                 <td class="text-center">298</td>
                                 <td class="text-center">398,000</td>
                                 <td class="text-center">Chưa thanh toán</td>
-                            </tr>
+                            </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -390,7 +394,7 @@
 
 <script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
 <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
-<script src="script/admin1FrontEnd.js"></script>
+<script src="script/admin2FrontEnd.js"></script>
 <!-- END USER MANAGE -->
 <!-- CHART -->
 <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
