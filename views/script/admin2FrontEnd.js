@@ -2,18 +2,18 @@
 
 firebase.auth().onAuthStateChanged(function(userChanged)
 {
-    console.log("\nonAuthStateChanged");
+    // console.log("\nonAuthStateChanged");
     if (userChanged != null)
     {
-        console.log('current user: ', userChanged.email);
+        // console.log('current user: ', userChanged.email);
         var pathUserType = '/UserInfo/' + userChanged.uid + '/type';
         firebase.database().ref(pathUserType).on('value', function(userType)       
         {
-            console.log(userType.val());
+            // console.log(userType.val());
             try
             {
                 if (userType.val() == "Customer")
-                {
+                { 
                     JSAlert.alert("Đang mở trang khách hàng...").dismissIn(1000*5);
                     window.location = "/user"; 
                     // document.getElementById("myMain").hidden="";
@@ -27,7 +27,7 @@ firebase.auth().onAuthStateChanged(function(userChanged)
                     // do not redirect, it's here now
                     document.getElementById("myMain").hidden="";
                     document.getElementById("myWait").hidden="hidden";
-                    getElec();
+                    // getDatabaseElec(); // Cannot read property 'ref' of undefined
                     getInfo();
                 }
                 else if (userType.val() == "AdminTong")
@@ -48,38 +48,7 @@ firebase.auth().onAuthStateChanged(function(userChanged)
         JSAlert.alert("Đang mở trang đăng nhập...").dismissIn(1000*5);
         window.location = "/login";
     }
-
 });
-////
-var Elec = {};
-function getElec()
-{
-    const pathElec = "/";
-    database_Elec.ref(pathElec).on('value', function(snapshot) 
-    {   
-        console.log("getElec on value called"); 
-        Elec = snapshot.val();
-        var Total = Elec.Total;
-        if (Total)  // != null
-        {
-            $("#current").text(Total.pha1.current + " (A)");
-            $("#power").text(Total.pha1.power + " (kW)");
-            $("#energy").text(Total.pha1.energy + " (kWh)");
-
-            $("#current_2").text(Total.pha2.current + " (A)");
-            $("#power_2").text(Total.pha2.power + " (kW)");
-            $("#energy_2").text(Total.pha2.energy + " (kWh)");
-
-            $("#current_3").text(Total.pha3.current + " (A)");
-            $("#power_3").text(Total.pha3.power + " (kW)");
-            $("#energy_3").text(Total.pha3.energy + " (kWh)");
-        }
-        else
-        {
-            console.log("Total elec data read null");
-        }
-    });
-}
 ////
 var user = {};
 function getInfo()
@@ -113,9 +82,119 @@ function getCompanyId()
     firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/companyId").on('value', function(snapshot) 
     {   
         user.companyId = snapshot.val();
-        getAllCustomer(); 
+        getDatabaseElec();
     });
 }
+var database_Elec; 
+function getDatabaseElec()
+{
+    if (user.companyId == "GoVap")
+    {
+        database_Elec = database_Elec_GV;
+        getElec();
+    }
+    else if  (user.companyId == "ThuDuc")
+    {
+        database_Elec = database_Elec_TD;
+        getElec_TD();
+    }
+    // getElec();
+    getAllCustomer(); 
+}
+////
+var Elec = {};
+function getElec()
+{
+    const pathElec = "/";
+    database_Elec.ref(pathElec).once('value').then( function(snapshot) 
+    {   
+        // console.log("getElec on value called"); 
+        Elec = snapshot.val();
+    });   
+
+    // const pathRealtimeValue = "/Total/RealtimeValue";
+    const pathRealtimeValue = "/Total";
+    database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
+    // database_Elec.ref(pathElec).once('value').then( function(snapshot) 
+    {   
+        // console.log("getElec on value called"); 
+        RealtimeValue = snapshot.val();
+        if (RealtimeValue)  // != null
+        {
+            $("#current").text(RealtimeValue.pha1.current + " (A)");
+            $("#power").text(RealtimeValue.pha1.power + " (kW)");
+            $("#energy").text(RealtimeValue.pha1.energy + " (kWh)");
+
+            $("#current_2").text(RealtimeValue.pha2.current + " (A)");
+            $("#power_2").text(RealtimeValue.pha2.power + " (kW)");
+            $("#energy_2").text(RealtimeValue.pha2.energy + " (kWh)");
+
+            $("#current_3").text(RealtimeValue.pha3.current + " (A)");
+            $("#power_3").text(RealtimeValue.pha3.power + " (kW)");
+            $("#energy_3").text(RealtimeValue.pha3.energy + " (kWh)");
+            getEnergyChartData();
+        }
+        else
+        {
+            console.log("Total elec data read null");
+        }
+    });
+}
+function getElec_TD()
+{
+    const pathElec = "/";
+    database_Elec.ref(pathElec).on('value', function(snapshot) 
+    {   
+        // console.log("getElec on value called"); 
+        Elec = snapshot.val();
+        // console.log("getElec on value called"); 
+        if (Elec)  // != null
+        {
+            $("#current").text(Elec.PE00000000000.RealtimeValue.Current + " (A)");
+            $("#power").text(Elec.PE00000000000.RealtimeValue.Power + " (kW)");
+            $("#energy").text(Elec.PE00000000000.RealtimeValue.Energy + " (kWh)");
+
+            $("#current_2").text(Elec.PE00000000001.RealtimeValue.Current + " (A)");
+            $("#power_2").text(Elec.PE00000000001.RealtimeValue.Power + " (kW)");
+            $("#energy_2").text(Elec.PE00000000001.RealtimeValue.Energy + " (kWh)");
+
+            $("#current_3").text(Elec.PE00000000002.RealtimeValue.Current + " (A)");
+            $("#power_3").text(Elec.PE00000000002.RealtimeValue.Power + " (kW)");
+            $("#energy_3").text(Elec.PE00000000002.RealtimeValue.Energy + " (kWh)");
+            getEnergyChartData();
+        }
+        else
+        {
+            console.log("Total elec data read null");
+        }
+    });
+}
+////
+var energyChartData = {}; 
+// getEnergyChartData(); 
+function getEnergyChartData()  
+{
+    var path = "/" + "Total" + "/energyChartData";
+    // 20181109
+    // var path = "/" + firebase.auth().currentUser.uid + "/energyChartData";
+    // database_Elec.ref(path).once('value').then(function(snapshot) 
+    database_Elec.ref(path).on('value', function(snapshot) 
+    {   
+        energyChartData = snapshot.val();
+        // console.log(energyChartData[myYear.toString()][myMonth.toString()]["03"]);
+        if (chart == null || chart == undefined) 
+        {
+            chartLoad();
+        }
+        else
+        {
+            updateChartData();
+            chart.render();
+            // console.log("chart.render() running");
+        }
+    });
+}
+////
 function mySize(obj)
 {
     var size = 0, key;
@@ -131,7 +210,7 @@ function getAllCustomer()
     firebase.database().ref("/UserInfo").on('value', function(snapshot) 
     {   
         // $("#audioAlert_Notification")[0].play(); // không ổn // 20181127
-        console.log("/notification change");
+        console.log("/UserInfo change");
         allCustomer = null;
         allCustomer = snapshot.val();
         allCustomer.size = mySize(allCustomer);
@@ -152,6 +231,7 @@ function getAllCustomer()
         for (i = 0; i < 99; i++)
         {  
             var i_ = i + 1;
+            // console.log("allCustomer_Filtered.displayName" + allCustomer_Filtered.displayName);
             if(allCustomer_Filtered[i*1])       // tồn tại
             {
                 allCustomer_Filtered[i*1].energy = Elec[allCustomer_Filtered[i*1].customerId].RealtimeValue.Energy;
@@ -170,7 +250,99 @@ function getAllCustomer()
             }
         }
     });
+    getNotification();
 }
 
+function mySize(obj)
+{
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+}
+var allNotification = {}; // 20181204 // thông báo đã gửi
+function getNotification()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notification").on('child_added', function(snapshot, prev) 
+    {
+        // console.log("/notification change");
+        currentNotification = snapshot.val();
+        time = snapshot.key;
+        if (currentNotification) 
+        {
+            divForEachNotification = document.createElement('div');
+            $(divForEachNotification)
+                .show()
+                .html("<label><span class=\"fas fa-angle-double-right\"></span><b data-toggle=\"modal\" data-target=\"#Modal_xemthongbao\" class=\"buttonNotification\" id data-title></b><br></label>")
+            // thêm các thông số khác
+            buttonNotification = $(divForEachNotification).find('.buttonNotification')
+            $(buttonNotification)
+                .text(currentNotification.title)
+                .data("title", currentNotification.title)
+                .data("content", currentNotification.content)
+                .data("sender", currentNotification.sender)
+                .data("time", time)
+            $(divForEachNotification).prependTo($("#thongBaoDaGui"))    // hiển thị nó lên
+        }   
+    });
+}
+/*
+{
+    "1543235014684": {
+        "content": "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+        "read": 0,
+        "sender": "Quản trị viên khu vực",
+        "title": "Quản trị viên gửi thông báo thử lần 1"
+    },
+    "1543235364453": {
+        "content": "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+        "read": 0,
+        "sender": "Quản trị viên khu vực",
+        "title": "Quản trị viên gửi thông báo thử lần 2"
+    }
+}
+*/
+$('#Modal_xemthongbao').on('show.bs.modal', function (event) 
+{
+    // console.log("Modal_xemthongbao event...");
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var time = button.data("time");
+    var timeFormated = moment(time*1).format("HH:mm:ss, DD-MM-YYYY");
+    var modal = $(this)
+    modal.find('.card-header').text(button.data("title"));
+    modal.find('.card-text').text(button.data("content"));
+    // modal.find('.card-footer').text("Được gửi bởi: " 
+    //                     + button.data("sender")
+    //                     + ". Vào lúc: " 
+    //                     + timeFormated);
+    modal.find('.card-footer').text("Được gửi vào lúc: " 
+                        + timeFormated);
+    // markRead(time);
+})
+function markRead(time)
+{
+    var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
+    firebase.database().ref(path).set(1, function(error) {});
+}
+function markUnRead(time)
+{
+    var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
+    firebase.database().ref(path).set(0, function(error) {});
+}
+    
 
 
+
+
+
+
+
+// sau khi đã remote thành công tới project trên heroku, 
+// nếu project dưới máy có chỉnh sửa thì sẽ làm thế này...
+// viết heroku login  rồi enter, bấm phím bất kì để mở trình duyệt và đăng nhập..
+// tiếp git add .
+// tiếp git commit -am "make it better"
+// tiếp là git push heroku master
+// ở đây mới làm rồi, không có gì thay đổi nên k làm tiếp được...
+// OK  

@@ -1,0 +1,288 @@
+{
+  "AdminThuDuc" : {
+    "ThongBao" : {
+      "NoiDung" : "cái gì đây"
+    },
+    "feedback" : {
+      "20181117200000" : {
+        "content" : "Cái gì đây",
+        "time" : 20181117200000
+      },
+      "201811172359" : {
+        "content" : "ádfasd ",
+        "time" : "/201811172359"
+      },
+      "201811180001" : {
+        "content" : "được chưaa???\n",
+        "time" : "201811180001"
+      },
+      "201811181946" : {
+        "attachPhotoURL" : "https://sdfasdf",
+        "content" : "fasdfas 20181118 sdfas \nhầm ",
+        "read" : 1,
+        "sender" : "PE00000000002",
+        "time" : "không cần",
+        "title" : "bấm vào đây"
+      },
+      "201811211523" : {
+        "content" : "24512435123452345234",
+        "time" : "201811211523"
+      },
+      "201811211524" : {
+        "content" : "sao ở đây không có gì",
+        "time" : "201811211524"
+      },
+      "201812021057" : {
+        "content" : "",
+        "time" : "201812021057"
+      }
+    }
+  },
+  "LoginUserName" : {
+    "HoaiNam" : "14141202@student.hcmute.edu.vn",
+    "HuuNghia" : "14141211@student.hcmute.edu.vn",
+    "VanHien" : "14141097@student.hcmute.edu.vn"
+  },
+  "UserInfo" : {
+    "0_Mô_Tả" : "Thư mục này chứa thông tin người dùng, được sắp xếp theo UID của các User trong Firebase Authenticate",
+    "C25APYtfI7Mb1AaemBgJjp4kS3J2" : {
+      "address" : "229 Nguyễn Thái Sơn, Phường 5, Gò Vấp",
+      "companyId" : "GoVap",
+      "customerId" : "PE00000000003",
+      "displayName" : "Phạm Văn Hiến",
+      "email" : "14141097@student.hcmute.edu.vn",
+      "email_2" : "@",
+      "loginUserName" : "VanHien",
+      "meterId" : "003",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "time" : "1543235014684",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235364453",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "time" : "1543235641463",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543250001903",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "time" : "1543267558195",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        }
+      },
+      "phoneNumber" : "0344302753",
+      "type" : "Customer"
+    },
+    "XH38IMRE4tRRs2Od4gJivmLEM1F3" : {
+      "address" : "17/5/2, đường Dân Chủ, phường Bình Thọ, quận Thủ Đức",
+      "companyId" : "ThuDuc",
+      "customerId" : "PE00000000000",
+      "displayName" : "Nguyễn Hữu Nghĩa",
+      "email" : "14141211@student.hcmute.edu.vn",
+      "email_2" : "huunghia021296@gmail.com",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        },
+        "1543337644800" : {
+          "content" : "Chức năng cài đặt định mức đã có thêm tính năng báo chuông beep khi đạt 80% hoặc 100% giá trị đặt trước.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 3"
+        }
+      },
+      "phoneNumber" : "0964807452",
+      "type" : "Customer"
+    },
+    "dsv9dIe8smgV3XM6hNmppsThBFo1" : {
+      "address" : "17/5/2, đường Dân Chủ, phường Bình Thọ, quận Thủ Đức",
+      "companyId" : "ThuDuc",
+      "customerId" : "PE00000000001",
+      "displayName" : "Bùi Hải Minh",
+      "email" : "16146405@student.hcmute.edu.vn",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        },
+        "1543337644800" : {
+          "content" : "Chức năng cài đặt định mức đã có thêm tính năng báo chuông beep khi đạt 80% hoặc 100% giá trị đặt trước.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 3"
+        }
+      },
+      "phoneNumber" : "0523860577",
+      "type" : "Customer"
+    },
+    "gvsdP7jlM4PhrWIycOcK6tKyX9Q2" : {
+      "address" : "133 đường số 4, khu phố 3, phường Linh Xuân, Thủ Đức",
+      "companyId" : "ThuDuc",
+      "customerId" : "PE00000000002",
+      "displayName" : "Nguyễn Hoài Nam",
+      "email" : "14141202@student.hcmute.edu.vn",
+      "email_2" : "@",
+      "meterId" : "002",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235014684",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235364453",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235641463",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543250001903",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543267558195",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        }
+      },
+      "phoneNumber" : "0968787976",
+      "type" : "Customer"
+    },
+    "mBtaZfw1GLYPFIW3mSqQxWHpYA82" : {
+      "address" : "Thủ Đức",
+      "companyId" : "ThuDuc",
+      "displayName" : "Quản trị viên khu vực Thủ Đức",
+      "electric" : {
+        "pha1" : {
+          "current" : 2,
+          "energy" : 100,
+          "power" : 30
+        },
+        "pha2" : {
+          "current" : 2,
+          "energy" : 120,
+          "power" : 31
+        },
+        "pha3" : {
+          "current" : 2,
+          "energy" : 110,
+          "power" : 30
+        }
+      },
+      "email" : "namnguyen260596@gmail.com",
+      "phoneNumber" : "0968787976",
+      "type" : "AdminKV"
+    },
+    "o4RQF6nhrLfPfjKyamHtPhtAMnX2" : {
+      "address" : "Gò Vấp",
+      "companyId" : "GoVap",
+      "displayName" : "Quản trị viên khu vực Gò Vấp",
+      "email" : "vanhien2403@gmail.com",
+      "phoneNumber" : "0344302753",
+      "type" : "AdminKV"
+    },
+    "rh1JcYn6hvWbxon1pDB1OWt32vk2" : {
+      "address" : "TP. Hồ Chí Minh",
+      "compayId" : "MienNam",
+      "displayName" : "Admin Tổng Công ty Điện lực TP. Hồ Chí Minh",
+      "email" : "huunghia021296@gmail.com",
+      "phoneNumber" : "0964807452",
+      "type" : "AdminTong"
+    }
+  },
+  "WebData" : {
+    "Messages" : [ null, "Hello world..!", "Xin chào..!" ]
+  },
+  "test" : {
+    "xx" : "new Date(2017, 0, 3)"
+  }
+}

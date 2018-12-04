@@ -5,8 +5,8 @@
 // var userServer = JSON.parse(document.getElementById('userServer').innerHTML);
 // 20181109
 var userServer = firebase.auth().currentUser; 
-console.log("userServer", userServer);
-console.log("firebase.auth().currentUser", firebase.auth().currentUser);
+// console.log("userServer", userServer);
+// console.log("firebase.auth().currentUser", firebase.auth().currentUser);
 
 var customerId = document.getElementById('customerId');
 var displayName = document.getElementById('displayName');
@@ -23,7 +23,7 @@ var energy = document.getElementById('energy');
 
 var customerId_payment = document.getElementById('customerId_payment');
 var phoneNumber_payment = document.getElementById('phoneNumber_payment');
-
+var email_payment = document.getElementById('email_payment');
 var user = {customerId:""};
 function getInfo()
 {
@@ -69,7 +69,8 @@ function getEmail()
         user.email = snapshot.val();
         var email__ = document.getElementById("email__"); // email for change pass
         email__.value = 
-        email.innerHTML = user.email;
+        email_payment.value = 
+        email.innerHTML = user.email; 
         getLoginUserName();
     }); 
 }
@@ -168,10 +169,10 @@ function getElec()
     const pathRealtimeValue = "/" + user.customerId + "/RealtimeValue";
     database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
     {   
-        console.log("RealtimeValue on value called"); 
-        var nowMils = Date.now();
-        var sec = moment(nowMils).format('ss');
-        console.log(pathRealtimeValue);
+        // console.log("RealtimeValue on value called"); 
+        // var nowMils = Date.now();
+        // var sec = moment(nowMils).format('ss');
+        // console.log(pathRealtimeValue);
         if (snapshot.val() != null)
             displayElec(snapshot.val());
         else
@@ -181,12 +182,16 @@ function getElec()
 
 displayElec = function(elecData)
 {
+    for (para in elecData)
+    {
+        if (elecData[para]*1 <= 0) elecData[para] = 0;  // bỏ số âm // 20181203
+        // console.log(elecData[para]);
+    }
     if (elecData == null) return;
     voltage.innerHTML = elecData.Voltage + " (V)";
     current.innerHTML = elecData.Current + " (A)";
     power.innerHTML = elecData.Power + " (W)";
     energy.innerHTML = elecData.Energy + " (kWh)";
-
     voltage.style.color = 
     current.style.color = 
     power.style.color = 
@@ -221,7 +226,7 @@ function getEnergyChartData()
         {
             updateChartData();
             chart.render();
-            console.log("chart.render() running");
+            // console.log("chart.render() running");
         }
     });
 }
@@ -304,7 +309,7 @@ function getNotification()
     firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notification").on('value', function(snapshot) 
     {   
         // $("#audioAlert_Notification")[0].play(); // không ổn // 20181127
-        console.log("/notification change");
+        // console.log("/notification change");
         user.notification = null;
         user.notification = snapshot.val();
         user.notification.size = mySize(user.notification)
@@ -387,6 +392,11 @@ function getLimit()
 $("#Modal_limit").find(".btn-primary").click(function()
 {
     var limitValue = $("#iLimitValue").val();
+    if (limitValue <= 0)
+    {
+        JSAlert.alert("Vui lòng nhập số lớn hơn 0");
+        return;
+    }
     var path = "/" + user.customerId + "/limitValue/Energy";
     database_Elec.ref(path).set(limitValue*1, function(error) {});
     JSAlert.alert("Đang lưu...").dismissIn(1000*.5);
@@ -400,15 +410,20 @@ function getEnergy()
     database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
     {   
         energyRealTime = snapshot.val();
+        if (energyRealTime*1 <= 0)  energyRealTime = 0;
         energy.innerHTML = energyRealTime + " (kWh)";
         $("#thangNay_DienNang").text(energyRealTime);
         $("#thangNay_Tien").text(energyRealTime*1549);
         checkLimit();
     });
 }
-
+ 
 function checkLimit()
 {
+    console.log("energyRealTime = " + energyRealTime);
+    console.log("energyLimit = " + energyLimit);
+    console.log("energyRealTime/energyLimit = " + energyRealTime/energyLimit);
+    
     if (energyRealTime/energyLimit >= 1)
     {
         var beep500 = setInterval(function(){ $("#audioAlert")[0].play() }, 500);

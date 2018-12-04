@@ -134,6 +134,23 @@
         </div>
     </div>
     <br >
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row my-0">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="chartContainer" style="height: 250px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid" style="background-color: #fffebb">
         <div class="row">
             <div class="col-12 card" style="background-color: #e9eeff">
@@ -249,20 +266,21 @@
                     <h3 class="text-center" style="color: blue">Thông báo đã gửi</h3>
                 </div>
                 <div class="panel">
-                    <div class="list-group">
-                        <div>
-                            <label> <span class="fas fa-angle-double-right"></span> screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
+                    <div class="list-group" id="thongBaoDaGui">
+                        <!-- <% loadNotificationEJS();
+                        function loadNotificationEJS() {for (i = 0; i < 100; i ++)
+                        { %>
+                        <div id="divForEachNotification_<%=i%>">
+                            <label>
+                                <span class="fas fa-angle-double-right">
+                                </span>
+                                <b data-toggle="modal" data-target="#Modal_xemthongbao" id="buttonNotification_<%=i%>" data-title="Thông báo <%=i%>">
+                                    Thông báo <%=i%>
+                                </b>
+                                <br>
+                            </label>
                         </div>
-                        <div>
-                            <label >  <span class="fas fa-angle-double-right"></span> Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
-                        </div>
-                        <div>
-                            <label> <span class="fas fa-angle-double-right"></span> Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
-                        </div>
-                        <div>
-
-                            <label> <span class="fas fa-angle-double-right"></span>Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
-                        </div>
+                        <% }}; %> -->
                     </div>
                 </div>
             </div>
@@ -295,14 +313,30 @@
             <!--</div>-->
         </div>
     </div>
-<div style="background-color:  #080753">
-    <footer>
-        <p class="text-center text-white">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p>
-        <p class="text-center text-white">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p>
-        <p class="text-center text-white">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4" style="background-color: #2aabd2;     ">
 
-    </footer>
-</div>
+            </div>
+            <div class="col-sm-8" style="background-color:#2aabd2;">
+                <p style="font-weight: bold;font-style: revert">Thông tin liên hệ </p>
+                <div class="fas fa-home">
+                    <i style="font-style: italic">Số 1 Võ Văn Ngân, phường Linh Chiểu, quận Thủ Đức, Tp.HCM</i>
+                </div>
+                <br>
+                <div class="fas fa-phone">
+                    <i style="font-style: italic">0968787976</i>
+                </div>
+                <br>
+                <div class="fas fa-envelope">
+                    <i style="font-style: italic">dienluc.hnn@gmail.com</i>
+                </div>
+
+            </div>
+            <!-- <div class="col-sm-3" style="background-color:#2aabd2;"></div> -->
+
+        </div>
+    </div>
 <!--modal gui thong bao-->
 <div class="modal fade" id="Modal_thongbao" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -381,6 +415,33 @@
         </div>
     </div>
 </div>
+<!--modal xem thong báo\-->
+<div class="modal fade" id="Modal_xemthongbao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="notificationTitleModal">THÔNG BÁO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="card border-success mb-3">
+                    <div class="card-header bg-transparent border-success text-center" id="notificationTitle" style="font-size: 20px">Tiêu đề hiện ở đây</div>
+                    <div class="card-body text-success">
+                        <p class="card-text" id="notificationContent">trong đây là nội dung thông báo</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success" id="notificationTimeAndSender">Thời gian và người gửi hiện ở đây</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hết modal xem thông báo   -->
+
 
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <!-- BEGIN USER MANAGE -->
@@ -391,7 +452,7 @@
 <script src="script/firebasejs/5.5.6/firebase-database.js"></script>
 <script src="script/firebasejs/5.5.6/firebase-auth.js"></script>
 <script src="script/init.js"></script>
-
+  
 <script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
 <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
 <script src="script/admin2FrontEnd.js"></script>
@@ -399,7 +460,7 @@
 <!-- CHART -->
 <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 <script src="js/canvasjs.min.js"></script>
-<script src="script/myCanvasChart.js"> </script>
+<script src="script/myCanvasChart_admin_2.js"> </script>
 <!-- <script src="script/myCanvasChart_20181105_ThangNayThangTruoc_OkOkOk.js"> </script> -->
 <!-- <script src="script/chart.js"></script> -->
 <!-- HẾT CHART -->
@@ -412,5 +473,7 @@
     <!-- script dấu 3 chấm -->
     <script src="script/threeDots.js"></script>            
 </myWait>
+
+<script src="script/mySecurity.js"></script>
 </body>
 </html>
