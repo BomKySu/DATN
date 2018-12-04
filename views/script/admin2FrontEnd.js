@@ -91,7 +91,7 @@ function getDatabaseElec()
     if (user.companyId == "GoVap")
     {
         database_Elec = database_Elec_GV;
-        getElec();
+        getElec_GV();
     }
     else if  (user.companyId == "ThuDuc")
     {
@@ -132,6 +132,35 @@ function getElec()
             $("#current_3").text(RealtimeValue.pha3.current + " (A)");
             $("#power_3").text(RealtimeValue.pha3.power + " (kW)");
             $("#energy_3").text(RealtimeValue.pha3.energy + " (kWh)");
+            getEnergyChartData();
+        }
+        else
+        {
+            console.log("Total elec data read null");
+        }
+    });
+}
+function getElec_GV()
+{
+    const pathElec = "/";
+    database_Elec.ref(pathElec).on('value', function(snapshot) 
+    {   
+        // console.log("getElec on value called"); 
+        Elec = snapshot.val();
+        // console.log("getElec on value called"); 
+        if (Elec)  // != null
+        {
+            $("#current").text(Elec.PE00000000003.RealtimeValue.Current + " (A)");
+            $("#power").text(Elec.PE00000000003.RealtimeValue.Power + " (kW)");
+            $("#energy").text(Elec.PE00000000003.RealtimeValue.Energy + " (kWh)");
+
+            $("#current_2").text(0 + " (A)");
+            $("#power_2").text(0 + " (kW)");
+            $("#energy_2").text(0 + " (kWh)");
+
+            $("#current_3").text(0 + " (A)");
+            $("#power_3").text(0 + " (kW)");
+            $("#energy_3").text(0 + " (kWh)");
             getEnergyChartData();
         }
         else
