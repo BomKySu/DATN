@@ -121,14 +121,14 @@ function getLoginUserName()
 
 firebase.auth().onAuthStateChanged(function(userChanged)
 {
-    console.log("\nonAuthStateChanged");
+    // console.log("\nonAuthStateChanged");
     if (userChanged != null)
     {
-        console.log('current user: ', userChanged.email);
+        // console.log('current user: ', userChanged.email);
         var pathUserType = '/UserInfo/' + userChanged.uid + '/type';
         firebase.database().ref(pathUserType).on('value', function(userType)       
-        {
-            console.log(userType.val());
+        {       
+            // console.log(userType.val());
             try
             {
                 if (userType.val() == "Customer")
@@ -330,7 +330,7 @@ function mySize(obj)
     return size;
 }
 var allNotification = {};
-function getNotification()
+function getNotification_old()
 {
     firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notification").on('value', function(snapshot) 
     {   
@@ -375,6 +375,54 @@ function getNotification()
         }
     });
 }
+
+function checkReadUnread(pathRead)
+{
+    firebase.database().ref(pathRead).on('value', function(snapshot, prev) 
+    {
+        // console.log(snapshot);
+        if (snapshot.val()*1 == 1)
+        {
+            $("#" + snapshot.ref.parent.key ).css({'color' : 'grey', 'font-size': '100%'});
+        }
+        else
+        {
+            $("#" + snapshot.ref.parent.key ).css({'color' : 'black', 'font-size': '100%'});
+        }
+    });
+}
+function getNotification()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notification").on('child_added', function(snapshot, prev) 
+    {
+        // console.log("/notification change");
+        currentNotification = snapshot.val();
+        // console.log(currentNotification);
+        time = snapshot.key;
+        if (currentNotification) 
+        {
+            divForEachNotification = document.createElement('div');
+            $(divForEachNotification)
+                .slideToggle(500)
+                .show()
+                .slideToggle(500)
+                .attr("id", time)
+                .html("<label><span class=\"fas fa-angle-double-right\"></span><b data-toggle=\"modal\" data-target=\"#Modal_xemthongbao\" class=\"buttonNotification\" id data-title></b><br></label>")
+            // thêm các thông số khác
+            buttonNotification = $(divForEachNotification).find('.buttonNotification') // con của cái div
+            $(buttonNotification)
+                .text(currentNotification.title)
+                .data("title", currentNotification.title)
+                .data("content", currentNotification.content)
+                .data("sender", currentNotification.sender)
+                .data("time", time)
+            $(divForEachNotification).prependTo($("#thongBaoDaNhan"))    // hiển thị nó lên
+
+            var pathRead = "/UserInfo/" + firebase.auth().currentUser.uid + "/notification/" + time + "/read";
+            checkReadUnread(pathRead);  
+        }   
+    });
+}
 $('#Modal_xemthongbao').on('show.bs.modal', function (event) 
 {
     console.log("Modal_xemthongbao event...");
@@ -400,7 +448,7 @@ function markUnRead(time)
     var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
     firebase.database().ref(path).set(0, function(error) {});
 }
-    
+
 //// limit
 var energyLimit;
 function getLimit()
@@ -412,6 +460,7 @@ function getLimit()
         $("#iLimitValue").val(energyLimit);  
         $("#textLimitValue")[0].innerHTML = energyLimit + " (kWh)";
         getEnergy();
+        displayTable();
     });
 }
 
@@ -471,21 +520,52 @@ function checkLimit()
     }   
 }
 
-// var testEventPath = "/PE00000000000/RealtimeValue";
-// testEvent();
-// function testEvent()
-// {
-//     database_Elec_TD.ref(testEventPath).on('value', function(snapshot) 
-//     {
-//         console.log(testEventPath);
-//         console.log("testEvent() running...");
-//         console.log(snapshot.key);
-//         console.log(snapshot.val());
-//         console.log(snapshot);
-//     });
-// }
 // xử lý thanh toán
 var Payment;
+function displayTable()
+{
+    var pathPayment = "/" + user.customerId + "/Payment";
+    database_Elec.ref(pathPayment).on('value', function(snapshot) 
+    {   
+        var count = 0;
+        Payment = snapshot.val();
+        for(year in Payment)
+        {
+            for(month in Payment[year])
+            {
+                // console.log(Payment[year][month]);
+                count ++;
+                if (count >= 4) return;
+                $("#rowMonth" + month + year).remove();
+                trForEachMonth = document.createElement('tr');
+                $(trForEachMonth)
+                    .slideToggle(500)
+                    .show()
+                    .slideToggle(500)
+                    .html("<td id='month'></td> <td id='energy'></td> <td id='money'></td> <td id='paid'></td>")
+                    .attr("id", "rowMonth" + month + year)
+                $(trForEachMonth).find('#month').text("Tháng " + month);
+                $(trForEachMonth).find('#energy').text(Payment[year][month].TotalEnergy);
+                $(trForEachMonth).find('#money').text(Payment[year][month].Debt);
+                $(trForEachMonth).find('#paid').text(Payment[year][month].Paid);
+                if (Payment[year][month].Paid == 1)
+                {
+                    $(trForEachMonth).find('#paid').text("Đã thanh toán")
+                }
+                else
+                {
+                    // $(trForEachMonth).find('#paid')[0].innerHTML = ("<b>Chưa thanh toán</b>")
+                    $(trForEachMonth).find('#paid')
+                        .text("Chưa thanh toán")
+                        .css({"font-weight": "bold"});
+                }
+                // $(trForEachMonth).prependTo($("#bangTT3Thang"))    // hiển thị nó lên
+                ($("#trThangNay")).after($(trForEachMonth))    // hiển thị nó lên
+            }
+        }
+    })
+}
+
 function getDebt()
 {
     var pathPayment = "/" + user.customerId + "/Payment";

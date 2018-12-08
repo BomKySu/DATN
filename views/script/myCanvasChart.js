@@ -4,6 +4,7 @@ console.log("myCanvasChart.js running");
 var nowMils = Date.now();
 var myYear = moment(nowMils).format("YYYY");
 var myMonth = moment(nowMils).format("MM");
+$("#thangNay").text("Tháng " + myMonth);
 // var myMonthMinus1 = myMonth - 1;
 var myMonthBefore = myMonth - 1;
 // var myMonthBeforeMinus1 = myMonthBefore - 1;
