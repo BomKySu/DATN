@@ -54,7 +54,7 @@ chartLoad = function ()
                 showInLegend: true,
                 name: "Tháng " + myMonthBefore_2,
                 markerType: "square",
-                lineDashType: "dash",
+                lineDashType: "",
                 xValueFormatString: "Ngày DD",
                 color: "#0000FF",
                 dataPoints: 
@@ -98,7 +98,7 @@ chartLoad = function ()
                 showInLegend: true,
                 name: "Tháng " + myMonthBefore,
                 markerType: "square",
-                lineDashType: "dash",
+                lineDashType: "",
                 xValueFormatString: "Ngày DD",
                 color: "#00FF00",
                 dataPoints: 

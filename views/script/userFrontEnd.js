@@ -27,6 +27,7 @@ var email_payment = document.getElementById('email_payment');
 var user = {customerId:""};
 function getInfo()
 {
+    getCompanyId(); // 20181205
     getDisplayName();
     getCustomerId();
     getAddress();
@@ -163,6 +164,31 @@ firebase.auth().onAuthStateChanged(function(userChanged)
     }
 
 });
+
+function getCompanyId()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/companyId").on('value', function(snapshot) 
+    {   
+        user.companyId = snapshot.val();
+        getDatabaseElec();
+    });
+}
+var database_Elec; 
+function getDatabaseElec()
+{
+    if (user.companyId == "GoVap")
+    {
+        database_Elec = database_Elec_GV;
+        // getElec_GV();
+    }
+    else if  (user.companyId == "ThuDuc")
+    {
+        database_Elec = database_Elec_TD;
+        // getElec_TD();
+    }
+    getElec();
+    // getAllCustomer(); 
+}
 
 function getElec()
 {
@@ -406,23 +432,23 @@ $("#Modal_limit").find(".btn-primary").click(function()
 var energyRealTime;
 function getEnergy()
 {
-    const pathRealtimeValue = "/" + user.customerId + "/RealtimeValue/Energy";
+    var pathRealtimeValue = "/" + user.customerId + "/RealtimeValue/Energy";
     database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
     {   
         energyRealTime = snapshot.val();
         if (energyRealTime*1 <= 0)  energyRealTime = 0;
         energy.innerHTML = energyRealTime + " (kWh)";
         $("#thangNay_DienNang").text(energyRealTime);
-        $("#thangNay_Tien").text(energyRealTime*1549);
+        $("#thangNay_Tien").text(Math.round(LuyKe(energyRealTime)));
         checkLimit();
     });
 }
  
 function checkLimit()
 {
-    console.log("energyRealTime = " + energyRealTime);
-    console.log("energyLimit = " + energyLimit);
-    console.log("energyRealTime/energyLimit = " + energyRealTime/energyLimit);
+    // console.log("energyRealTime = " + energyRealTime);
+    // console.log("energyLimit = " + energyLimit);
+    // console.log("energyRealTime/energyLimit = " + energyRealTime/energyLimit);
     
     if (energyRealTime/energyLimit >= 1)
     {
@@ -445,3 +471,138 @@ function checkLimit()
     }   
 }
 
+// var testEventPath = "/PE00000000000/RealtimeValue";
+// testEvent();
+// function testEvent()
+// {
+//     database_Elec_TD.ref(testEventPath).on('value', function(snapshot) 
+//     {
+//         console.log(testEventPath);
+//         console.log("testEvent() running...");
+//         console.log(snapshot.key);
+//         console.log(snapshot.val());
+//         console.log(snapshot);
+//     });
+// }
+// xử lý thanh toán
+var Payment;
+function getDebt()
+{
+    var pathPayment = "/" + user.customerId + "/Payment";
+    database_Elec.ref(pathPayment).on('value', function(snapshot) 
+    {   
+        user.debt = 0;
+        Payment = snapshot.val();
+        for(year in Payment)
+        {
+            for(month in Payment[year])
+            {
+                if (Payment[year][month].Paid*1 != 1)   // chưa thanh toán
+                {
+                    user.debt += Payment[year][month].Debt; 
+                }
+                $("#payment_Money").text(user.debt + " (VNĐ)");
+                if (user.debt <= 0)
+                {
+                    $('#xacNhanThanhToan').attr("disabled", "disabled");
+                }
+                else
+                {
+                    $('#xacNhanThanhToan').removeAttr("disabled");
+                }
+            }
+        }
+        return user.debt;
+    });
+}
+function removeDebt()
+{
+    var pathPaid = "/" + user.customerId + "/Payment/";
+    for(year in Payment)
+    {
+        for(month in Payment[year])
+        {
+            pathPaid = "/" + user.customerId + "/Payment/" + year + "/" + month + "/Paid";
+            database_Elec.ref(pathPaid).set(1, function(error) {});
+        }
+    }
+}
+/*
+{
+"Debt":173195,
+"Paid":0,
+"TotalEnergy":100
+}
+*/
+
+$('#payment_SumitButton').on('click', function()
+{
+    $('#payment_Name')[0].innerHTML = $('#displayName')[0].innerHTML;
+    $('#payment_Address')[0].innerHTML = $('#address')[0].innerHTML;
+    $('#payment_CustomerId')[0].innerHTML = $('#customerId_payment')[0].value;
+    $('#payment_PhoneNumber')[0].innerHTML = $('#phoneNumber_payment')[0].value;
+    $('#payment_Email')[0].innerHTML = $('#email_payment')[0].value;
+    $('#payment_Bank').attr("src", $('.mx-auto.d-block.selected')[0].currentSrc);
+    getDebt();
+})
+$('#xacNhanThanhToan').on('click', function()
+{
+    var money = $("#payment_Money").text();
+    removeDebt();
+    JSAlert.alert("Đang xử lý...").dismissIn(1000*.5);
+    JSAlert.alert("Đã thanh toán thành công số tiền " + money + "!");
+})
+
+function LuyKe(energy)
+{
+    var price1 =1549;
+    var price2 =1600;
+    var price3 =1858;
+    var price4 =2340;
+    var price5 =2615;
+    var price6 =2701;
+
+    var money = 0;
+    if (energy <= 50)
+    {
+        money = energy*price1;
+    }
+    else if (energy <= 100)
+    {
+        money = 50*price1;
+        money = money + (energy-50)*price2;
+    }
+    else if (energy <= 200)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += (energy-100)*price3;
+    }
+    else if (energy <= 300)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += 100*price3;
+        money += (energy-200)*price4;
+    }
+    else if (energy <= 400)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += 100*price3;
+        money += 100*price4;
+        money += (energy-300)*price5;
+    }
+    else if (energy > 400)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += 100*price3;
+        money += 100*price4;
+        money += 100*price5;
+        money += (energy-400)*price6;
+    }
+    money += money/10;
+    money = Math.round(money);
+    return money;
+}

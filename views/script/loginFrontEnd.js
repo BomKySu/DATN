@@ -61,53 +61,74 @@
         // document.getElementById('quickstart-sign-in').disabled = true;
     }
 );
-// on auth change
 
-    firebase.auth().onAuthStateChanged(function(user)
+    // on auth change
+    // $("mymain").attr("hidden","hidden");
+    $("mymain").hide();
+    $("body").removeAttr("background");
+firebase.auth().onAuthStateChanged(function(userChanged)
+{
+    // console.log("\nonAuthStateChanged");
+    if (userChanged != null)
     {
-        console.log('\nAuthState changed');
-        // httpGet("/");
-        if ( (user !== null && user !== undefined) )
+        // console.log('current user: ', userChanged.email);
+        var pathUserType = '/UserInfo/' + userChanged.uid + '/type';
+        firebase.database().ref(pathUserType).on('value', function(userType)       
         {
-            // window.location = "/user"; 
-            // return;
-            console.log('current user: ', user.email);
-            var pathUserType = '/UserInfo/' + user.uid + '/type';
-            firebase.database().ref(pathUserType).on('value', function(userType)       
+            // console.log(userType.val());
+            try
             {
-                console.log(userType.val());
-                JSAlert.alert("Đang đăng nhập...");
-                try
-                {
-                    if (userType.val() == "Customer")
-                    {
-                        window.location = "/user"; 
-                    }
-                    else if (userType.val() == "AdminKV")
-                    {
-                        window.location = "/user/admin_2"; 
-                    }
-                    else if (userType.val() == "AdminTong")
-                    {
-                        window.location = "/user/admin_1"; 
-                    }
-                    else
-                    {
-                        JSAlert.alert("Thông tin tài khoản không đầy đủ, liên hệ quản trị viên để biết thêm thông tin.");
-                    }
+                if (userType.val() == "Customer")
+                { 
+                    JSAlert.alert("Đang mở trang khách hàng...").dismissIn(1000*5);
+                    window.location = "/user"; 
+                    // document.getElementById("myMain").hidden="";
+                    // document.getElementById("myWait").hidden="hidden";
+                    // getInfo();
                 }
-                catch(error) { console.log(error.message)};
-            });
-        };
-    });
-    function validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+                else if (userType.val() == "AdminKV")
+                {
+                    JSAlert.alert("Đang mở trang quản trị viên khu vực...").dismissIn(1000*5);
+                    window.location = "/user/admin_2"; 
+                    // document.getElementById("myMain").hidden="";
+                    // document.getElementById("myWait").hidden="hidden";
+                    // getDatabaseElec(); // Cannot read property 'ref' of undefined
+                    getInfo();
+                }
+                else if (userType.val() == "AdminTong")
+                {
+                    JSAlert.alert("Đang mở trang quản trị viên tổng công ty...").dismissIn(1000*5);
+                    window.location = "/user/admin_1"; 
+                }
+                else
+                {
+                    JSAlert.alert("Thông tin tài khoản không đầy đủ, liên hệ quản trị viên để biết thêm thông tin.");
+                }
+            }
+            catch(error) { console.log(error.message)};
+        });
     }
-    // load login user name
-    var LoginUserName = {};
-    firebase.database().ref('/LoginUserName').once('value').then(function(snapshot) 
-    {   
-        // console.log(snapshot.val());
-        LoginUserName = snapshot.val();
-    });
+    else
+    {
+        // JSAlert.alert("Đang mở trang đăng nhập...").dismissIn(1000*5);
+        // window.location = "/login";
+        // do not redirect, it's here now
+        // document.getElementById("myMain").hidden="";
+        $("mymain").show();
+        document.getElementById("myWait").hidden="hidden";
+        $("body").attr("background", "IMAGE/background_login.jpg");
+    }
+});
+////
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+// load login user name
+var LoginUserName = {};
+// firebase.database().ref('/LoginUserName').once('value').then(function(snapshot) 
+firebase.database().ref('/LoginUserName').on('value', function(snapshot) 
+{   
+    // console.log(snapshot.val());
+    LoginUserName = snapshot.val();
+});

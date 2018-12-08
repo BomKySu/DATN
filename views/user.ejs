@@ -166,10 +166,16 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td id="thangNay">Tháng 11</td>
+                        <td id="thangNay">Tháng 12</td>
                         <td id="thangNay_DienNang">30</td>
                         <td id="thangNay_Tien">46470</td>
                         <td id="thangNay_TrangThai">Chưa thanh toán</td>
+                    </tr>
+                    <tr>
+                        <td id="thangTruoc">Tháng 11</td>
+                        <td id="thangTruoc_DienNang">0</td>
+                        <td id="thangTruoc_Tien">0</td>
+                        <td id="thangTruoc_TrangThai">Đã thanh toán</td>
                     </tr>
                     <tr>
                         <td id="thangTruoc">Tháng 10</td>
@@ -177,12 +183,12 @@
                         <td id="thangTruoc_Tien">0</td>
                         <td id="thangTruoc_TrangThai">Đã thanh toán</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td id="thangTruocTruoc">Tháng 9</td>
                         <td id="thangTruocTruoc_DienNang">0</td>
                         <td id="thangTruocTruoc_Tien">0</td>
                         <td id="thangTruocTruoc_TrangThai">Đã thanh toán</td>
-                    </tr>
+                    </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -199,7 +205,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><li class="fas fa-barcode"></li></span>
                         </div>
-                        <input type="text" class="form-control" id="customerId_payment" placeholder="Nhập mã khách hàng">
+                        <input type="text" class="form-control" id="customerId_payment" placeholder="Nhập mã khách hàng" disabled>
                     </div>
                     <label>Điện thoại<a style="color: red">*</a></label>
                     <div class="input-group mb-3">
@@ -281,15 +287,6 @@
                       $(this).addClass('selected');
                       $('#payment_SumitButton').removeAttr("disabled");
                     });
-                    $('#payment_SumitButton').on('click', function()
-                    {
-                        $('#payment_Name')[0].innerHTML = $('#displayName')[0].innerHTML;
-                        $('#payment_Address')[0].innerHTML = $('#address')[0].innerHTML;
-                        $('#payment_CustomerId')[0].innerHTML = $('#customerId_payment')[0].value;
-                        $('#payment_PhoneNumber')[0].innerHTML = $('#phoneNumber_payment')[0].value;
-                        $('#payment_Email')[0].innerHTML = $('#email_payment')[0].value;
-                        $('#payment_Bank').attr("src", $('.mx-auto.d-block.selected')[0].currentSrc);
-                    })
                 </script>
             </div>
         </div>
@@ -680,14 +677,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary" id="xacNhanThanhToan">Xác nhận thanh toán</button>
-                    <script>
-                        $('#xacNhanThanhToan').on("click", function() 
-                        {
-                            JSAlert.alert("Đang xử lý...").dismissIn(1000*.5);
-                            var money = "---";
-                            JSAlert.alert("Đã thanh toán thành công số tiền " + money + " VNĐ!");
-                        }) 
-                    </script>
+
                 </div>
             </div>
         </div>

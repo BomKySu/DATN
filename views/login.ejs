@@ -23,20 +23,27 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body background="IMAGE/background_login.jpg" style="background-color:#eee;height: 100%; background-size: auto; background-position: center">
-<nav href="/" class="" style="background: rgba(114,171,255,0.9); text-align:center; align-items: center">
+<myMain id="myMain">
+<nav href="" class="" style="background: rgba(114,171,255,0.9); text-align:center; align-items: center">
     <div class="container-fluid">
         <div class="navbar navbar-text" >
             <div>
-                <a href="/" class="navbar-brand" style="font-weight: bold; font-size: large">ĐỒ ÁN TỐT NGHIỆP</a>
+                <a href="" class="navbar-brand" style="font-weight: bold; font-size: large">ĐỒ ÁN TỐT NGHIỆP</a>
             </div>
             <div style="text-align:center">
-                <a href="/" class="navbar-brand" style="color: rgb(255,0,0);font-weight: bold; font-size: xx-large ; ">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH</a>
+                <a href="" class="navbar-brand" style="color: rgb(255,0,0);font-weight: bold; font-size: xx-large ; ">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH</a>
             </div>
         </div>
 
     </div>
 </nav>
-<marquee style="background: rgba(255,239,219,0.7); color: rgba(45,62,72,1);font-weight: bold;">Tổng công ty điện lực Hiến-Nghĩa-Nam xin kính chào quý khách!</marquee>
+<div style="background: rgba(255,239,219,0.7); color: rgba(45,62,72,1);font-weight: bold;">
+    <marquee2 behavior="scroll" scrollamount="2.8" direction="left" height="28" width="1280">Tổng công ty điện lực Hiến-Nghĩa-Nam xin kính chào quý khách!</marquee2>
+    <script src="js/marquee.js"></script>
+    <script> 
+            // $('marquee2').marquee();
+    </script>
+</div>
 <div class="container container-fluid">
     <!--<img src="./IMAGE/BACKGROUND.png" class="img-fluid" alt="Responsive image">-->
         <div class="row" style="padding-top: 80px;padding-right: 100px;padding-left: 100px; ">
@@ -104,5 +111,18 @@
 <script src="script/init.js"></script>
 
 <script src="script/loginFrontEnd.js"> </script>
+
+</myMain>
+<myWait id="myWait">
+    <p style="font-size:42px; text-align:center; font-family:'Consolas' ">
+            Vui lòng chờ<br>
+            <a id="threeDots"></a>
+    </p>
+    <!-- script dấu 3 chấm -->
+    <script src="script/threeDots.js"></script>            
+</myWait>
+
+<script src="script/mySecurity.js"></script>
+
 </body>
 </html>

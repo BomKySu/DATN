@@ -147,7 +147,6 @@ function getElec_GV()
     {   
         // console.log("getElec on value called"); 
         Elec = snapshot.val();
-        // console.log("getElec on value called"); 
         if (Elec)  // != null
         {
             $("#current").text(Elec.PE00000000003.RealtimeValue.Current + " (A)");
@@ -176,7 +175,6 @@ function getElec_TD()
     {   
         // console.log("getElec on value called"); 
         Elec = snapshot.val();
-        // console.log("getElec on value called"); 
         if (Elec)  // != null
         {
             $("#current").text(Elec.PE00000000000.RealtimeValue.Current + " (A)");
@@ -257,14 +255,14 @@ function getAllCustomer()
             // if 
         }        
         // $('#buttonNotification_0').text(allNotification["0"].title);
-        for (i = 0; i < 99; i++)
+        for (i = 0; i < 9; i++)
         {  
             var i_ = i + 1;
             // console.log("allCustomer_Filtered.displayName" + allCustomer_Filtered.displayName);
             if(allCustomer_Filtered[i*1])       // tồn tại
             {
                 allCustomer_Filtered[i*1].energy = Elec[allCustomer_Filtered[i*1].customerId].RealtimeValue.Energy;
-                allCustomer_Filtered[i*1].money = Elec[allCustomer_Filtered[i*1].customerId].RealtimeValue.Energy*1549;
+                allCustomer_Filtered[i*1].money = Math.round(LuyKe(allCustomer_Filtered[i*1].energy));
 
                 $('#trForEachCustomer_' + i_)["0"].hidden="";
                 $('#customerId_' + i_).text(allCustomer_Filtered[i*1].customerId);
@@ -359,13 +357,6 @@ function markUnRead(time)
     var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
     firebase.database().ref(path).set(0, function(error) {});
 }
-    
-
-
-
-
-
-
 
 // sau khi đã remote thành công tới project trên heroku, 
 // nếu project dưới máy có chỉnh sửa thì sẽ làm thế này...
@@ -375,3 +366,57 @@ function markUnRead(time)
 // tiếp là git push heroku master
 // ở đây mới làm rồi, không có gì thay đổi nên k làm tiếp được...
 // OK  
+
+function LuyKe(energy)
+{
+    var price1 =1549;
+    var price2 =1600;
+    var price3 =1858;
+    var price4 =2340;
+    var price5 =2615;
+    var price6 =2701;
+
+    var money = 0;
+    if (energy <= 50)
+    {
+        money = energy*price1;
+    }
+    else if (energy <= 100)
+    {
+        money = 50*price1;
+        money = money + (energy-50)*price2;
+    }
+    else if (energy <= 200)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += (energy-100)*price3;
+    }
+    else if (energy <= 300)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += 100*price3;
+        money += (energy-200)*price4;
+    }
+    else if (energy <= 400)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += 100*price3;
+        money += 100*price4;
+        money += (energy-300)*price5;
+    }
+    else if (energy > 400)
+    {
+        money = 50*price1;
+        money += 50*price2;
+        money += 100*price3;
+        money += 100*price4;
+        money += 100*price5;
+        money += (energy-400)*price6;
+    }
+    money += money/10;
+    money = Math.round(money);
+    return money;
+}
