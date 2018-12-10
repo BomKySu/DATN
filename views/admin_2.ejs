@@ -19,34 +19,51 @@
 <body>
 <!--<%# include nav.ejs %>-->
 <myMain id="myMain" hidden>
-<nav class="navbar sticky-top navbar-expand-sm" style="background-color: #1F3A93">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    </button>
+<nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(28, 28, 255)">
     <a class="text-white navbar-brand" href="">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH
-        <div class="text-center" id="titleKhuVuc">KHU VỰC ---</div>
+        <div class="text-center" id="titleKhuVuc">Quản trị viên khu vực ---</div>
     </a>
-    <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03">
-        <form class="form-inline ml-auto">
-            <input class="form-control mr-sm-2" type="search" aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="submit" style="background-color: #fff">Tìm kiếm</button>
-        </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <style>
+            .navbar-toggler
+            {
+                background-color:white;
+                border-radius: 3px;
+            }
+            .icon-bar
+            {
+                width: 18px;
+                height: 4px;
+                background-color: blue;
+                margin: 3px 0px;
+                border-radius: 3px;
+            }
+        </style>
+    </button>
+    <div class="navbar-collapse navbar-brand collapse" id="navbarTogglerDemo03" style="font-size: 16px">
+        <!-- <form class="form-inline ml-auto"> -->
+            <!-- <input class="form-control mr-sm-2" type="search" aria-label="Search"> -->
+            <!-- <button class="btn my-2 my-sm-0" type="submit" style="background-color: #fff">Tìm kiếm</button> -->
+        <!-- </form> -->
         <ul class="navbar-nav ml-4 ml-auto">
-            <!--<li class=" dropdown">-->
-                <!--<a class="nav-link dropdown-toggle text-white"  href="#" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                    <!--Cài đặt-->
-                <!--</a>-->
-                <!--<div class="dropdown-menu" >-->
-                    <!--<a class="dropdown-item" href="#">Định mức sử dụng điện</a>-->
-                <!--</div>-->
-            <!--</li>-->
-
-            <li class="text-white">
-                <a class="nav-link text-white" href="#" data-toggle="modal" type="link" data-target="#Modal_thongbao" style="font-size: medium">Gửi thông báo</a>
-            </li>
-            <li class="text-white">
-                <a class="nav-link text-white" href="#" data-toggle="modal" type="link" data-target="#Modal_ThemKhachHang" style="font-size: medium">Thêm khách hàng</a>
-            </li>
-            <li class="text-right">
+            <style>
+                .header-hover:hover{
+                    background-color: lightblue;
+                }
+                .header-hover-red:hover{
+                    background-color: red
+                }
+            </style>
+            <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_thongbao" >
+                <a class="nav-link text-white" href="#" style="font-size: medium">Gửi thông báo</a>
+            </div>
+            <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_ThemKhachHang" >
+                <a class="nav-link text-white" href="#" style="font-size: medium">Thêm khách hàng</a>
+            </div>
+            <div class="btn header-hover-red" href="#">
                 <a id="logout" class="nav-link text-white" style="font-size: medium"  href="/login">Đăng xuất</a>
                 <script>
                     document.getElementById("logout").onclick =
@@ -55,7 +72,7 @@
                         firebase.auth().signOut();
                     }
                 </script>
-            </li>
+            </div>
         </ul>
 
     </div>
@@ -258,10 +275,10 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4" style="background-color: #2aabd2;     ">
+            <div class="col-sm-4" style="background-color: #0000ff;     ">
 
             </div>
-            <div class="col-sm-8" style="background-color:#2aabd2;">
+            <div class="col-sm-8 text-white" style="background-color:#0000ff;">
                 <p style="font-weight: bold;font-style: revert">Thông tin liên hệ </p>
                 <div class="fas fa-home">
                     <i style="font-style: italic">Số 1 Võ Văn Ngân, phường Linh Chiểu, quận Thủ Đức, Tp.HCM</i>
@@ -271,13 +288,12 @@
                     <i style="font-style: italic">0968787976</i>
                 </div>
                 <br>
-                <div class="fas fa-envelope">
+                <div class="fas fa-envelope" href="mailto:dienluc.hnn@gmail.com">
                     <i style="font-style: italic">dienluc.hnn@gmail.com</i>
                 </div>
 
             </div>
             <!-- <div class="col-sm-3" style="background-color:#2aabd2;"></div> -->
-
         </div>
     </div>
 <!--modal gui thong bao-->

@@ -403,20 +403,25 @@ function getNotification()
         {
             divForEachNotification = document.createElement('div');
             $(divForEachNotification)
-                .slideToggle(500)
-                .show()
-                .slideToggle(500)
+                // .slideToggle(500)
+                // .show()
+                .hide()
+                // .slideToggle(500)
                 .attr("id", time)
-                .html("<label><span class=\"fas fa-angle-double-right\"></span><b data-toggle=\"modal\" data-target=\"#Modal_xemthongbao\" class=\"buttonNotification\" id data-title></b><br></label>")
+                .attr("class","header-hover")
+                .attr("href", "#")
+                .attr('data-target', '#Modal_xemthongbao')
+                .attr('data-toggle', 'modal' )
+                .html("<label><span class='fas fa-angle-double-right'></span><b class='titleNotification'></b><br></label>")
             // thêm các thông số khác
-            buttonNotification = $(divForEachNotification).find('.buttonNotification') // con của cái div
-            $(buttonNotification)
-                .text(currentNotification.title)
                 .data("title", currentNotification.title)
                 .data("content", currentNotification.content)
                 .data("sender", currentNotification.sender)
                 .data("time", time)
-            $(divForEachNotification).prependTo($("#thongBaoDaNhan"))    // hiển thị nó lên
+                .prependTo($("#thongBaoDaNhan"))    // hiển thị nó lên
+                .slideToggle("slow");
+            titleNotification = $(divForEachNotification).find('.titleNotification') // con của cái div
+            $(titleNotification).text(currentNotification.title)
 
             var pathRead = "/UserInfo/" + firebase.auth().currentUser.uid + "/notification/" + time + "/read";
             checkReadUnread(pathRead);  
@@ -541,6 +546,7 @@ function displayTable()
                 $(trForEachMonth)
                     .slideToggle(500)
                     .show()
+                    // .hide()
                     .slideToggle(500)
                     .html("<td id='month'></td> <td id='energy'></td> <td id='money'></td> <td id='paid'></td>")
                     .attr("id", "rowMonth" + month + year)
@@ -557,7 +563,7 @@ function displayTable()
                     // $(trForEachMonth).find('#paid')[0].innerHTML = ("<b>Chưa thanh toán</b>")
                     $(trForEachMonth).find('#paid')
                         .text("Chưa thanh toán")
-                        .css({"font-weight": "bold"});
+                        .css({"font-weight": "bold", "color":"orangered"});
                 }
                 // $(trForEachMonth).prependTo($("#bangTT3Thang"))    // hiển thị nó lên
                 ($("#trThangNay")).after($(trForEachMonth))    // hiển thị nó lên

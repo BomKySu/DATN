@@ -1,6 +1,6 @@
 
 
-console.log("myCanvasChart.js running");
+// console.log("myCanvasChart.js running");
 var nowMils = Date.now();
 var myYear = moment(nowMils).format("YYYY");
 var myMonth = moment(nowMils).format("MM");
@@ -16,7 +16,7 @@ var chart;
 // {
 chartLoad = function () 
 {
-    console.log("chartLoad running");
+    // console.log("chartLoad running");
     chart = new CanvasJS.Chart("chartContainer", 
     { 
         animationEnabled: true,

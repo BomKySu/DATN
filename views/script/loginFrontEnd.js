@@ -64,8 +64,8 @@
 
     // on auth change
     // $("mymain").attr("hidden","hidden");
-    $("mymain").hide();
-    $("body").removeAttr("background");
+    // $("mymain").hide();
+    // $("body").removeAttr("background");
 firebase.auth().onAuthStateChanged(function(userChanged)
 {
     // console.log("\nonAuthStateChanged");
@@ -115,7 +115,7 @@ firebase.auth().onAuthStateChanged(function(userChanged)
         // do not redirect, it's here now
         // document.getElementById("myMain").hidden="";
         $("mymain").show();
-        document.getElementById("myWait").hidden="hidden";
+        $("myWait").hide();
         $("body").attr("background", "IMAGE/background_login.jpg");
     }
 });
