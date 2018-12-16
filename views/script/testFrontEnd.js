@@ -13,14 +13,15 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // var outputText = document.getElementById('outputText');
-firebase.database().ref('/').once('value').then(function(snapshot) 
+// firebase.database().ref('/').once('value').then(function(snapshot) 
 {
     // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
     // outputText.innerHTML = JSON.stringify(snapshot.val());
     // document.body.innerHTML = JSON.stringify(snapshot.val());
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     var x = new Date(2018, 11, 05);
     console.log(x.toString("YYYYMMDD_HHmmss")); // k được gì, như không
-});
+}
+// );
 
 

@@ -1,0 +1,398 @@
+{
+  "AdminGoVap" : {
+    "feedback" : {
+      "1544680656511" : {
+        "content" : "ádfasdf ádfasdf ",
+        "time" : "201812131257",
+        "title" : "văn hiến"
+      }
+    }
+  },
+  "AdminThuDuc" : {
+    "ThongBao" : {
+      "NoiDung" : "cái gì đây"
+    },
+    "feedback" : {
+      "1544682868409" : {
+        "content" : "ádf à nội dung",
+        "time" : "201812131334",
+        "title" : "tiêu đề"
+      },
+      "1544691394401" : {
+        "content" : "Xin phép phản hồi tới quản trị viên là từ khi sử dụng trang web tới giờ tôi không nhận được thông báo nào từ quản trị viên hết..\nChỉ có thông báo từ hệ thống thôi.... \n",
+        "time" : "201812131556",
+        "title" : "Không nhận được thông báo nào từ quản trị viên"
+      },
+      "1544692249958" : {
+        "content" : "Tôi vẫn chưa nhận được thông báo trả lời nào từ QTV",
+        "time" : "201812131610",
+        "title" : "Khách hàng Hữu Nghĩa phản hồi tới QTV"
+      },
+      "1544785896146" : {
+        "content" : "Khách hàng thử gửi phản hồi có hình ảnh...",
+        "title" : "Khách hàng thử gửi phản hồi có hình ảnh"
+      },
+      "1544786142776" : {
+        "content" : "Khách hàng thử gửi phản hồi có hình ảnh lần 2...",
+        "title" : "Khách hàng thử gửi phản hồi có hình ảnh lần 2"
+      },
+      "1544788255086" : {
+        "content" : "Khách hàng test có hình lần 3Khách hàng test có hình lần 3Khách hàng test có hình lần 3",
+        "title" : "Khách hàng test có hình lần 3"
+      },
+      "1544788325989" : {
+        "content" : "Khách hàng test có hình lần 4Khách hàng test có hình lần 4",
+        "title" : "Khách hàng test có hình lần 4"
+      },
+      "1544788461053" : {
+        "content" : "Khách hàng test có hình lần 5 ....",
+        "title" : "Khách hàng test có hình lần 5"
+      },
+      "1544790660666" : {
+        "content" : "Khách hàng test có hình lần 6 Khách hàng test có hình lần 6 Khách hàng test có hình lần 6 ...",
+        "title" : "Khách hàng test gửi phản hồi có hình lần 6"
+      },
+      "1544792834746" : {
+        "content" : "Khách hàng test gửi phản hồi có hình lần 7..\nCó thêm phần lưu lại title ở storage luôn cho dễ phân biệt.",
+        "title" : "Khách hàng test gửi phản hồi có hình lần 7"
+      },
+      "1544863304713" : {
+        "content" : "Khách hàng test gửi phản hồi có hình lần 8 Khách hàng test gửi phản hồi có hình lần 8 ...",
+        "title" : "Khách hàng test gửi phản hồi có hình lần 8 "
+      },
+      "1544863487593" : {
+        "content" : "Khách hàng test gửi phản hồi có hình lần 9 ...",
+        "title" : "Khách hàng test gửi phản hồi có hình lần 9 "
+      },
+      "1544863589303" : {
+        "content" : "Khách hàng test gửi phản hồi có hình lần 10 ...",
+        "title" : "Khách hàng test gửi phản hồi có hình lần 10 "
+      },
+      "1544869811014" : {
+        "content" : "Khách hàng test gửi phản hồi có hình lần 11 ... \n... ",
+        "sender" : {
+          "customerId" : "PE00000000000",
+          "name" : "Nguyễn Hữu Nghĩa"
+        },
+        "title" : "Khách hàng test gửi phản hồi có hình lần 11 "
+      },
+      "1544942021543" : {
+        "content" : "Khách hàng test gửi phản hồi có hình lần 12 ...",
+        "sender" : {
+          "customerId" : "PE00000000000",
+          "name" : "Nguyễn Hữu Nghĩa"
+        },
+        "title" : "Khách hàng test gửi phản hồi có hình lần 12"
+      }
+    }
+  },
+  "LoginUserName" : {
+    "HoaiNam" : "14141202@student.hcmute.edu.vn",
+    "HuuNghia" : "14141211@student.hcmute.edu.vn",
+    "VanHien" : "14141097@student.hcmute.edu.vn"
+  },
+  "UserInfo" : {
+    "0_Mô_Tả" : "Thư mục này chứa thông tin người dùng, được sắp xếp theo UID của các User trong Firebase Authenticate",
+    "C25APYtfI7Mb1AaemBgJjp4kS3J2" : {
+      "address" : "229 Nguyễn Thái Sơn, Phường 5, Gò Vấp",
+      "companyId" : "GoVap",
+      "customerId" : "PE00000000003",
+      "displayName" : "Phạm Văn Hiến",
+      "email" : "14141097@student.hcmute.edu.vn",
+      "email_2" : "@",
+      "loginUserName" : "VanHien",
+      "meterId" : "003",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "time" : "1543235014684",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235364453",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "time" : "1543235641463",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543250001903",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543267558195",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        }
+      },
+      "phoneNumber" : "0344302753",
+      "type" : "Customer"
+    },
+    "XH38IMRE4tRRs2Od4gJivmLEM1F3" : {
+      "address" : "17/5/2, đường Dân Chủ, phường Bình Thọ, quận Thủ Đức",
+      "companyId" : "ThuDuc",
+      "customerId" : "PE00000000000",
+      "debt" : 0,
+      "displayName" : "Nguyễn Hữu Nghĩa",
+      "email" : "14141211@student.hcmute.edu.vn",
+      "email_2" : "huunghia021296@gmail.com",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        },
+        "1543337644800" : {
+          "content" : "Chức năng cài đặt định mức đã có thêm tính năng báo chuông beep khi đạt 80% hoặc 100% giá trị đặt trước.",
+          "read" : 0,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 3"
+        },
+        "1544694410064" : {
+          "content" : "Chào quý khách hàng, trong thời gian vừa qua, do chức năng gửi thông báo chưa được hoàn thiện nên quản trị viên chưa thể gửi thông báo cho quý khách hàng...\nThay mặt các QTV, mong quý khách hàng thông cảm cho những thiếu sót này...\nCảm ơn quý khách hàng đã đọc thông báo..!",
+          "read" : 1,
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo từ QTV khu vực tới khách hàng"
+        },
+        "1544933901747" : {
+          "content" : "Chào quý khách, chức năng gửi phản hồi ở trang của khách hàng hiện đã hoàn thiện chức năng đính kèm hình ảnh..\nQuý khách có thể đính kèm các hình ảnh liên quan nếu có. Số lượng có thể từ 1-5 hình ảnh đính kèm.\nChỉ nên đính kèm những hình ảnh thật sự liên quan, không nên đính kèm quá nhiều, sẽ làm tốn thời gian upload và download..\nHệ thống cũng tự động lưu lại thông tin của người gửi phản hồi nên quý khách không cần chú thích thêm... \nCảm ơn quý khách hàng đã xem thông báo...\n",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo về mục phản hồi của khách hàng"
+        }
+      },
+      "phoneNumber" : "0964807452",
+      "type" : "Customer"
+    },
+    "dsv9dIe8smgV3XM6hNmppsThBFo1" : {
+      "address" : "17/5/2, đường Dân Chủ, phường Bình Thọ, quận Thủ Đức",
+      "companyId" : "ThuDuc",
+      "customerId" : "PE00000000001",
+      "displayName" : "Bùi Hải Minh",
+      "email" : "16146405@student.hcmute.edu.vn",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        },
+        "1543337644800" : {
+          "content" : "Chức năng cài đặt định mức đã có thêm tính năng báo chuông beep khi đạt 80% hoặc 100% giá trị đặt trước.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "title" : "Thông báo về cài đặt định mức lần 3"
+        },
+        "1544694410064" : {
+          "content" : "Chào quý khách hàng, trong thời gian vừa qua, do chức năng gửi thông báo chưa được hoàn thiện nên quản trị viên chưa thể gửi thông báo cho quý khách hàng...\nThay mặt các QTV, mong quý khách hàng thông cảm cho những thiếu sót này...\nCảm ơn quý khách hàng đã đọc thông báo..!",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo từ QTV khu vực tới khách hàng"
+        },
+        "1544933901747" : {
+          "content" : "Chào quý khách, chức năng gửi phản hồi ở trang của khách hàng hiện đã hoàn thiện chức năng đính kèm hình ảnh..\nQuý khách có thể đính kèm các hình ảnh liên quan nếu có. Số lượng có thể từ 1-5 hình ảnh đính kèm.\nChỉ nên đính kèm những hình ảnh thật sự liên quan, không nên đính kèm quá nhiều, sẽ làm tốn thời gian upload và download..\nHệ thống cũng tự động lưu lại thông tin của người gửi phản hồi nên quý khách không cần chú thích thêm... \nCảm ơn quý khách hàng đã xem thông báo...\n",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo về mục phản hồi của khách hàng"
+        }
+      },
+      "phoneNumber" : "0523860577",
+      "type" : "Customer"
+    },
+    "gvsdP7jlM4PhrWIycOcK6tKyX9Q2" : {
+      "address" : "133 đường số 4, khu phố 3, phường Linh Xuân, Thủ Đức",
+      "companyId" : "ThuDuc",
+      "customerId" : "PE00000000002",
+      "displayName" : "Nguyễn Hoài Nam",
+      "email" : "14141202@student.hcmute.edu.vn",
+      "email_2" : "@",
+      "meterId" : "002",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-yyyy",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235014684",
+          "title" : "Thông báo về mục thông báo trên trang web"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo thay đổi kiểu hiện thị thời gian của thông báo thành: HH:mm:ss, DD-MM-YYYY",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235364453",
+          "title" : "Thông báo về mục thông báo trên trang web khác hàng"
+        },
+        "1543235641463" : {
+          "content" : "Thông báo này được gửi để kiểm tra chức năng thông báo trên trang web ",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543235641463",
+          "title" : "Thêm một thông báo mới từ hệ thống"
+        },
+        "1543250001903" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543250001903",
+          "title" : "Thông báo về cài đặt định mức lần 1 "
+        },
+        "1543267558195" : {
+          "content" : "Người phát triển hệ thống đang cập nhật chức năng đặt định mức sử dụng điện. Theo đó, người dùng sẽ nhận được 2 lần thông báo, khi điện năng tiêu thụ đạt tới 80% và 100% định mức. Cập nhật: Đã hoàn thành đến chức năng thông báo hiện lên màn hình.",
+          "read" : 1,
+          "sender" : "Hệ thống",
+          "time" : "1543267558195",
+          "title" : "Thông báo về cài đặt định mức lần 2"
+        },
+        "1544694410064" : {
+          "content" : "Chào quý khách hàng, trong thời gian vừa qua, do chức năng gửi thông báo chưa được hoàn thiện nên quản trị viên chưa thể gửi thông báo cho quý khách hàng...\nThay mặt các QTV, mong quý khách hàng thông cảm cho những thiếu sót này...\nCảm ơn quý khách hàng đã đọc thông báo..!",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo từ QTV khu vực tới khách hàng"
+        },
+        "1544933901747" : {
+          "content" : "Chào quý khách, chức năng gửi phản hồi ở trang của khách hàng hiện đã hoàn thiện chức năng đính kèm hình ảnh..\nQuý khách có thể đính kèm các hình ảnh liên quan nếu có. Số lượng có thể từ 1-5 hình ảnh đính kèm.\nChỉ nên đính kèm những hình ảnh thật sự liên quan, không nên đính kèm quá nhiều, sẽ làm tốn thời gian upload và download..\nHệ thống cũng tự động lưu lại thông tin của người gửi phản hồi nên quý khách không cần chú thích thêm... \nCảm ơn quý khách hàng đã xem thông báo...\n",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo về mục phản hồi của khách hàng"
+        }
+      },
+      "phoneNumber" : "0968787976",
+      "type" : "Customer"
+    },
+    "mBtaZfw1GLYPFIW3mSqQxWHpYA82" : {
+      "address" : "Thủ Đức",
+      "companyId" : "ThuDuc",
+      "displayName" : "Quản trị viên khu vực Thủ Đức",
+      "email" : "namnguyen260596@gmail.com",
+      "notification" : {
+        "1543235014684" : {
+          "content" : "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+          "read" : 0,
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Quản trị viên gửi thông báo thử lần 1"
+        },
+        "1543235364453" : {
+          "content" : "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+          "read" : 0,
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Quản trị viên gửi thông báo thử lần 2"
+        },
+        "1543918196324" : {
+          "content" : "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+          "read" : 0,
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Quản trị viên gửi thông báo thử lần 3"
+        },
+        "1543919810389" : {
+          "content" : "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+          "read" : 0,
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Quản trị viên gửi thông báo thử lần 4"
+        },
+        "1543922322746" : {
+          "content" : "Thông báo: Đây là thông báo gửi thử nghiệm từ quản trị viên khu vực",
+          "read" : 0,
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Quản trị viên gửi thông báo thử lần 5"
+        },
+        "1544691162732" : {
+          "content" : "Chức năng gửi thông báo từ quản trị viên đang dần hoàn thiện...\nsdfasdf ",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Quản trị viên gửi thông báo thử lần 6"
+        },
+        "1544694410064" : {
+          "content" : "Chào quý khách hàng, trong thời gian vừa qua, do chức năng gửi thông báo chưa được hoàn thiện nên quản trị viên chưa thể gửi thông báo cho quý khách hàng...\nThay mặt các QTV, mong quý khách hàng thông cảm cho những thiếu sót này...\nCảm ơn quý khách hàng đã đọc thông báo..!",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo từ QTV khu vực tới khách hàng"
+        },
+        "1544933901747" : {
+          "content" : "Chào quý khách, chức năng gửi phản hồi ở trang của khách hàng hiện đã hoàn thiện chức năng đính kèm hình ảnh..\nQuý khách có thể đính kèm các hình ảnh liên quan nếu có. Số lượng có thể từ 1-5 hình ảnh đính kèm.\nChỉ nên đính kèm những hình ảnh thật sự liên quan, không nên đính kèm quá nhiều, sẽ làm tốn thời gian upload và download..\nHệ thống cũng tự động lưu lại thông tin của người gửi phản hồi nên quý khách không cần chú thích thêm... \nCảm ơn quý khách hàng đã xem thông báo...\n",
+          "sender" : "Quản trị viên khu vực",
+          "title" : "Thông báo về mục phản hồi của khách hàng"
+        }
+      },
+      "phoneNumber" : "0968787976",
+      "type" : "AdminKV"
+    },
+    "o4RQF6nhrLfPfjKyamHtPhtAMnX2" : {
+      "address" : "Gò Vấp",
+      "companyId" : "GoVap",
+      "displayName" : "Quản trị viên khu vực Gò Vấp",
+      "email" : "vanhien2403@gmail.com",
+      "phoneNumber" : "0344302753",
+      "type" : "AdminKV"
+    },
+    "rh1JcYn6hvWbxon1pDB1OWt32vk2" : {
+      "address" : "TP. Hồ Chí Minh",
+      "compayId" : "MienNam",
+      "displayName" : "Admin Tổng Công ty Điện lực TP. Hồ Chí Minh",
+      "email" : "huunghia021296@gmail.com",
+      "phoneNumber" : "0964807452",
+      "type" : "AdminTong"
+    }
+  },
+  "WebData" : {
+    "Messages" : [ null, "Hello world..!", "Xin chào..!" ]
+  },
+  "test" : {
+    "xx" : "new Date(2017, 0, 3)"
+  }
+}

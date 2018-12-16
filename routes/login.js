@@ -5,11 +5,11 @@ var path = require('path');
 
 global.firebase_0 = require('../config/firebase_0.js'); // auth
 var LoginUserName = {};
-firebase_0.database().ref('/LoginUserName').once('value').then(function(snapshot) 
-{   
-    // console.log(snapshot.val());
-    LoginUserName = snapshot.val();
-}); 
+// firebase_0.database().ref('/LoginUserName').once('value').then(function(snapshot) 
+// {   
+//     // console.log(snapshot.val());
+//     LoginUserName = snapshot.val();
+// }); 
     
 var validator = require("email-validator");
 
@@ -17,11 +17,11 @@ router.get('/', function(req, res, next) {
   var user_ = req.session.sessUser;
   if (user_ === null || user_ === undefined)
   {
-    firebase_0.database().ref('/LoginUserName').once('value').then(function(snapshot) 
-    {   
-        // console.log(snapshot.val());
-        LoginUserName = snapshot.val();
-    });
+    // firebase_0.database().ref('/LoginUserName').once('value').then(function(snapshot) 
+    // {   
+    //     // console.log(snapshot.val());
+    //     LoginUserName = snapshot.val();
+    // });
     try
     {
       res.render('login', {alertMessage:null});

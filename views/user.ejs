@@ -9,10 +9,12 @@
     <!--<%/*   include include.ejs  */%>-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>
     <!--<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous"> -->
 
 
     <title>Trang cá nhân</title>
@@ -56,7 +58,7 @@
                         background-color: red
                     }
                 </style>
-                <div class="btn header-hover"  href="#" data-toggle="modal" data-target="#Modal_TK" style="display: flex; align-items: center;">
+                <div class="btn header-hover"  href="#" data-toggle="modal" data-target="#Modal_TK.bd-example-modal-lg" style="display: flex; align-items: center;">
                     <span class="text-white" style="color: white; display: flex; align-items: center;">
                         <i class="fas fa-user-circle fa-2x" ></i>
                         Tài khoản
@@ -71,7 +73,7 @@
                 <div class="btn header-hover-red" href="#">
                     <a class="nav-link text-white text-left" href="/login" id="logout">Đăng xuất</a>
                     <script>
-                      document.getElementById("logout").onclick =
+                      document.getElementById("logout").onclick = 
                           function()
                           {
                             firebase.auth().signOut();
@@ -104,10 +106,12 @@
                 <p class="text-center" style="color: blue">Điện năng tiêu thụ định mức</p>
                 <h4 id='textLimitValue' class="text-center" >
                     -- (kWh)
-                </h4>
-                <div class="text-center" href="" data-toggle="modal" data-target="#Modal_limit" style="color: blue ; display: inline; font-size: 16px">
-                    <a class="fas fa-edit" ></a>
-                    <a style="display: inline;">Cài đặt</a>
+                </h4>   
+                <div class="text-center"  href="#" data-toggle="modal" data-target="#Modal_limit" style="">
+                    <span class="btn header-hover text-center" style="color: blue;">
+                        <i class="fas fa-edit"></i>
+                        Cài đặt
+                    </span>
                 </div>
             </div>
         </div>
@@ -169,7 +173,7 @@
                             <td id="thangNay">Tháng 12</td>
                             <td id="thangNay_DienNang">30</td>
                             <td id="thangNay_Tien">46470</td>
-                            <td id="thangNay_TrangThai">Chưa thanh toán</td>
+                            <td id="thangNay_TrangThai"><!--Chưa thanh toán--></td>
                         </tr>
                     </tbody>
                 </table>
@@ -182,13 +186,14 @@
 
             <div class="row">
                 <div class="col-sm-4" style="background-color: #b8daff">
-                    <label>Mã khách hàng<a style="color: red">*</a></label>
-                    <div class="input-group mb-3">
+                    <label hidden>Mã khách hàng<a style="color: red">*</a></label>
+                    <div hidden class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><li class="fas fa-barcode"></li></span>
                         </div>
                         <input type="text" class="form-control" id="customerId_payment" placeholder="Nhập mã khách hàng" disabled>
                     </div>
+                    <br>
                     <label>Điện thoại<a style="color: red">*</a></label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -205,48 +210,53 @@
                     </div>
                 </div>
                 <div class="col-sm-8" style="background-color:#2aabd2;">
-                    <p style="color: white;font-weight: bold">Vui lòng chọn ngân hàng thanh toán</p>
+                    <p style="color: white;font-weight: bold; text-align: center">Vui lòng chọn ngân hàng thanh toán</p>
                     <div class="row">
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/AB.jpg" class="mx-auto d-block" >
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/ACB.jpg" class="mx-auto d-block" >
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/Agri.jpg" class="mx-auto d-block">
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/NamA.jpg" class="mx-auto d-block" >
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/Donga.jpg" class="mx-auto d-block">
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/Mart.jpg" class="mx-auto d-block" >
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/BIDV.jpg" class="mx-auto d-block">
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/VCB.jpg" class="mx-auto d-block">
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/OCB.jpg" class="mx-auto d-block">
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/MB.jpg" class="mx-auto d-block" >
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/VP.jpg" class="mx-auto d-block" >
                         </div>
-                        <div class="col-sm-2 btn" href="#">
+                        <div class="col-sm-2 btn header-hover" href="#">
                             <img src="IMAGE/SCB_1.jpg" class="mx-auto d-block">
                         </div>
                     </div>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#Modal_thanhtoan" id="payment_SumitButton">Thanh toán</button>
+                    <div class="row">
+                        <div class="col-sm-5"></div> 
+                        <div class="col-sm-7">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#Modal_thanhtoan" id="payment_SumitButton">Thanh toán</button>
+                        </div>      
+                    </div>      
                 </div>
                 <!--<script>-->
                   <!--// $('body').on('click','img',function()-->
@@ -260,7 +270,12 @@
                     .col-sm-2.btn{
                         /*border: 3px solid #1c44f8;*/
                     }
-                    .selected{border: 3px solid #1c44f8;}
+                    .selected{
+                        /* border: 3px solid #1c44f8; */
+                    }
+                    .selected-btn{  
+                        background-color: blue !important;
+                    }
                 </style>
                 <script>
                     $('#payment_SumitButton').attr("disabled", "disabled");
@@ -269,6 +284,12 @@
                       $(this).addClass('selected');
                       $('#payment_SumitButton').removeAttr("disabled");
                     });
+                    $('.col-sm-2.btn').click(function (e) {
+                        $('.col-sm-2.btn').removeClass('selected-btn');
+                      $(this).addClass('selected-btn');
+                      $('#payment_SumitButton').removeAttr("disabled");
+                    });
+                    
                 </script>
             </div>
         </div>
@@ -288,7 +309,7 @@
                         <i style="font-style: italic">0968787976</i>
                     </div>
                     <br>
-                    <div class="fas fa-envelope" href="mailto:dienluc.hnn@gmail.com">
+                    <div class="fas fa-envelope" href="#">
                         <i style="font-style: italic">dienluc.hnn@gmail.com</i>
                     </div>
 
@@ -312,6 +333,8 @@
                     </button>
                     <form>
                         <div class="form-group">
+                            <label for="message-text" class="col-form-label">Tiêu đề:</label>
+                            <input class="form-control" id="titleFeedback"></input>
                             <label for="message-text" class="col-form-label">Phản hồi:</label>
                             <textarea class="form-control" id="textFeedback"></textarea>
                         </div>
@@ -319,8 +342,9 @@
                     <form>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Chọn ảnh đính kèm liên quan:</label>
-                            <input type="file" id="file-input" accept="image/*" multiple onchange="loadFile(event)">
-                            <!--<img id="output" style="max-width: 200px"/>-->
+                            <input type="file" id="file-input" accept="image/*" multiple >
+                            <!-- onchange="loadFile(event)" // 20181214 -->    
+                            <!--<img id="output" style="max-width: 200px"/>--> 
                             <div id="preview"></div>
                         </div>
                     </form>
@@ -344,11 +368,9 @@
                         function readAndPreview(file) {
                           // Make sure `file.name` matches our extensions criteria
                           if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                            return alert(file.name + " không đúng định dạng hình ảnh!");// is not an image
+                            return JSAlert.alert(file.name + " có định dạng không được hỗ trợ! \nHãy chọn file .jpeg, .jpg, .png, .gif");// is not an image
                           } // else...
-
                           var reader = new FileReader();
-
                           reader.addEventListener("load", function() {
                             var image = new Image();
                             image.height = 100;
@@ -356,13 +378,9 @@
                             image.src    = this.result;
                             preview.appendChild(image);
                           }, false);
-
                           reader.readAsDataURL(file);
-
                         }
-
                       }
-
                       document.querySelector('#file-input').addEventListener("change", previewImages, false);
                     </script>
                 </div>
@@ -371,42 +389,19 @@
                     <button type="button" class="btn btn-primary" id="submitFeedback">Gửi phản hồi</button>
                 </div>
             </div>
-            <script>
-              var submitFeedback = document.getElementById("submitFeedback");
-              var textFeedback = document.getElementById("textFeedback");
-              submitFeedback.onclick =
-                  function()
-                  {
-                    // JSAlert.alert(textFeedback.value);
-                    var nowMils = Date.now();
-                    var time = moment(nowMils).format("YYYYMMDDHHmm");
-                    var path = "/AdminThuDuc/feedback/" + time;
-                    firebase.database().ref(path + "/content").set(textFeedback.value, function(error)
-                    {
-                      if (error) {
-                        // The write failed...
-                        // console.log("Update False");
-                        // return false;
-                      } else {
-                        // Data saved successfully!
-                        // return true;
-                      }
-                    });
-                    firebase.database().ref(path + "/time").set(time, function(error) {});
-                  }
-            </script>
         </div>
     </div>
     <!--modal center-->
 
 
-    <div class="modal fade" id="Modal_TK" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="Modal_TK" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <!-- Dấu x góc trên bên phải, bỏ qua.. // 20181213 -->
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                        <!-- <span aria-hidden="true">&times;</span> -->
+                    <!-- </button> -->
                     <div class="card text-center">
                         <div class="card-header">
                             <h3>Thông tin tài khoản</h3>
@@ -414,9 +409,9 @@
                         <div class="card-body">
                             <div class="table card">
                                 <table class="table table-bordered" >
-                                    <tbody>
+                                    <tbody> 
                                     <tr>
-                                        <td class="font-weight-bold">Tên khách hàng</td>
+                                        <td nowrap class="font-weight-bold">Tên khách hàng</td>
                                         <td id="displayName"><%/* user.displayName */%></td>
                                     </tr>
                                     <tr>
@@ -439,7 +434,7 @@
                                         <td class="font-weight-bold">Tên đăng nhập</td>
                                         <td>
                                             <a id="loginUserName"> </a>
-                                            <div href="#" data-toggle="modal" data-target="#loginUserNameForm" style="color: blue; display: inline">
+                                            <div class="header-hover" href="#" data-toggle="modal" data-target="#loginUserNameForm" style="color: blue; display: inline">
                                                 <a class="fas fa-edit" ></a>
                                                 <a>Sửa</a>
                                             </div>
@@ -448,7 +443,7 @@
                                     <tr>
                                         <td class="font-weight-bold">Mật khẩu</td>
                                         <td>
-                                            <div href="#" data-toggle="modal" data-target="#Modal_changePass" style="color: blue; display: inline">
+                                            <div class="header-hover" href="#" data-toggle="modal" data-target="#Modal_changePass" style="color: blue; display: inline">
                                                 <a class="fas fa-edit" ></a>
                                                 <a>Đổi mật khẩu</a>
                                             </div>
@@ -609,51 +604,57 @@
 
     <!--modal thanh toán-->
     <div class="modal fade" id="Modal_thanhtoan" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <!-- <div class="modal-header">
                     <h5 class="modal-title">THÔNG TIN THANH TOÁN</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
+                </div> -->
                 <div class="modal-body">
-                    <table class="table table-striped table-bordered">
-                        <tbody>
-                        <tr>
-                            <td class="font-weight-light">Nội dung thanh toán</td>
-                            <td class="font-weight-light">Thanh toán hóa đơn tiền điện</td>
-                        </tr>
-                        <tbody>
-                        <tr>
-                            <td class="font-weight-light">Tên khách hàng</td>
-                            <td id="payment_Name"></td>
-                        </tr>
-                        <tr>    
-                            <td class="font-weight-light">Mã khách hàng</td>
-                            <td id="payment_CustomerId"></td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light">Địa chỉ</td>
-                            <td id="payment_Address"></td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light">Số điện thoại</td>
-                            <td id="payment_PhoneNumber"></td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light">Email</td>
-                            <td id="payment_Email"></td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-light">Ngân hàng liên kết</td>
-                            <td> <img id="payment_Bank" src="" /> </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="card" style="background-color: orangered;color: white">
-                        Số tiền cần thanh toán 
-                        <a id="payment_Money"></a>
+                    <div class="card text-center">
+                        <div class="card-header">
+                                <h3>THÔNG TIN THANH TOÁN</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-light">Nội dung thanh toán</td>
+                                    <td class="font-weight-light">Thanh toán hóa đơn tiền điện</td>
+                                </tr>
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-light">Tên khách hàng</td>
+                                    <td id="payment_Name"></td>
+                                </tr>
+                                <tr>    
+                                    <td class="font-weight-light">Mã khách hàng</td>
+                                    <td id="payment_CustomerId"></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-light">Địa chỉ</td>
+                                    <td id="payment_Address"></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-light">Số điện thoại</td>
+                                    <td id="payment_PhoneNumber"></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-light">Email</td>
+                                    <td id="payment_Email"></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-light">Ngân hàng liên kết</td>
+                                    <td> <img id="payment_Bank" src="" /> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                        <div class="" style="background-color: orangered;color: white">
+                                Số tiền cần thanh toán: <a id="payment_Money"></a>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -665,18 +666,34 @@
         </div>
     </div>
 
+
+    <div class="modal fade uploading" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="text-center text-danger modal-content">
+                    Đang tải lên file đính kèm...
+                </div>
+            </div>
+    </div>
+
     <script type="text/javascript" src="js/bootstrap.js" ></script>
     <!-- BEGIN USER MANAGE -->
     <p id='userServer'    hidden > <%= JSON.stringify(user) %> </p>
 
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-functions.js"></script><!--20181114-->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-auth.js"></script> -->
+    <script src="js/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="js/firebasejs/5.5.6/firebase-database.js"></script>
+    <script src="js/firebasejs/5.5.6/firebase-auth.js"></script>
+    <script src="js/firebasejs/5.5.6/firebase-storage.js"></script> <!-- 20181214 -->
+    <!--20181114-->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-functions.js"></script> -->
     <script src="script/init.js"></script>
 
-    <script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
-    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+    <!-- <script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script> -->
+    <script src='js/moment.min.js'></script>
+    <!-- <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script> -->
+    <script src="js/jsalert.min.js"></script>
     <script src="script/userFrontEnd.js"></script>
     <!-- END USER MANAGE -->
     <!-- CHART -->

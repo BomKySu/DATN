@@ -9,6 +9,7 @@
     	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
@@ -18,13 +19,13 @@
 <body>
 	<body style="height:100%; background-color:#eee;">
 
-    <!-- Popup Thông báo khi đăng nhập lỗi, phải viết ở Client -->
+        <!-- Popup Thông báo khi đăng nhập lỗi, phải viết ở Client -->
     <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
-    <% alertMessage_ = 0 %>
-    <p href="click" id='myVarFromServer'> <%= alertMessage %></p>
+    <!-- <% alertMessage_ = 0 %> -->
+    <!-- <p href="click" id='myVarFromServer'> <%= alertMessage %></p> -->
     <!-- <p id='myVarFromServer' hidden><%= alertMessage %></p> -->
 
-            
+    <!-- 
     <p id='outputText'> Đây </p>
     <p id='outputText2'> <br> Đây2    </p>
     <script>
@@ -34,8 +35,8 @@
      function fTestEJS() {for (i = 0; i < 100; i ++)
      { %>
         <p>Test FOR... <%= i %></p>
-    <% }}; %>
-
+    <% }}; %> 
+    -->    
     <script src="script/testFrontEnd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
  
@@ -47,6 +48,7 @@
         //     console.log(response);
         // });
     </script>
+    <!--
     <script>
             var myElement2 = document.getElementById('outputText');
             var myText2 = myElement2.innerHTML = "111111";
@@ -104,6 +106,29 @@
                 }, 1000)
             };
     </script>
-   
+    --> 
+
+    <!-- // 20181213 -->
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        ...
+        </div>
+    </div>
+    </div>
+
+    <!-- Small modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        ...
+        </div>
+    </div>
+    </div>
 </body>
 </html>

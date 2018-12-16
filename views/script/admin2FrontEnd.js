@@ -99,6 +99,7 @@ function getDatabaseElec()
         getElec_TD();
     }
     // getElec();
+    getEnergyChartData();
     getAllCustomer(); 
 }
 ////
@@ -122,17 +123,18 @@ function getElec()
         if (RealtimeValue)  // != null
         {
             $("#current").text(RealtimeValue.pha1.current + " (A)");
-            $("#power").text(RealtimeValue.pha1.power + " (kW)");
+            $("#power").text(RealtimeValue.pha1.power + " (W)");
             $("#energy").text(RealtimeValue.pha1.energy + " (kWh)");
 
             $("#current_2").text(RealtimeValue.pha2.current + " (A)");
-            $("#power_2").text(RealtimeValue.pha2.power + " (kW)");
+            $("#power_2").text(RealtimeValue.pha2.power + " (W)");
             $("#energy_2").text(RealtimeValue.pha2.energy + " (kWh)");
 
             $("#current_3").text(RealtimeValue.pha3.current + " (A)");
-            $("#power_3").text(RealtimeValue.pha3.power + " (kW)");
+            $("#power_3").text(RealtimeValue.pha3.power + " (W)");
             $("#energy_3").text(RealtimeValue.pha3.energy + " (kWh)");
-            getEnergyChartData();
+            // getEnergyChartData();
+            // getAllCustomer(); 
         }
         else
         {
@@ -160,7 +162,8 @@ function getElec_GV()
             $("#current_3").text(0 + " (A)");
             $("#power_3").text(0 + " (kW)");
             $("#energy_3").text(0 + " (kWh)");
-            getEnergyChartData();
+            // getEnergyChartData();    
+            // getAllCustomer(); 
         }
         else
         {
@@ -188,7 +191,8 @@ function getElec_TD()
             $("#current_3").text(Elec.PE00000000002.RealtimeValue.Current + " (A)");
             $("#power_3").text(Elec.PE00000000002.RealtimeValue.Power + " (kW)");
             $("#energy_3").text(Elec.PE00000000002.RealtimeValue.Energy + " (kWh)");
-            getEnergyChartData();
+            // getEnergyChartData();
+            // getAllCustomer(); 
         }
         else
         {
@@ -230,10 +234,12 @@ function mySize(obj)
     }
     return size;
 }
+
 var allCustomer = {};
 var allCustomer_Filtered = {};
 function getAllCustomer()
 {
+    // firebase.database().ref("/UserInfo").once('value').then( function(snapshot) 
     firebase.database().ref("/UserInfo").on('value', function(snapshot) 
     {   
         // $("#audioAlert_Notification")[0].play(); // không ổn // 20181127
@@ -249,10 +255,10 @@ function getAllCustomer()
                 if (allCustomer[idid].type == "Customer")
                 {
                     allCustomer_Filtered[count*1] = allCustomer[idid];
+                    allCustomer_Filtered[count*1].uid = idid;
                     count++;
                 }
             }
-            // if 
         }        
         // $('#buttonNotification_0').text(allNotification["0"].title);
         for (i = 0; i < 9; i++)
@@ -269,7 +275,11 @@ function getAllCustomer()
                 $('#customerName_' + i_).text(allCustomer_Filtered[i*1].displayName);
                 $('#customerEnergy_' + i_).text(allCustomer_Filtered[i*1].energy);
                 $('#customerMoney_' + i_).text(allCustomer_Filtered[i*1].money);
-                $('#customerStatus_' + i_).text(allCustomer_Filtered[i*1].status);
+                // $('#customerStatus_' + i_).text(allCustomer_Filtered[i*1].status);
+                // $('#customerStatus_' + i_).text(allCustomer_Filtered[i*1].debt);
+                $('#customerStatus_' + i_).addClass(allCustomer_Filtered[i*1].customerId);
+                $('#customerStatus_' + i_).addClass("debt");
+                loadDebt(allCustomer_Filtered[i*1].customerId);
             }
             else
             {
@@ -279,15 +289,40 @@ function getAllCustomer()
     });
     getNotification();
 }
-
-function mySize(obj)
+function loadDebt(customerId)
 {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
+    var path = "/" + customerId + "/Payment";
+    database_Elec.ref(path).on('value', function(snapshot) 
+    {   
+        // var count = 0;
+        var debt = 0;
+        Payment = snapshot.val();
+        console.log(path, Payment);
+        var customerIdInEvent = snapshot.ref.parent.key;
+        for(year in Payment)
+        {
+            for(month in Payment[year])
+            {
+                console.log(Payment[year][month]);
+                if (Payment[year][month].Paid != 1)
+                {
+                    debt += Payment[year][month].Debt;
+                    $("." + customerIdInEvent + ".debt").text(debt);
+                }
+            }
+        }
+    })
 }
+
+// function mySize(obj) // có ở trên rồi
+// {
+//     var size = 0, key;
+//     for (key in obj) {
+//         if (obj.hasOwnProperty(key)) size++;
+//     }
+//     return size;
+// }
+
 var allNotification = {}; // 20181204 // thông báo đã gửi
 function getNotification()
 {
@@ -295,24 +330,30 @@ function getNotification()
     {
         // console.log("/notification change");
         currentNotification = snapshot.val();
+        // console.log(currentNotification);
         time = snapshot.key;
-        if (currentNotification) 
+        // if (currentNotification) 
+        if ((currentNotification) && (($("#"+time).length <= 0)) ) // ktra có đọc được k, và cái đọc được đã tồn tại trên giao diện hay chưa... 
         {
             divForEachNotification = document.createElement('div');
             $(divForEachNotification)
-                .show()
-                .html("<label><span class=\"fas fa-angle-double-right\"></span><b data-toggle=\"modal\" data-target=\"#Modal_xemthongbao\" class=\"buttonNotification\" id data-title></b><br></label>")
-            // thêm các thông số khác
-            buttonNotification = $(divForEachNotification).find('.buttonNotification')
-            $(buttonNotification)
-                .text(currentNotification.title)
+                .hide()
+                .attr("id", time)
+                .attr("class","header-hover")
+                .attr("href", "#")
+                .attr('data-target', '#Modal_xemthongbao')
+                .attr('data-toggle', 'modal' )
+                .html("<label><span class='fas fa-angle-double-right'></span><b class='titleNotification'></b><br></label>")
                 .data("title", currentNotification.title)
                 .data("content", currentNotification.content)
-                .data("sender", currentNotification.sender)
                 .data("time", time)
-            $(divForEachNotification).prependTo($("#thongBaoDaGui"))    // hiển thị nó lên
+                .prependTo($("#thongBaoDaGui"))    // hiển thị nó lên
+                .slideToggle("slow");
+            titleNotification = $(divForEachNotification).find('.titleNotification') // con của cái div
+            $(titleNotification).text(" " + currentNotification.title)
         }   
     });
+    getFeedback();
 }
 /*
 {
@@ -343,8 +384,7 @@ $('#Modal_xemthongbao').on('show.bs.modal', function (event)
     //                     + button.data("sender")
     //                     + ". Vào lúc: " 
     //                     + timeFormated);
-    modal.find('.card-footer').text("Được gửi vào lúc: " 
-                        + timeFormated);
+    modal.find('.card-footer').html("Được gửi vào lúc: " + timeFormated);
     // markRead(time);
 })
 function markRead(time)
@@ -420,3 +460,159 @@ function LuyKe(energy)
     money = Math.round(money);
     return money;
 }
+
+
+
+function checkReadUnread(pathRead)
+{
+    firebase.database().ref(pathRead).on('value', function(snapshot, prev) 
+    {
+        // console.log(snapshot);
+        if (snapshot.val()*1 == 1)
+        {
+            $("#" + snapshot.ref.parent.key ).css({'color' : 'grey', 'font-size': '100%'});
+        }
+        else
+        {
+            $("#" + snapshot.ref.parent.key ).css({'color' : 'black', 'font-size': '100%'});
+        }
+    });
+}
+function getFeedback()
+{
+    firebase.database().ref("/Admin" + user.companyId + "/feedback/").on('child_added', function(snapshot, prev) 
+    {
+        // console.log("/feedback change");
+        currentFeedback = snapshot.val();
+        // console.log(currentNotification);
+        time = snapshot.key;
+        // if (currentFeedback) 
+        if ((currentFeedback) && (($("#"+time).length <= 0)) ) // ktra có đọc được k, và cái đọc được đã tồn tại trên giao diện hay chưa... 
+        {
+            if (currentFeedback.sender == null || currentFeedback.sender == undefined)
+            {
+                currentFeedback.sender = {name:"Chưa có", customerId:""};
+            }
+            divForEach = document.createElement('div');
+            $(divForEach)
+                .hide()
+                .attr("id", time)
+                .attr("class","header-hover")
+                .attr("href", "#")
+                .attr('data-target', '#Modal_xemPhanHoi')
+                .attr('data-toggle', 'modal' )
+                .html("<label><span class='fas fa-angle-double-right'></span><b class='titleFeedback'></b><br></label>")
+            // thêm các thông số khác
+                .data("title", currentFeedback.title)
+                .data("content", currentFeedback.content)
+                .data("senderName", currentFeedback.sender.name)
+                .data("senderCustomerId", currentFeedback.sender.customerId)
+                .data("time", time)
+                .prependTo($("#feedbackList"))    // hiển thị nó lên
+                .slideToggle("slow");
+                titleFeedback = $(divForEach).find('.titleFeedback') // con của cái div
+            $(titleFeedback).text(" " + currentFeedback.title)
+            var pathRead = "/Admin" + user.companyId + "/feedback/" + time + "/read";
+            checkReadUnread(pathRead);
+        }
+    });
+}
+$('#Modal_xemPhanHoi').on('show.bs.modal', function (event) 
+{
+    // console.log("Modal_xemthongbao event...");
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var time = button.data("time");
+    var timeFormated = moment(time*1).format("HH:mm:ss, DD-MM-YYYY");
+    var modal = $(this)
+    modal.find('.card-header').text(button.data("title"));
+    modal.find('.card-text').text(button.data("content"));
+    // modal.find('.card-footer').text("Được gửi bởi: " 
+    //                     + button.data("sender")
+    //                     + ". Vào lúc: " 
+    //                     + timeFormated);
+    modal.find('.card-footer').html("Được gửi từ: "
+                        + button.data("senderName")
+                        + " (" + button.data("senderCustomerId") + ")"
+                        + "<br>Vào lúc: " 
+                        + timeFormated);
+    // modal.find("#previewFeedbackPhoto");
+    loadFeedbackPhoto(time);
+    // markRead(time);
+})
+var storage = firebase.storage();
+function loadFeedbackPhoto(time)
+{
+    $("#previewFeedbackPhoto").find("img").remove();// xoá hết hình đang có..   
+    var path = "";
+    for (var index = 0; index < 4; index ++)
+    {
+        path = user.companyId +  "/feedbackPhoto/" + time + "/" + index;
+        storage.ref(path).getDownloadURL().then(function(url) 
+        {
+            // console.log(url);
+            var img = document.createElement("img");
+            $(img)
+                .hide()
+                .attr("src", url)
+                .attr("height", 100)
+                .attr("width", 100)
+                .slideToggle("slow")
+                .appendTo($("#previewFeedbackPhoto"))
+                .attr("data-toggle", "modal")
+                .attr("data-target", ".modal-view-photo");
+                
+            // var image = new Image();
+            // image.height = 100;
+            // // image.width = 100;
+            // image.title  = "Ảnh đính kèm";
+            // image.src    = url;
+            // image.onclick = imgClick();
+            // $("#previewFeedbackPhoto").append(image);
+        }).catch(function(error) 
+        {
+            // console.log(error.code);
+        });
+    }
+}
+// bấm vào hình xem kích thước lớn:
+$('.modal-view-photo').on('show.bs.modal', function (event) 
+{
+    var img = $(event.relatedTarget) // Button that triggered the modal
+    $(this).find("img")[0].src = img[0].src;
+})
+
+//////// GỬI THÔNG BÁO
+var submitNotification_new = document.getElementById("submitNotification_new");
+var titleNotification_new = document.getElementById("titleNotification_new");
+var textNotification_new = document.getElementById("textNotification_new");
+var objNotification_new = {};
+submitNotification_new.onclick =
+    function()
+    {
+        objNotification_new.title = titleNotification_new.value;
+        objNotification_new.content = textNotification_new.value;  
+        objNotification_new.sender = "Quản trị viên khu vực";
+        var nowMils = Date.now();
+        // var time = moment(nowMils).format("YYYYMMDDHHmm");
+        var path = "/UserInfo/" + firebase.auth().currentUser.uid + "/notification/" + nowMils;
+        firebase.database().ref(path).set(objNotification_new, function(error)
+        {
+            if (error) {} 
+            else 
+            {
+            JSAlert.alert("Gửi thông báo thành công..!").then(function()
+                {
+                    $("#Modal_thongbao").modal("hide");
+                    titleNotification_new.value = "";
+                    textNotification_new.value = "";
+                });
+            }
+            for ( var user in allCustomer_Filtered)
+            {
+                path = "/UserInfo/" + allCustomer_Filtered[user].uid + "/notification/" + nowMils;
+                firebase.database().ref(path).set(objNotification_new, function(error){});
+            }
+        });
+    }
+
+

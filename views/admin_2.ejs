@@ -9,10 +9,12 @@
     <!--<%/*   include include.ejs  */%>-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>
     <!--<script src="https://code.jquery.com/jquery-2.x-git.min.js"></script>-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous"> -->
     <title>Điện lực ---</title>
 </head>
 
@@ -162,7 +164,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div id="chartContainer" style="height: 250px; width: 100%;"></div>
+                                <div id="chartContainer" style="height: 400px; width: 100%;"></div>
                             </div>
                         </div>
                     </div>
@@ -194,7 +196,6 @@
                             <% loadUserEJS(); 
                             function loadUserEJS() {for (i = 1; i < 10; i ++)
                             { %>
-                                <div >
                                 <tr id="trForEachCustomer_<%=i%>">
                                         <th scope="row" class="text-center"><%=i%></th>
                                         <td class="text-center" id="customerId_<%=i%>">PExxxxxxxxxx<%=i%></td>
@@ -217,7 +218,7 @@
                 </div>
                 <div class="panel">
                     <div class="list-group">
-                        <div>
+                        <!-- <div>
                             <label> <span class="fas fa-angle-double-right"></span> screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
                         </div>
                         <div>
@@ -229,7 +230,7 @@
                         <div>
 
                             <label> <span class="fas fa-angle-double-right"></span>Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -249,8 +250,8 @@
                     <h3 class="text-center" style="color: blue">Phản hồi của khách hàng</h3>
                 </div>
                 <div class="panel">
-                    <div class="list-group">
-                        <div>
+                    <div class="list-group" id="feedbackList">
+                        <!-- <div>
                             <label> <span class="fas fa-angle-double-right"></span> screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
                         </div>
                         <div>
@@ -262,7 +263,7 @@
                         <div>
 
                             <label> <span class="fas fa-angle-double-right"></span>Bootstrap's grid system is responsive, and the columns will re-arrange depending on the screen size: On a big screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -309,14 +310,16 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
+                        <label for="message-text" class="col-form-label">Tiêu đề:</label>
+                        <input class="form-control" id="titleNotification_new"></input>
                         <label for="message-text" class="col-form-label">Thông báo:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <textarea class="form-control" id="textNotification_new"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Gửi thông báo</button>
+                <button type="button" class="btn btn-primary" id="submitNotification_new">Gửi thông báo</button>
             </div>
         </div>
     </div>
@@ -400,7 +403,45 @@
     </div>
 </div>
 <!-- hết modal xem thông báo   -->
-
+    
+<!--modal xem phản hồi\-->
+<div class="modal fade" id="Modal_xemPhanHoi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="notificationTitleModal">THÔNG BÁO</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> -->
+                <div class="modal-body">
+                    <div class="card border-success mb-3">
+                        <div class="card-header bg-transparent border-success text-center" id="notificationTitle" style="font-size: 20px">Tiêu đề hiện ở đây</div>
+                        <div class="card-body text-success">
+                            <p class="card-text" id="notificationContent">trong đây là nội dung thông báo</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-success" id="notificationTimeAndSender">Thời gian và người gửi hiện ở đây</div>
+                    </div>
+                    <div class="bg-transparent" id="previewFeedbackPhoto">
+                        Hình ảnh đính kèm (nếu có): 
+                        <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- hết modal xem thông báo   -->
+    
+    <!-- modal xem ảnh kích thước lớn -->
+    <div class="modal fade modal-view-photo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <img width=100% src="">
+            </div>
+    </div>    
+    <!-- hết modal xem ảnh kích thước lớn -->
 
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <!-- BEGIN USER MANAGE -->
@@ -410,10 +451,13 @@
 <script src="script/firebasejs/5.5.6/firebase-app.js"></script>
 <script src="script/firebasejs/5.5.6/firebase-database.js"></script>
 <script src="script/firebasejs/5.5.6/firebase-auth.js"></script>
+<script src="js/firebasejs/5.5.6/firebase-storage.js"></script> <!-- 20181214 -->
 <script src="script/init.js"></script>
   
-<script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script>
-<script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+<!-- <script src='https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js'></script> -->
+<script src='js/moment.min.js'></script>
+<!-- <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script> -->
+<script src="js/jsalert.min.js"></script>
 <script src="script/admin2FrontEnd.js"></script>
 <!-- END USER MANAGE -->
 <!-- CHART -->

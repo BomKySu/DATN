@@ -421,7 +421,7 @@ function getNotification()
                 .prependTo($("#thongBaoDaNhan"))    // hiển thị nó lên
                 .slideToggle("slow");
             titleNotification = $(divForEachNotification).find('.titleNotification') // con của cái div
-            $(titleNotification).text(currentNotification.title)
+            $(titleNotification).text(" " + currentNotification.title)
 
             var pathRead = "/UserInfo/" + firebase.auth().currentUser.uid + "/notification/" + time + "/read";
             checkReadUnread(pathRead);  
@@ -430,16 +430,16 @@ function getNotification()
 }
 $('#Modal_xemthongbao').on('show.bs.modal', function (event) 
 {
-    console.log("Modal_xemthongbao event...");
+    // console.log("Modal_xemthongbao event...");
     var button = $(event.relatedTarget) // Button that triggered the modal
     var time = button.data("time");
     var timeFormated = moment(time*1).format("HH:mm:ss, DD-MM-YYYY");
     var modal = $(this)
     modal.find('.card-header').text(button.data("title"));
     modal.find('.card-text').text(button.data("content"));
-    modal.find('.card-footer').text("Được gửi bởi: " 
+    modal.find('.card-footer').html("Được gửi bởi: " 
                         + button.data("sender")
-                        + ". Vào lúc: " 
+                        + ". <br>Vào lúc: " 
                         + timeFormated);
     markRead(time);
 })
@@ -692,3 +692,77 @@ function LuyKe(energy)
     money = Math.round(money);
     return money;
 }
+
+//////// GỬI PHẢN HỒI 
+var submitFeedback = document.getElementById("submitFeedback");
+var titleFeedback = document.getElementById("titleFeedback");
+var textFeedback = document.getElementById("textFeedback");
+var objFeedback = {};
+submitFeedback.onclick =
+    function()
+    {
+        objFeedback.title = titleFeedback.value;
+        objFeedback.content = textFeedback.value;   
+        objFeedback.sender = {};
+        objFeedback.sender.name = user.displayName;
+        objFeedback.sender.customerId = user.customerId;
+        var nowMils = Date.now();
+        // var time = moment(nowMils).format("YYYYMMDDHHmm");
+        // var path = "/AdminThuDuc/feedback/" + time;
+        var path = "/Admin" + user.companyId + "/feedback/" + nowMils;
+        firebase.database().ref(path).set(objFeedback, function(error)
+        {
+            if (error) 
+            {
+                console.log(error);
+            } 
+            else 
+            {}
+        });
+        uploadFeedbackPhoto(nowMils);
+    }
+async function uploadFeedbackPhoto(time)
+{
+    $(".uploading").modal("show");
+    var preview = $("#preview");
+    var imgs  = preview.find("img");
+    for (var index in imgs)
+    {
+        var path = user.companyId +  "/feedbackPhoto/" + time + "/" + index;
+        // console.log(imgs[index]);
+        // console.log("Đang upload " + index + " file...");
+        try
+        {
+            await firebase.storage().ref(path).putString(imgs[index].src, 'data_url').then(function(snapshot) {
+                // console.log("Upload xong 1 cái !");
+              });
+        }
+        catch(err)
+        {
+            // console.log(err);
+        }
+    }
+    ///////
+    // // KHÔNG ĐƯỢC GÌ.. UP LÊN ĐƯỢC NHƯNG KHÔNG XEM NHANH ĐƯỢC, PHẢI DOWNLOAD VỀ.. 
+    // var path = user.companyId +  "/feedbackPhoto/" + time + "/title.txt";
+    // await firebase.storage().ref(path).putString(objFeedback.title).then(function(snapshot) {
+    //     // console.log("Upload xong cái titile thông báo!");
+    //   });    
+    /////// 
+    // // CÁCH NÀY CŨNG KHÔNG ĐƯỢC GÌ // THÔI BỎ QUA
+    // var path = user.companyId +  "/feedbackPhoto/" + time + "/0";
+    // await firebase.storage().ref(path).updateMetadata(objFeedback).then(function(snapshot) {
+    //     // console.log("Upload xong cái titile thông báo!");
+    //   });
+    $(".uploading").modal("hide");
+    JSAlert.alert("Gửi phản hồi thành công..!").then(function()
+        { // thử bàn phím.. bấm ok không?? bấm nhanh hơn xem nào... fasdfasdf;alsdkfa;s 
+            $("#Modal_phanhoi").modal("hide");
+            titleFeedback.value = "";
+            textFeedback.value = "";
+            $("#preview").find("img").remove();
+            $("#file-input").val("");
+        });
+}
+
+
