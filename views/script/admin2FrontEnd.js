@@ -152,15 +152,15 @@ function getElec_GV()
         if (Elec)  // != null
         {
             $("#current").text(Elec.PE00000000003.RealtimeValue.Current + " (A)");
-            $("#power").text(Elec.PE00000000003.RealtimeValue.Power + " (kW)");
+            $("#power").text(Elec.PE00000000003.RealtimeValue.Power + " (W)");
             $("#energy").text(Elec.PE00000000003.RealtimeValue.Energy + " (kWh)");
 
             $("#current_2").text(0 + " (A)");
-            $("#power_2").text(0 + " (kW)");
+            $("#power_2").text(0 + " (W)");
             $("#energy_2").text(0 + " (kWh)");
 
             $("#current_3").text(0 + " (A)");
-            $("#power_3").text(0 + " (kW)");
+            $("#power_3").text(0 + " (W)");
             $("#energy_3").text(0 + " (kWh)");
             // getEnergyChartData();    
             // getAllCustomer(); 
@@ -181,15 +181,15 @@ function getElec_TD()
         if (Elec)  // != null
         {
             $("#current").text(Elec.PE00000000000.RealtimeValue.Current + " (A)");
-            $("#power").text(Elec.PE00000000000.RealtimeValue.Power + " (kW)");
+            $("#power").text(Elec.PE00000000000.RealtimeValue.Power + " (W)");
             $("#energy").text(Elec.PE00000000000.RealtimeValue.Energy + " (kWh)");
 
             $("#current_2").text(Elec.PE00000000001.RealtimeValue.Current + " (A)");
-            $("#power_2").text(Elec.PE00000000001.RealtimeValue.Power + " (kW)");
+            $("#power_2").text(Elec.PE00000000001.RealtimeValue.Power + " (W)");
             $("#energy_2").text(Elec.PE00000000001.RealtimeValue.Energy + " (kWh)");
 
             $("#current_3").text(Elec.PE00000000002.RealtimeValue.Current + " (A)");
-            $("#power_3").text(Elec.PE00000000002.RealtimeValue.Power + " (kW)");
+            $("#power_3").text(Elec.PE00000000002.RealtimeValue.Power + " (W)");
             $("#energy_3").text(Elec.PE00000000002.RealtimeValue.Energy + " (kWh)");
             // getEnergyChartData();
             // getAllCustomer(); 
@@ -200,7 +200,40 @@ function getElec_TD()
         }
     });
 }
-////
+//// CHART
+function fitChartData(energyChartData)
+{   // 20181218 Đây là hàm giới hạn giá trị của energyChartData lại từ giờ hiện tại..
+    var nowMils = Date.now();
+    var myYear = moment(nowMils).format("YYYY");
+    var myMonth = moment(nowMils).format("M");
+    var myDate = moment(nowMils).format("D");
+    var myHour = moment(nowMils).format("H");
+
+    var output = energyChartData;
+    // var phase = "pha1";
+    for (var phase in energyChartData)
+    {
+        // for (var year in energyChartData[phase])
+        var year = myYear;
+        {
+            // for (var month in energyChartData[phase][year])
+            var month = myMonth;
+            {
+                // for (var day in energyChartData[phase][year][month])
+                var day = myDate;
+                {
+                    // for (var hour in energyChartData[phase][year][month][day])
+                    for(var hour=myHour; hour < 24; hour ++)
+                    {
+                        // output[phase][year][month][day][hour] = undefined;
+                        output[phase][year][month][day][hour] = "Chưa có dữ liệu";
+                    }
+                }
+            }
+        }
+    }
+    return output;
+}
 var energyChartData = {}; 
 // getEnergyChartData(); 
 function getEnergyChartData()  
@@ -212,6 +245,7 @@ function getEnergyChartData()
     database_Elec.ref(path).on('value', function(snapshot) 
     {   
         energyChartData = snapshot.val();
+        energyChartData = fitChartData(energyChartData);
         // console.log(energyChartData[myYear.toString()][myMonth.toString()]["03"]);
         if (chart == null || chart == undefined) 
         {
@@ -297,13 +331,13 @@ function loadDebt(customerId)
         // var count = 0;
         var debt = 0;
         Payment = snapshot.val();
-        console.log(path, Payment);
+        // console.log(path, Payment);
         var customerIdInEvent = snapshot.ref.parent.key;
         for(year in Payment)
         {
             for(month in Payment[year])
             {
-                console.log(Payment[year][month]);
+                // console.log(Payment[year][month]);
                 if (Payment[year][month].Paid != 1)
                 {
                     debt += Payment[year][month].Debt;
@@ -354,7 +388,10 @@ function getNotification()
         }   
     });
     getFeedback();
+    getNotification_Admin1();
 }
+
+
 /*
 {
     "1543235014684": {
@@ -384,7 +421,10 @@ $('#Modal_xemthongbao').on('show.bs.modal', function (event)
     //                     + button.data("sender")
     //                     + ". Vào lúc: " 
     //                     + timeFormated);
-    modal.find('.card-footer').html("Được gửi vào lúc: " + timeFormated);
+    if  ((button.data("sender") == "") || (button.data("sender") == null) ) 
+        modal.find('.card-footer').html("Được gửi vào lúc: " + timeFormated);
+    else
+        modal.find('.card-footer').html("Được gửi từ: " + button.data("sender")+ "<br>Vào lúc: " + timeFormated);
     // markRead(time);
 })
 function markRead(time)
@@ -396,6 +436,59 @@ function markUnRead(time)
 {
     var path = '/UserInfo/' + firebase.auth().currentUser.uid + "/notification/" + time + "/read"
     firebase.database().ref(path).set(0, function(error) {});
+}
+
+function getNotification_Admin1()
+{
+    firebase.database().ref('/UserInfo/' + firebase.auth().currentUser.uid + "/notificationAdmin1").on('child_added', function(snapshot, prev) 
+    {
+        // console.log("/notification change");
+        currentNotification = snapshot.val();
+        // console.log(currentNotification);
+        time = snapshot.key;
+        if (currentNotification) 
+        {
+            divForEachNotification = document.createElement('div');
+            $(divForEachNotification)
+                // .slideToggle(500)
+                // .show()
+                .hide()
+                // .slideToggle(500)
+                .attr("id", time)
+                .attr("class","header-hover")
+                .attr("href", "#")
+                .attr('data-target', '#Modal_xemthongbao')
+                .attr('data-toggle', 'modal' )
+                .html("<label><span class='fas fa-angle-double-right'></span><b class='titleNotification'></b><br></label>")
+            // thêm các thông số khác
+                .data("title", currentNotification.title)
+                .data("content", currentNotification.content)
+                .data("sender", currentNotification.sender)
+                .data("time", time)
+                .prependTo($("#thongBaoAdmin1"))    // hiển thị nó lên
+                .slideToggle("slow");
+            titleNotification = $(divForEachNotification).find('.titleNotification') // con của cái div
+            $(titleNotification).text(" " + currentNotification.title)
+
+            var pathRead = "/UserInfo/" + firebase.auth().currentUser.uid + "/notificationAdmin1/" + time + "/read";
+            checkReadUnread(pathRead);  
+        }   
+    });
+}
+function checkReadUnread(pathRead)
+{
+    firebase.database().ref(pathRead).on('value', function(snapshot, prev) 
+    {
+        // console.log(snapshot);
+        if (snapshot.val()*1 == 1)
+        {
+            $("#" + snapshot.ref.parent.key ).css({'color' : 'grey', 'font-size': '100%'});
+        }
+        else
+        {
+            $("#" + snapshot.ref.parent.key ).css({'color' : 'black', 'font-size': '100%'});
+        }
+    });
 }
 
 // sau khi đã remote thành công tới project trên heroku, 
@@ -607,7 +700,7 @@ submitNotification_new.onclick =
                     textNotification_new.value = "";
                 });
             }
-            for ( var user in allCustomer_Filtered)
+            for (var user in allCustomer_Filtered)
             {
                 path = "/UserInfo/" + allCustomer_Filtered[user].uid + "/notification/" + nowMils;
                 firebase.database().ref(path).set(objNotification_new, function(error){});

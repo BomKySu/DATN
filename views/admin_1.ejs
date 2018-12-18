@@ -21,33 +21,69 @@
 <body background="IMAGE/nen.jpg">
 <!--<%# include nav.ejs %>-->
 <myMain id="myMain" hidden>
-<nav class="navbar sticky-top navbar-expand-sm" style="background-color: #1F3A93">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    </button>
+<nav class="navbar sticky-top navbar-expand-lg" style="background-color: #1F3A93">
+<!-- <nav class="navbar sticky-top navbar-expand-sm" style="background-color: rgb(0, 0, 255)"> -->
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    </button> -->
     <a class="text-white navbar-brand" href="">HỆ THỐNG QUẢN LÍ ĐIỆN NĂNG THÔNG MINH
-        <div class="text-center">KHU VỰC MIỀN NAM</div>
+        <div class="text-center">QUẢN TRỊ VIÊN TỔNG CÔNG TY</div>
     </a>
-    <div class="navbar-collapse navbar-brand" id="navbarTogglerDemo03">
-        <form class="form-inline ml-auto">
-            <input class="form-control mr-sm-2" type="search" aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="submit" style="background-color: #fff">Tìm kiếm</button>
-        </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <style>
+            .navbar-toggler
+            {
+                background-color:white;
+                border-radius: 3px;
+            }
+            .icon-bar
+            {
+                width: 18px;
+                height: 4px;
+                background-color: blue;
+                margin: 3px 0px;
+                border-radius: 3px;
+            }
+        </style>
+    </button>
+    <div class="navbar-collapse navbar-brand collapse" id="navbarTogglerDemo03" style="font-size: 16px">    
+        <!-- <form class="form-inline ml-auto"> -->
+            <!-- <input class="form-control mr-sm-2" type="search" aria-label="Search"> -->
+            <!-- <button class="btn my-2 my-sm-0" type="submit" style="background-color: #fff">Tìm kiếm</button> -->
+        <!-- </form> -->
         <ul class="navbar-nav ml-4 ml-auto">
-
-            <li class="text-white">
-                <a class="nav-link text-white" href="#" data-toggle="modal" type="link" data-target="#Modal_thongbao" style="font-size: medium">Gửi thông báo</a>
-            </li>
-            <li class="text-white">
-                <a class="nav-link text-white" href="#" data-toggle="modal" type="link" data-target="#Modal_ThemKhachHang" style="font-size: medium">Thêm admin</a>
-            </li>
-            <li class="text-right">
-                <a id="logout" class="nav-link text-white" style="font-size: medium" href="/login">Đăng xuất</a>
+            <style>
+                    .header-hover:hover{
+                        background-color: lightblue;
+                    }
+                    .header-hover-red:hover{
+                        background-color: red
+                    }
+            </style>
+            <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_thongbao" >
+                <a class="nav-link text-white" href="#" style="font-size: medium">Gửi thông báo</a>
+            </div>
+            <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_ThemQTV" >
+                <a class="nav-link text-white" href="#" style="font-size: medium">Thêm quản trị viên khu vực</a>
+            </div>
+            <div class="btn header-hover-red" href="#">
+                <a id="logout" class="nav-link text-white" style="font-size: medium"  href="#">Đăng xuất</a>
                 <script>
-                        document.getElementById("logout").onclick =
+                    document.getElementById("logout").onclick = 
                         function()
                         {
-                            firebase.auth().signOut();
-                            console.log("After firebase.auth().signOut();");
+                            var alert = new JSAlert.confirm("Bạn muốn đăng xuất?");
+                            alert.buttons[0].text = "Đồng ý";
+                            alert.buttons[1].text = "Bỏ qua";
+                            alert.show();
+                            alert.then(function(result) 
+                            {
+                                if (!result) return;
+                                firebase.auth().signOut();
+                                window.location = "/login";
+                            })
                         }
                 </script>
             </li>
@@ -64,15 +100,15 @@
         </div>
         <div class=" col-sm-4 card">
             <p class="text-center">Dòng điện tổng</p>
-            <h4 id='current' class="text-center">63 A</h4>
+            <h4 id='current' class="text-center">10 A</h4>
         </div>
         <div class="col-sm-4 card">
             <p  class="text-center"> Công suất tổng</p>
-            <h4 id='power' class="text-center">456544 KW</h4>
+            <h4 id='power' class="text-center">2000 W</h4>
         </div>
         <div class="col-sm-4 card">
             <p  class="text-center"> Tổng điện năng tiêu thụ</p>
-            <h4 id='energy' class="text-center">345678 KWh</h4>
+            <h4 id='energy' class="text-center">3456 kWh</h4>
         </div>
 
     </div>
@@ -84,15 +120,15 @@
         </div>
         <div class=" col-sm-4 card">
             <p class="text-center">Dòng điện tổng</p>
-            <h4 id='current_2' class="text-center">40 A</h4>
+            <h4 id='current_2' class="text-center">15 A</h4>
         </div>
         <div class="col-sm-4 card">
             <p  class="text-center"> Công suất tổng</p>
-            <h4 id='power_2' class="text-center">23424 KW</h4>
+            <h4 id='power_2' class="text-center">23424 kW</h4>
         </div>
         <div class="col-sm-4 card">
             <p  class="text-center"> Tổng điện năng tiêu thụ</p>
-            <h4 id='energy_2' class="text-center">34353 KWh</h4>
+            <h4 id='energy_2' class="text-center">3435 kWh</h4>
         </div>
 
     </div>
@@ -100,33 +136,29 @@
 <br >
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-8">
+
+        <div class="col-md-8 card">
             <div class="row my-0">
                 <div class="col-md-12" >
-                    <div class="card">
+                    <div class="">
                         <div class="card-body" >
                             <div id="chartContainer" style="height: 400px; width: 100%;">
-                                <h2 class="text-center">BIỂU ĐỒ Ở ĐÂY</h2>
+                                <!-- <h2 class="text-center">BIỂU ĐỒ Ở ĐÂY</h2> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-4 card ">
-            <div class="panel">
-                <h4 class="text-center" style="color: orangered">Thông báo</h4>
-            </div>
-            <div class="panel card">
-                <div class="list-group" style="height: 550px;">
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 1</b><br>Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ</label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 2</b><br>Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ</label>
-                    </div>
-                    <div>
-                        <label> <span class="fas fa-angle-double-right"></span><b>Thông báo 3</b><br>Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ. Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ. Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ. Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ. Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ. Các thông báo sẽ hiển thị ở đây theo thứ tự từ mới đến cũ</label>
+
+        <div class="col-md-4 card">
+            <div class="" style="padding-left:0px; padding-right:0px">
+                <div class="panel">
+                    <h4 class="text-center" style="color: orangered">Thông báo đã gửi</h4>
+                </div>
+                <div class="panel card" style="height: 405px;">
+                    <div class="list-group"  id="thongBaoDaGui" style="height: 550px;">
+                        <!-- // thông báo hiển thị ở đây, được tạo ra bằng js -->
                     </div>
                 </div>
             </div>
@@ -140,12 +172,157 @@
         <!--<p class="text-center text-white" style="padding-right: 80px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>-->
     <!--</footer>-->
 <!--</div>-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4" style="background-color: #1F3A93;     ">
 
-<nav class="navbar navbar-expand-xl" style="background-color: #e0a800">
-    <p class="text-center text-white" style="padding-right: 60px;">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p>
-    <p class="text-center text-white">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p>
-    <p class="text-center text-white" style="padding-right: 80px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>
-</nav>
+        </div>
+        <div class="col-sm-8 text-white" style="background-color:#1F3A93;">
+            <p style="font-weight: bold;font-style: revert">Thông tin liên hệ </p>
+            <div class="fas fa-home">
+                <i style="font-style: italic">Số 1 Võ Văn Ngân, phường Linh Chiểu, quận Thủ Đức, Tp.HCM</i>
+            </div>
+            <br>
+            <div class="fas fa-phone">
+                <i style="font-style: italic">0968787976</i>
+            </div>
+            <br>
+            <div class="fas fa-envelope" href="mailto:dienluc.hnn@gmail.com">
+                <i style="font-style: italic">dienluc.hnn@gmail.com</i>
+            </div>
+
+        </div>
+        <!-- <div class="col-sm-3" style="background-color:#2aabd2;"></div> -->
+    </div>
+</div>
+
+<!-- <nav class="navbar navbar-expand-xl" style="background-color: #e0a800"> -->
+    <!-- <p class="text-center text-white" style="padding-right: 60px;">Tổng công ty Điện lực Hiến - Nghĩa - Nam</p> -->
+    <!-- <p class="text-center text-white">Thông tin liên hệ: <a href="mailto:namnguyen260596@gmail.com">namnguyen260596@gmail.com</a>.</p> -->
+    <!-- <p class="text-center text-white" style="padding-right: 80px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p> -->
+<!-- </nav> -->
+
+
+<!--modal gui thong bao-->
+<div class="modal fade" id="Modal_thongbao" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông báo mới</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Tiêu đề:</label>
+                        <input class="form-control" id="titleNotification_new"></input>
+                        <label for="message-text" class="col-form-label">Thông báo:</label>
+                        <textarea class="form-control" id="textNotification_new"></textarea>
+                        <div class="">
+                            <input class="checkbox Customer" type="checkbox" name="" value="Customer" checked="true"> Gửi tới khách hàng <br>
+                            <input class="checkbox ThuDuc" type="checkbox" name="" value="ThuDuc"  checked="true"> Gửi tới quản trị viên khu vực Thủ Đức <br>
+                            <input class="checkbox GoVap" type="checkbox" name="" value="GoVap"  checked="true"> Gửi tới quản trị viên khu vực Gò Vấp <br>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submitNotification_new">Gửi thông báo</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hết modal gui thong bao-->
+<!--modal them QTV-->
+<div class="modal fade" id="Modal_ThemQTV" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm quản trị viên khu vực</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 150px">
+                                <span class="input-group-text">Họ và tên</span>
+                            </div>
+                            <input type="text" aria-label="First name" class="form-control displayName" id="displayName">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 150px">
+                                <span class="input-group-text">Khu vực</span>
+                            </div>
+                            <!-- <input type="text" aria-label="First name" class="form-control"> -->
+                            <select class="form-control companyId" id="companyId">
+                                <option value="ThuDuc">Thủ Đức</option>
+                                <option value="GoVap">Gò Vấp</option>
+                            </select>
+                        </div>
+                        <!-- <div class="input-group"> -->
+                            <!-- <div class="input-group-lg" style="width: 150px"> -->
+                                <!-- <span class="input-group-text">Đia chỉ</span> -->
+                            <!-- </div> -->
+                            <!-- <input type="text" aria-label="First name" class="form-control"> -->
+                        <!-- </div> -->
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 150px">
+                                <span class="input-group-text">Email</span>
+                            </div>
+                            <input type="text" aria-label="First name" class="form-control email" id="email">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-grouplg" style="width: 150px">
+                                <span class="input-group-text">Số điện thoại</span>
+                            </div>
+                            <input type="number" aria-label="First name" class="form-control phoneNumber" id="phoneNumber">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hết modal them QTV-->
+<!--modal xem thong báo\-->
+<div class="modal fade" id="Modal_xemthongbao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="notificationTitleModal">THÔNG BÁO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="card border-success mb-3">
+                    <div class="card-header bg-transparent border-success text-center" id="notificationTitle" style="font-size: 20px">Tiêu đề hiện ở đây</div>
+                    <div class="card-body text-success">
+                        <p class="card-text" id="notificationContent">trong đây là nội dung thông báo</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success" id="notificationTimeAndSender">Thời gian và người gửi hiện ở đây</div>
+                    <div class="card-footer sendTo bg-transparent border-success" id="">Được gửi tới</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hết modal xem thông báo   -->
+    
+
 <script type="text/javascript" src="js/bootstrap.js" ></script>
 <!-- BEGIN USER MANAGE -->
 <!-- <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
@@ -163,9 +340,7 @@
 <!-- CHART -->
 <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 <script src="js/canvasjs.min.js"></script>
-<script src="script/myCanvasChart.js"> </script>
-<!-- <script src="script/myCanvasChart_20181105_ThangNayThangTruoc_OkOkOk.js"> </script> -->
-<!-- <script src="script/chart.js"></script> -->
+<script src="script/myCanvasChart_admin_1.js"> </script>
 <!-- HẾT CHART -->
 </myMain>
 <myWait id="myWait">
@@ -176,5 +351,7 @@
     <!-- script dấu 3 chấm -->
     <script src="script/threeDots.js"></script>            
 </myWait>
+
+<script src="script/mySecurity.js"></script>
 </body>
 </html>

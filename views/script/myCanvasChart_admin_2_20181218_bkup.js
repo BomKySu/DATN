@@ -8,9 +8,9 @@
 console.log("myCanvasChart.js running");
 var nowMils = Date.now();
 var myYear = moment(nowMils).format("YYYY");
-var myMonth = moment(nowMils).format("M");
+var myMonth = moment(nowMils).format("MM");
 $(".thang.nay").text(myMonth);
-var myDate = moment(nowMils).format("D");
+var myDate = moment(nowMils).format("DD");
 // var myDate = "05";
 // var myMonthMinus1 = myMonth - 1;
 var myMonthBefore = myMonth - 1;
@@ -22,7 +22,7 @@ var chart;
 // {
 chartLoad = function () 
 {
-    // console.log("chartLoad running");
+    console.log("chartLoad running");
     chart = new CanvasJS.Chart("chartContainer", 
     { 
         animationEnabled: true,
@@ -39,7 +39,7 @@ chartLoad = function ()
         },
         axisY: {
             title: "",
-            suffix: " kWh",
+            suffix: "kWh",
             crosshair: {
                 enabled: true
             }
@@ -100,7 +100,7 @@ chartLoad = function ()
                 markerType: "square",
                 lineDashType: "",
                 xValueFormatString: "HH giờ",
-                color: "#008000",   // rgb(0, 128, 0)
+                color: "#00FF00",
                 dataPoints: 
                 [
                     { x: new Date(myYear, myMonthXaxis, myDate, 00), y: energyChartData["pha2"][myYear][myMonth][myDate]["0"] },

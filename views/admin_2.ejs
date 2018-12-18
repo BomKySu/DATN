@@ -66,13 +66,23 @@
                 <a class="nav-link text-white" href="#" style="font-size: medium">Thêm khách hàng</a>
             </div>
             <div class="btn header-hover-red" href="#">
-                <a id="logout" class="nav-link text-white" style="font-size: medium"  href="/login">Đăng xuất</a>
+                <a id="logout" class="nav-link text-white" style="font-size: medium"  href="#">Đăng xuất</a>
                 <script>
-                    document.getElementById("logout").onclick =
-                    function()
-                    {
-                        firebase.auth().signOut();
-                    }
+                        document.getElementById("logout").onclick = 
+                            function()
+                            {
+                                var alert = new JSAlert.confirm("Bạn muốn đăng xuất?");
+                                alert.buttons[0].text = "Đồng ý";
+                                alert.buttons[1].text = "Bỏ qua";
+                                alert.show();   
+                                alert.then(function(result) 
+                                {
+                                    if (!result) return;
+                                    // JSAlert.alert("File deleted!");
+                                    firebase.auth().signOut();
+                                    window.location = "/login";
+                                })
+                            }
                 </script>
             </div>
         </ul>
@@ -214,10 +224,10 @@
         <div class="row">
             <div class="col-6 col-md-4 card">
                 <div class="panel" style="background-color: #fffebb">
-                    <h3 class="text-center" style="color: blue">Thông báo nội bộ</h3>
+                    <h3 class="text-center" style="color: blue">Thông báo</h3>
                 </div>
                 <div class="panel">
-                    <div class="list-group">
+                    <div class="list-group" id="thongBaoAdmin1">
                         <!-- <div>
                             <label> <span class="fas fa-angle-double-right"></span> screen it might look better with the content organized in three columns, but on a small screen it would be better if the content items were stacked on top of each other.</label>
                         </div>
@@ -329,7 +339,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Thêm Khách hàng mới</h4>
+                <h4 class="modal-title">Thêm khách hàng mới</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -341,31 +351,31 @@
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Họ và tên</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control">
+                            <input type="text" aria-label="First name" class="form-control displayName" id="displayName">
                         </div>
                         <div class="input-group">
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Mã khách hàng</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control">
+                            <input type="text" aria-label="First name" class="form-control customerId">
                         </div>
                         <div class="input-group">
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Đia chỉ</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control">
+                            <input type="text" aria-label="First name" class="form-control address">
                         </div>
                         <div class="input-group">
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Email</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control">
+                            <input type="text" aria-label="First name" class="form-control email" id="email">
                         </div>
                         <div class="input-group">
                             <div class="input-grouplg" style="width: 150px">
                                 <span class="input-group-text">Số điện thoại</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control">
+                            <input type="number" aria-label="First name" class="form-control phoneNumber" id="phoneNumber">
                         </div>
                     </div>
                 </form>
