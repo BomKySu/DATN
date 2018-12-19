@@ -191,15 +191,15 @@
                 </div>
                 <div class="panel">
                     <div class="list-group">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-fixed">
                             <thead>
                             <tr>
-                                <th scope="col" class="text-center">Số TT</th>
-                                <th scope="col" class="text-center">Mã khách hàng</th>
-                                <th scope="col" class="text-center">Họ và tên</th>
-                                <th scope="col" class="text-center">Điện năng tháng <a class="thang nay"></a> (kWh)</th>
-                                <th scope="col" class="text-center">Tổng tiền tháng <a class="thang nay"></a> (VNĐ)</th>
-                                <th scope="col" class="text-center">Tổng tiền nợ (VNĐ)</th>
+                                <th scope="col" class="text-center stt">Số TT</th>
+                                <th scope="col" class="text-center makh">Mã khách hàng</th>
+                                <th scope="col" class="text-center ten">Họ và tên</th>
+                                <th scope="col" class="text-center diennang">Điện năng tháng <a class="thang nay"></a> (kWh)</th>
+                                <th scope="col" class="text-center tienthang">Tổng tiền tháng <a class="thang nay"></a> (VNĐ)</th>
+                                <th scope="col" class="text-center tienno">Tổng tiền nợ (VNĐ)</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -207,16 +207,62 @@
                             function loadUserEJS() {for (i = 1; i < 10; i ++)
                             { %>
                                 <tr id="trForEachCustomer_<%=i%>">
-                                        <th scope="row" class="text-center"><%=i%></th>
-                                        <td class="text-center" id="customerId_<%=i%>">PExxxxxxxxxx<%=i%></td>
-                                        <td class="text-center" id="customerName_<%=i%>">Tên Khách Hàng <%=i%></td>
-                                        <td class="text-center" id="customerEnergy_<%=i%>">Điện năng <%=i%></td>
-                                        <td class="text-center" id="customerMoney_<%=i%>">Số tiền <%=i%></td>
-                                        <td class="text-center" id="customerStatus_<%=i%>">0 </td>
+                                        <td class="text-center stt" scope="row"><%=i%></td>
+                                        <td class="text-center makh" id="customerId_<%=i%>">PExxxxxxxxxx<%=i%></td>
+                                        <td class="text-center ten" id="customerName_<%=i%>">Tên Khách Hàng <%=i%></td>
+                                        <td class="text-center diennang" id="customerEnergy_<%=i%>">Điện năng <%=i%></td>
+                                        <td class="text-center tienthang" id="customerMoney_<%=i%>">Số tiền <%=i%></td>
+                                        <td class="text-center tienno" id="customerStatus_<%=i%>">0 </td>
                                 </tr>
                             <% }}; %>
                             </tbody>
                         </table>
+                        <style>
+                            table {
+                                width: 100%;
+                            }
+                            thead, tbody, tr, td, th 
+                            { 
+                                display: block; 
+                                /* phải có cái display block này thì mới được */
+                            }
+                            tr:after {
+                                content: ' ';
+                                display: block;
+                                /* k có display block thì nó được cái thead thôi, tbody dồn cục dồn đống  */
+                                visibility: hidden;
+                                clear: both;
+                            }
+                            thead th {
+                                height: 75px;
+                                /*text-align: left;*/
+                            }
+                            tbody {
+                                height: 250px;
+                                /* cố định tbody, để kéo qua kéo lại trong khu vực đó, 
+                                nếu không thì tbody cứ dài ra theo content..,
+                                mỗi ô cao 50px á..  */
+                                overflow-y: auto;
+                            }
+                            thead {
+                                /* fallback */
+                            }
+                            tbody td, thead th {
+                                /* white-space: nowrap; */
+                                /* nowrap để ô có kích thước vừa chữ, dùng cách chia % rồi nên k cần nữa*/
+                                /* width: 16.666666667%; */
+                                /* 6 cột đều nhau */
+                                float: left;                
+                                /* k có float left thì nó xếp các ô theo chiều dọc hết */
+                            }
+                            .stt        {width: 06%;} 
+                            .makh       {width: 20%;}
+                            .ten        {width: 20%;}
+                            .diennang   {width: 18%;}
+                            .tienthang  {width: 18%;}
+                            .tienno     {width: 18%;}
+                            /* .tienno     {width: 13.333333333%;} */
+                        </style>
                     </div>
                 </div>
             </div>
@@ -351,38 +397,38 @@
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Họ và tên</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control displayName" id="displayName">
+                            <input type="text" aria-label="First name" class="form-control addNewCustomer displayName" id="displayName">
                         </div>
                         <div class="input-group">
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Mã khách hàng</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control customerId">
+                            <input type="text" aria-label="First name" class="form-control addNewCustomer customerId">
                         </div>
                         <div class="input-group">
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Đia chỉ</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control address">
+                            <input type="text" aria-label="First name" class="form-control addNewCustomer address">
                         </div>
                         <div class="input-group">
                             <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Email</span>
                             </div>
-                            <input type="text" aria-label="First name" class="form-control email" id="email">
+                            <input type="text" aria-label="First name" class="form-control addNewCustomer email" id="email">
                         </div>
                         <div class="input-group">
                             <div class="input-grouplg" style="width: 150px">
                                 <span class="input-group-text">Số điện thoại</span>
                             </div>
-                            <input type="number" aria-label="First name" class="form-control phoneNumber" id="phoneNumber">
+                            <input type="number" aria-label="First name" class="form-control addNewCustomer phoneNumber" id="phoneNumber">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Xác nhận</button>
+                <button type="button" class="btn btn-primary addNewCustomer submit" id="submitAddNewCustomer">Xác nhận</button>
             </div>
         </div>
     </div>

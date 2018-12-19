@@ -9,6 +9,7 @@ var config = {
     messagingSenderId: "14259981773"
 };
 firebase.initializeApp(config);
+var firebaseForCreateUser = firebase.initializeApp(config, "quaternary"); // 20181219
 // Get a reference to the database service
 var database = firebase.database();
 

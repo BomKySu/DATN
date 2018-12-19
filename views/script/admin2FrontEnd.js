@@ -301,8 +301,16 @@ function getAllCustomer()
             // console.log("allCustomer_Filtered.displayName" + allCustomer_Filtered.displayName);
             if(allCustomer_Filtered[i*1])       // tồn tại
             {
-                allCustomer_Filtered[i*1].energy = Elec[allCustomer_Filtered[i*1].customerId].RealtimeValue.Energy;
-                allCustomer_Filtered[i*1].money = Math.round(LuyKe(allCustomer_Filtered[i*1].energy));
+                if (Elec[allCustomer_Filtered[i*1].customerId])
+                {
+                    allCustomer_Filtered[i*1].energy = Elec[allCustomer_Filtered[i*1].customerId].RealtimeValue.Energy;
+                    allCustomer_Filtered[i*1].money = Math.round(LuyKe(allCustomer_Filtered[i*1].energy));
+                }
+                else
+                {
+                    allCustomer_Filtered[i*1].energy = "Chưa có";
+                    allCustomer_Filtered[i*1].money = "Chưa có";
+                }
 
                 $('#trForEachCustomer_' + i_)["0"].hidden="";
                 $('#customerId_' + i_).text(allCustomer_Filtered[i*1].customerId);
@@ -708,4 +716,45 @@ submitNotification_new.onclick =
         });
     }
 
+// THÊM KHÁCH HÀNG MỚI
+$(".addNewCustomer.submit").on("click", function()
+{
+    var newUser = {}; 
+    newUser.displayName = $(".addNewCustomer.displayName").val();
+    newUser.customerId = $(".addNewCustomer.customerId").val();
+    newUser.address = $(".addNewCustomer.address").val();
+    newUser.email = $(".addNewCustomer.email").val();
+    newUser.phoneNumber = $(".addNewCustomer.phoneNumber").val();
+    newUser.companyId = user.companyId;
+    newUser.type = "Customer";
+    
+    JSAlert.alert("Đang xử lý...").dismissIn(1000*1);
+    firebaseForCreateUser.auth().createUserWithEmailAndPassword // dùng firebaseForCreateUser để không ảnh hưởng đến login của admin 2
+    (
+        $(".addNewCustomer.email").val(),
+        "12345678"
+    )
+    .then(function(userRecord)
+    {
+        console.log("Thêm thành công!", userRecord);
+        var path = '/UserInfo/' + userRecord.user.uid;
+        firebase.database().ref(path).set(newUser, function(error) {});
+        JSAlert.alert("Thêm khách hàng thành công!").then(function()
+        {
+            firebaseForCreateUser.auth().signOut(); 
+            $("#Modal_ThemKhachHang").modal("hide");
+            $("input.addNewCustomer").val("");
+        });
+    })
+    .catch(function(error)
+    {
+        var errorCode = error.code;
+        console.log(error);
+        if (errorCode == "auth/email-already-in-use") errorMessage = 'Email này đã được sử dụng trong hệ thống!';
+        else if (errorCode == 'auth/invalid-email')  errorMessage = 'Email không hợp lệ!';
+        else if (errorMessage.includes("network error")) errorMessage = "Lỗi mạng! Hãy kiểm tra kết nối và thử lại...";
+        JSAlert.alert(errorMessage, null, JSAlert.Icons.Failed);
+
+    });
+})
 

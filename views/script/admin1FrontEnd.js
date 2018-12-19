@@ -401,7 +401,7 @@ async function getEnergyChartData()
         var energyChartData_GV = snapshot.val();
         energyChartData_GV = sum3Phase(energyChartData_GV);
         energyChartData.GoVap = energyChartData_GV.pha1;
-        if (chart == null) 
+        if ((chart == null) && (energyChartData.ThuDuc))
         {
             chartLoad();
         }
@@ -412,6 +412,51 @@ async function getEnergyChartData()
         }
     })
 }
-////
 
+
+// THÊM QTV
+$(".addNewAdmin.submit").on("click", function()
+{
+    var newUser = {}; 
+    // newUser.displayName = $(".addNewAdmin.displayName").val();
+    newUser.name = $(".addNewAdmin.displayName").val();
+    // newUser.customerId = $(".addNewAdmin.customerId").val();
+    // newUser.address = $(".addNewAdmin.address").val();
+    newUser.email = $(".addNewAdmin.email").val();
+    newUser.phoneNumber = $(".addNewAdmin.phoneNumber").val();
+    // newUser.companyId = user.companyId;
+    newUser.companyId = $(".addNewAdmin.companyId").val();
+    if (newUser.companyId == "GoVap")   newUser.displayName = "Quản trị viên khu vực Gò Vấp";
+    else                                newUser.displayName = "Quản trị viên khu vực Thủ Đức";
+    newUser.type = "AdminKV";
+    
+    JSAlert.alert("Đang xử lý...").dismissIn(1000*1);
+    firebaseForCreateUser.auth().createUserWithEmailAndPassword // dùng firebaseForCreateUser để không ảnh hưởng đến login của admin 2
+    (
+        $(".addNewAdmin.email").val(),
+        "12345678"
+    )
+    .then(function(userRecord)
+    {
+        console.log("Thêm thành công!", userRecord);
+        var path = '/UserInfo/' + userRecord.user.uid;
+        firebase.database().ref(path).set(newUser, function(error) {});
+        JSAlert.alert("Thêm quản trị viên thành công!").then(function()
+        {
+            firebaseForCreateUser.auth().signOut(); 
+            $("#Modal_ThemQTV").modal("hide");
+            $("input.addNewAdmin").val("");
+        });
+    })
+    .catch(function(error)
+    {
+        var errorCode = error.code;
+        console.log(error);
+        if (errorCode == "auth/email-already-in-use") errorMessage = 'Email này đã được sử dụng trong hệ thống!';
+        else if (errorCode == 'auth/invalid-email')  errorMessage = 'Email không hợp lệ!';
+        else if (errorMessage.includes("network error")) errorMessage = "Lỗi mạng! Hãy kiểm tra kết nối và thử lại...";
+        JSAlert.alert(errorMessage, null, JSAlert.Icons.Failed);
+
+    });
+})
 

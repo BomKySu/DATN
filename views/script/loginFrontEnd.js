@@ -102,7 +102,7 @@ firebase.auth().onAuthStateChanged(function(userChanged)
                 }
                 else
                 {
-                    JSAlert.alert("Thông tin tài khoản không đầy đủ, liên hệ quản trị viên để biết thêm thông tin.");
+                    JSAlert.alert("Thông tin tài khoản không đầy đủ, liên hệ quản trị viên để biết thêm thông tin.", null, JSAlert.Icons.Failed);
                 }
             }
             catch(error) { console.log(error.message)};
