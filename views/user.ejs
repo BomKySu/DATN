@@ -58,20 +58,40 @@
                         background-color: red
                     }
                 </style>
-                <div class="btn header-hover"  href="#" data-toggle="modal" data-target="#Modal_TK.bd-example-modal-lg" style="display: flex; align-items: center;">
+                <div class="btn header-hover"  href="#" data-toggle="modal" data-target="#Modal_TK.bd-example-modal-lg" 
+                style="display: flex; align-items: center;">
                     <span class="text-white" style="color: white; display: flex; align-items: center;">
-                        <i class="fas fa-user-circle fa-2x" ></i>
-                        Tài khoản
+                        <i class="fas fa-user-circle fa-2x" > </i>
+                        <!-- Tài khoản -->
+                        <a class="nav-link text-white text-left" href="#">Tài khoản</a>
                     </span>
                 </div>
-                <div class="btn header-hover" href="#formThanhToan">
-                    <a class="nav-link text-white text-left" href="#formThanhToan">Thanh toán</a>
+                <div class="btn header-hover" href="#formThanhToan"
+                style="display: flex; align-items: center;">
+                <!-- <a class="nav-link text-white text-left" href="#formThanhToan">Thanh toán</a> -->
+                    <span class="text-white" href="#formThanhToan" style="color: white; display: flex; align-items: center;">
+                        <i class="fas fa-money-check-alt fa-2x" > </i>
+                        <a class="nav-link text-white text-left" href="#formThanhToan">Thanh toán</a>
+                    </span>
                 </div>
-                <div class="btn header-hover" href="#" data-toggle="modal" data-target="#Modal_phanhoi">
-                    <a class="nav-link text-white text-left" href="#">Gửi phản hồi</a>
-                </div>
-                <div class="btn header-hover-red" href="#">
-                    <a class="nav-link text-white text-left" href="#" id="logout">Đăng xuất</a>
+                <div class="btn header-hover" href="#" data-toggle="modal" data-target="#Modal_phanhoi"
+                style="display: flex; align-items: center;">
+                    <!-- <a class="nav-link text-white text-left" href="#">Gửi phản hồi</a> -->
+                    <span class="text-white" style="color: white; display: flex; align-items: center;">
+                        <i class="fas fa-comments fa-2x" > </i>
+                        <!-- Gửi phản hồi -->
+                        <a class="nav-link text-white text-left" href="#">Gửi phản hồi</a>
+                    </span>                
+                </div>  
+                <div class="btn header-hover-red" href="#" id="logout"
+                style="display: flex; align-items: center;">
+                    <!-- <a class="nav-link text-white text-left" href="#" id="logout">Đăng xuất</a> -->
+                    <span class="text-white" style="color: white; display: flex; align-items: center;">
+                        <i class="fas fa-sign-out-alt fa-2x" > </i>
+                        <a> </a>
+                        <!-- Đăng xuất -->
+                        <a class="nav-link text-white text-left" href="#">Đăng xuất</a>
+                    </span>                
                     <script>
                         document.getElementById("logout").onclick = 
                             function()
@@ -741,6 +761,7 @@
     Your browser does not support the audio element.
 </audio>
 <script src="script/mySecurity.js"></script>
+<link rel="stylesheet" type="text/css" href="css/myCss.css">
 
 <!-- wsCheck.js không xài được // 20181210 -->
 <!-- <script src="script/wsCheck.js"></script> -->

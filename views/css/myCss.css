@@ -1,0 +1,16 @@
+.blink-backgroud-red {
+    animation-duration: 500ms;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    /* -webkit-animation:blink 500ms infinite;  */
+    /* Safari and Chrome */
+}
+@keyframes blink {
+    from {
+        background-color:white;
+    }
+    to {
+        background-color:red;
+    }
+}

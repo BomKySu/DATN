@@ -105,15 +105,15 @@
             <!--</div>-->
             <div class=" col-sm-4 card">
                 <p class="text-center">Dòng điện tổng</p>
-                <h4 id='current' class="text-center">63 A</h4>
+                <h4 id='current' class="text-center current">- A</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Công suất tổng</p>
-                <h4 id='power' class="text-center">456544 kW</h4>
+                <h4 id='power' class="text-center">- kW</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Tổng điện năng tiêu thụ tháng <a class="thang nay"></a></p>
-                <h4 id='energy' class="text-center">345678 kWh</h4>
+                <h4 id='energy' class="text-center">- kWh</h4>
             </div>
 
         </div>
@@ -129,15 +129,15 @@
             <!--</div>-->
             <div class=" col-sm-4 card">
                 <p class="text-center">Dòng điện tổng</p>
-                <h4 id='current_2' class="text-center">40 A</h4>
+                <h4 id='current_2' class="text-center current">- A</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Công suất tổng</p>
-                <h4 id='power_2' class="text-center">23424 kW</h4>
+                <h4 id='power_2' class="text-center">- kW</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Tổng điện năng tiêu thụ tháng <a class="thang nay"></a></p>
-                <h4 id='energy_2' class="text-center">34353 kWh</h4>
+                <h4 id='energy_2' class="text-center">- kWh</h4>
             </div>
 
         </div>
@@ -153,15 +153,15 @@
             <!--</div>-->
             <div class=" col-sm-4 card">
                 <p class="text-center">Dòng điện tổng</p>
-                <h4 id='current_3' class="text-center">84 A</h4>
+                <h4 id='current_3' class="text-center current">- A</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Công suất tổng</p>
-                <h4 id='power_3' class="text-center">1456544 kW</h4>
+                <h4 id='power_3' class="text-center">- kW</h4>
             </div>
             <div class="col-sm-4 card">
                 <p  class="text-center"> Tổng điện năng tiêu thụ tháng <a class="thang nay"></a></p>
-                <h4 id='energy_3' class="text-center">5443678 kWh</h4>
+                <h4 id='energy_3' class="text-center">- kWh</h4>
             </div>
         </div>
     </div>
@@ -190,7 +190,8 @@
                     <h3 class="text-center" style="color: blue">Danh sách khách hàng</h3>
                 </div>
                 <div class="panel">
-                    <div class="list-group">
+                    <div class="list-group__">
+                    <!-- bỏ đi class list-group để nguyên khối này không scroll nữa..  -->
                         <table class="table table-bordered table-fixed">
                             <thead>
                             <tr>
@@ -418,10 +419,13 @@
                             <input type="text" aria-label="First name" class="form-control addNewCustomer email" id="email">
                         </div>
                         <div class="input-group">
-                            <div class="input-grouplg" style="width: 150px">
+                            <div class="input-group-lg" style="width: 150px">
                                 <span class="input-group-text">Số điện thoại</span>
                             </div>
                             <input type="number" aria-label="First name" class="form-control addNewCustomer phoneNumber" id="phoneNumber">
+                        </div>
+                        <div class="input-group">
+                            Mật khẩu mặc định của khách hàng mới là 12345678
                         </div>
                     </div>
                 </form>
@@ -533,6 +537,18 @@
     <script src="script/threeDots.js"></script>            
 </myWait>
 
+<audio id="audioAlert">
+    <source src="SOUND/beep-04.mp3" type="audio/mpeg">
+    <source src="SOUND/beep-04.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
+<audio id="audioAlert_Notification">
+    <source src="SOUND/beep-04.mp3" type="audio/mpeg">
+    <source src="SOUND/beep-04.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
 <script src="script/mySecurity.js"></script>
+<link rel="stylesheet" type="text/css" href="css/myCss.css">
+
 </body>
 </html>

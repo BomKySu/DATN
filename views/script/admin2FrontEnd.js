@@ -193,6 +193,7 @@ function getElec_TD()
             $("#energy_3").text(Elec.PE00000000002.RealtimeValue.Energy + " (kWh)");
             // getEnergyChartData();
             // getAllCustomer(); 
+            checkBalance();
         }
         else
         {
@@ -200,6 +201,33 @@ function getElec_TD()
         }
     });
 }
+function checkBalance()
+{
+    var neutralCurrent = 0;
+    var can3 = Math.sqrt(3);
+    var A = Elec.PE00000000000.RealtimeValue.Current;
+    var B = Elec.PE00000000001.RealtimeValue.Current;
+    var C = Elec.PE00000000002.RealtimeValue.Current;
+    var M = A - B/2 - C/2;
+    var N = B*can3/2 - C*can3/2; 
+    neutralCurrent = Math.sqrt(Math.pow(M,2)+Math.pow(N,2));
+    neutralCurrent = Math.round(neutralCurrent*100)/100;
+    var averageCurrent = (A*1 + B*1 + C*1)/3;
+    var unbalanceRatio = neutralCurrent*100/averageCurrent;
+    if (unbalanceRatio >= 15)
+    {
+        // console.log("unbalanceRatio >= 15");
+        $(".current").parent().addClass("blink-backgroud-red");
+    }
+    else
+    {
+        // console.log("unbalanceRatio < 15");
+        $(".current").parent().removeClass("blink-backgroud-red");
+    }   
+    return neutralCurrent;
+}
+
+
 //// CHART
 function fitChartData(energyChartData)
 {   // 20181218 Đây là hàm giới hạn giá trị của energyChartData lại từ giờ hiện tại..
@@ -305,11 +333,18 @@ function getAllCustomer()
                 {
                     allCustomer_Filtered[i*1].energy = Elec[allCustomer_Filtered[i*1].customerId].RealtimeValue.Energy;
                     allCustomer_Filtered[i*1].money = Math.round(LuyKe(allCustomer_Filtered[i*1].energy));
-                }
+                    // $('#customerStatus_' + i_).addClass(allCustomer_Filtered[i*1].customerId);
+                    // $('#customerStatus_' + i_).addClass("debt");
+                    // 20181225 - cách addClass này không được, vì add mà không xoá thì khi thêm khách hàng mới cái element chứa class đó cũng tự thay đổi giá trị theo cái khác.. không đúng... 
+                    $('#customerStatus_' + i_).attr("class", "text-center tienno " + allCustomer_Filtered[i*1].customerId + " debt" );
+                    loadDebt(allCustomer_Filtered[i*1].customerId);
+                }   
                 else
                 {
                     allCustomer_Filtered[i*1].energy = "Chưa có";
                     allCustomer_Filtered[i*1].money = "Chưa có";
+                    $('#customerStatus_' + i_).attr("class", "text-center tienno");
+                    $('#customerStatus_' + i_).text("Chưa có");
                 }
 
                 $('#trForEachCustomer_' + i_)["0"].hidden="";
@@ -317,11 +352,6 @@ function getAllCustomer()
                 $('#customerName_' + i_).text(allCustomer_Filtered[i*1].displayName);
                 $('#customerEnergy_' + i_).text(allCustomer_Filtered[i*1].energy);
                 $('#customerMoney_' + i_).text(allCustomer_Filtered[i*1].money);
-                // $('#customerStatus_' + i_).text(allCustomer_Filtered[i*1].status);
-                // $('#customerStatus_' + i_).text(allCustomer_Filtered[i*1].debt);
-                $('#customerStatus_' + i_).addClass(allCustomer_Filtered[i*1].customerId);
-                $('#customerStatus_' + i_).addClass("debt");
-                loadDebt(allCustomer_Filtered[i*1].customerId);
             }
             else
             {

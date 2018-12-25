@@ -506,6 +506,7 @@ function checkLimit()
     
     if (energyRealTime/energyLimit >= 1)
     {
+        $("#textLimitValue").parent().addClass("blink-backgroud-red");
         var beep500 = setInterval(function(){ $("#audioAlert")[0].play() }, 500);
         JSAlert.alert("Điện năng tiêu thụ đã đạt tới định mức đặt trước!", null, JSAlert.Icons.Failed)
         .then(function() {
@@ -514,6 +515,7 @@ function checkLimit()
     }
     else if (energyRealTime/energyLimit >= 0.8)
     {
+        $("#textLimitValue").parent().addClass("blink-backgroud-red");
         var beep1000 = setInterval(function(){ $("#audioAlert")[0].play() }, 1000);
         JSAlert.alert("Điện năng tiêu thụ đã đạt 80% so với định mức đặt trước!", null, JSAlert.Icons.Failed)
         .then(function() {
@@ -522,6 +524,7 @@ function checkLimit()
     }
     else 
     {   
+        $("#textLimitValue").parent().removeClass("blink-backgroud-red");
     }   
 }
 
@@ -639,54 +642,65 @@ $('#xacNhanThanhToan').on('click', function()
     JSAlert.alert("Đã thanh toán thành công số tiền " + money + "!");
 })
 
+
+var bieugia = {};
+setTimeout(function()
+{
+    var path = "/" + "AdminTong" + "/" + "BieuGia";
+    firebase.database().ref(path).on("value", function(snapshot)
+    {
+        bieugia = snapshot.val();
+    })
+}, 3000);
+
 function LuyKe(energy)
 {
-    var price1 =1549;
-    var price2 =1600;
-    var price3 =1858;
-    var price4 =2340;
-    var price5 =2615;
-    var price6 =2701;
-
+    // var price1 =1549;
+    // var price2 =1600;
+    // var price3 =1858;
+    // var price4 =2340;
+    // var price5 =2615;
+    // var price6 =2701;
+    
     var money = 0;
     if (energy <= 50)
     {
-        money = energy*price1;
+        money = energy*bieugia.price1;
     }
     else if (energy <= 100)
     {
-        money = 50*price1;
-        money = money + (energy-50)*price2;
+        money = 50*bieugia.price1;
+        money = money + (energy-50)*bieugia.price2;
     }
     else if (energy <= 200)
     {
-        money = 50*price1;
-        money += 50*price2;
-        money += (energy-100)*price3;
+        money = 50*bieugia.price1;
+        money += 50*bieugia.price2;
+        money += (energy-100)*bieugia.price3;
     }
     else if (energy <= 300)
     {
-        money = 50*price1;
-        money += 50*price2;
-        money += 100*price3;
-        money += (energy-200)*price4;
+        money = 50*bieugia.price1;
+        money += 50*bieugia.price2;
+        money += 100*bieugia.price3;
+        money += (energy-200)*bieugia.price4;
     }
     else if (energy <= 400)
     {
-        money = 50*price1;
-        money += 50*price2;
-        money += 100*price3;
-        money += 100*price4;
-        money += (energy-300)*price5;
+        money = 50*bieugia.price1;
+        money += 50*bieugia.price2;
+        money += 100*bieugia.price3;
+        money += 100*bieugia.price4;
+        money += (energy-300)*bieugia.price5;
     }
     else if (energy > 400)
     {
-        money = 50*price1;
-        money += 50*price2;
-        money += 100*price3;
-        money += 100*price4;
-        money += 100*price5;
-        money += (energy-400)*price6;
+        money = 50*bieugia.price1;
+        money += 50*bieugia.price2;
+        money += 100*bieugia.price3;
+        money += 100*bieugia.price4;
+        money += 100*bieugia.price5;
+        money += (energy-400)*bieugia.price6;
     }
     money += money/10;
     money = Math.round(money);

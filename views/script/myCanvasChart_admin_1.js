@@ -26,7 +26,10 @@ chartLoad = function ()
     console.log("chartLoad running");
     chart = new CanvasJS.Chart("chartContainer", 
     { 
-        animationEnabled: true,
+        options: {
+            responsive: false
+        },
+        // animationEnabled: true,
         theme: "light2",
         title:{
             text: "Biểu đồ tổng điện năng tiêu thụ các khu vực"
@@ -205,6 +208,13 @@ chartLoad = function ()
 
 updateChartData = function()
 {
+    // comment đoạn này vì đã xử lý bên ngoài, không còn trường hợp gọi hàm này mà chart vẫn null
+    // if (chart == null)  
+    // {
+    //     console.log("chart == null");
+    //     return;
+    // }
+    // console.log("chart != null");
     chart.options.data[0].dataPoints = 
     [
         { x: new Date(myYear, myMonthXaxis, myDate, 00), y: energyChartData["ThuDuc"][myYear][myMonth][myDate]["0"] },

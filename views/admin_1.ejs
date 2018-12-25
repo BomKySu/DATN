@@ -18,7 +18,7 @@
 
 </head>
 
-<body background="IMAGE/nen.jpg">
+<body background="IMAGE/nen.jpg" >
 <!--<%# include nav.ejs %>-->
 <myMain id="myMain" hidden>
 <nav class="navbar sticky-top navbar-expand-lg" style="background-color: #1F3A93">
@@ -64,6 +64,9 @@
             </style>
             <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_thongbao" >
                 <a class="nav-link text-white" href="#" style="font-size: medium">Gửi thông báo</a>
+            </div>
+            <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_BieuGia" >
+                <a class="nav-link text-white" href="#" style="font-size: medium">Thiết lập biểu giá</a>
             </div>
             <div class="btn header-hover" href="#" data-toggle="modal" type="link" data-target="#Modal_ThemQTV" >
                 <a class="nav-link text-white" href="#" style="font-size: medium">Thêm quản trị viên khu vực</a>
@@ -143,7 +146,8 @@
                     <div class="">
                         <div class="card-body" >
                             <div id="chartContainer" style="height: 400px; width: 100%;">
-                                <!-- <h2 class="text-center">BIỂU ĐỒ Ở ĐÂY</h2> -->
+                            <!-- <div id="chartContainer" style="height: 400px; width: 781px;"> -->
+                                    <!-- <h2 class="text-center">BIỂU ĐỒ Ở ĐÂY</h2> -->
                             </div>
                         </div>
                     </div>
@@ -160,6 +164,11 @@
                     <div class="list-group"  id="thongBaoDaGui" style="height: 550px;">
                         <!-- // thông báo hiển thị ở đây, được tạo ra bằng js -->
                     </div>
+                    <style>
+                        .list-group {
+                            max-height: 500px;
+                        }
+                    </style>
                 </div>
             </div>
         </div>
@@ -172,11 +181,11 @@
         <!--<p class="text-center text-white" style="padding-right: 80px">Số điện thoại trực tuyến: <a href="">0968787976</a>.</p>-->
     <!--</footer>-->
 <!--</div>-->
-<div class="container-fluid">
+<div class="container-fluid" hidden>
     <div class="row">
-        <div class="col-sm-4" style="background-color: #1F3A93;     ">
-
+        <div class="col-sm-4" style="background-color: #1F3A93;">
         </div>
+
         <div class="col-sm-8 text-white" style="background-color:#1F3A93;">
             <p style="font-weight: bold;font-style: revert">Thông tin liên hệ </p>
             <div class="fas fa-home">
@@ -236,6 +245,72 @@
     </div>
 </div>
 <!-- hết modal gui thong bao-->
+
+
+<!--modal biểu giá -->
+<div class="modal fade bieu-gia" id="Modal_BieuGia" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-center">
+                    <h4 class="modal-title text-center col-12">Thiết lập biểu giá (VNĐ)</h4>
+                </div>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 270px">
+                                <span class="input-group-text">Bậc 1: Cho kWh từ 0 - 50</span>
+                            </div>
+                            <input value="1549" type="number" aria-label="First name" class="form-control bieu-gia price1" id="">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 270px">
+                                <span class="input-group-text">Bậc 2: Cho kWh từ 51 - 100</span>
+                            </div>
+                            <input value="1600" type="number" aria-label="First name" class="form-control bieu-gia price2" id="">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 270px">
+                                <span class="input-group-text">Bậc 3: Cho kWh từ 101 - 200</span>
+                            </div>
+                            <input value="1858" type="number" aria-label="First name" class="form-control bieu-gia price3" id="">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 270px">
+                                <span class="input-group-text">Bậc 4: Cho kWh từ 201 - 300</span>
+                            </div>
+                            <input value="2340" type="number" aria-label="First name" class="form-control bieu-gia price4" id="">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 270px">
+                                <span class="input-group-text">Bậc 5: Cho kWh từ 301 - 400</span>
+                            </div>
+                            <input value="2615" type="number" aria-label="First name" class="form-control bieu-gia price5" id="">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-lg" style="width: 270px">
+                                <span class="input-group-text">Bậc 6: Cho kWh từ 401 trở lên</span>
+                            </div>
+                            <input value="2701" type="number" aria-label="First name" class="form-control bieu-gia price6" id="">
+                        </div>
+    
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary bieu-gia submit">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hết modal biểu giá -->
+
 <!--modal them QTV-->
 <div class="modal fade" id="Modal_ThemQTV" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -282,6 +357,9 @@
                                 <span class="input-group-text">Số điện thoại</span>
                             </div>
                             <input type="number" aria-label="First name" class="form-control addNewAdmin phoneNumber" id="phoneNumber">
+                        </div>
+                        <div class="input-group">
+                            Mật khẩu mặc định của quản trị viên mới là 12345678
                         </div>
                     </div>
                 </form>

@@ -60,6 +60,9 @@ function getElec_TD()
         total.energy += Elec_TD.PE00000000002.RealtimeValue.Energy*1
         if (Elec_TD)  // != null
         {
+            total.current = Math.round(total.current * 100)/100;
+            total.power = Math.round(total.power);
+            total.energy = Math.round(total.energy * 100)/100;
             $("#current").text(total.current + " (A)");
             $("#power").text(total.power + " (W)");
             $("#energy").text(total.energy + " (kWh)");
@@ -79,6 +82,7 @@ function getElec_GV()
     var total = {current:0, power:0,energy:0}
     database_Elec_GV.ref(pathElec_GV).on('value', function(snapshot) 
     {   
+        total = {current:0, power:0,energy:0}; // không có dòng này nó sẽ cộng dồn nhiều lên á... . 
         // console.log("getElec on value called"); 
         Elec_GV = snapshot.val();
         // total.current += Elec_GV.PE00000000000.RealtimeValue.Current*1
@@ -95,6 +99,9 @@ function getElec_GV()
         total.energy += Elec_GV.PE00000000003.RealtimeValue.Energy*1
         if (Elec_GV)  // != null
         {
+            total.current = Math.round(total.current * 100)/100;
+            total.power = Math.round(total.power);
+            total.energy = Math.round(total.energy * 100)/100;
             $("#current_2").text(total.current + " (A)");
             $("#power_2").text(total.power + " (W)");
             $("#energy_2").text(total.energy + " (kWh)");
@@ -230,6 +237,7 @@ function getNotification()
         }   
     });
     getEnergyChartData();
+    // getEnergyChartData_test();
     // getFeedback();
 }
 $('#Modal_xemthongbao').on('show.bs.modal', function (event) 
@@ -279,7 +287,11 @@ function sum3Phase(energyChartData)
                     for (var hour in energyChartData[phase][year][month][day])
                     {
                         console.log(hour, myHour);
-                        if (hour*1 >= myHour*1) continue;
+                        if (hour*1 >= myHour*1) 
+                        {
+                            output[phase][year][month][day][hour] = "-";
+                            continue;
+                        }
                         output[phase][year][month][day][hour] = 
                         energyChartData[phase][year][month][day][hour]*1
                         + energyChartData["pha2"][year][month][day][hour]*1
@@ -385,34 +397,69 @@ async function getEnergyChartData()
         var energyChartData_TD = snapshot.val();
         energyChartData_TD = sum3Phase(energyChartData_TD);
         energyChartData.ThuDuc = energyChartData_TD.pha1;    // vì nó cộng dồn vào pha 1 thôi chứ k có gì đặc biệt..
-        if (chart == null) 
+        if (energyChartData.GoVap != null) 
         {
-            // chartLoad(); // chờ cho thằng Gò Vấp load luôn... 
-        }
-        else
-        {
-            updateChartData();
-            chart.render();
+            if (chart == null) 
+            {
+                console.log("(chart == null)");
+                chartLoad(); // chờ cho thằng Gò Vấp load luôn... 
+            }
+            else
+            {
+                updateChartData();
+                chart.render();
+            }
         }
     })
     var path_GV = "/" + "Total" + "/energyChartData";
     await database_Elec_GV.ref(path_GV).on('value', function(snapshot) 
     {   
         var energyChartData_GV = snapshot.val();
+        // console.log(energyChartData);
         energyChartData_GV = sum3Phase(energyChartData_GV);
         energyChartData.GoVap = energyChartData_GV.pha1;
-        if ((chart == null) && (energyChartData.ThuDuc))
+        // console.log(energyChartData);
+        if (energyChartData.ThuDuc != null) 
         {
-            chartLoad();
-        }
-        else
-        {
-            updateChartData();
-            chart.render();
+            console.log("(energyChartData.ThuDuc)")
+            if ((chart == null))
+            {
+                console.log("(chart == null)")
+                chartLoad();
+            }
+            else
+            {
+                updateChartData();
+                chart.render(); // báo lỗi dòng này // 20181221
+            }
         }
     })
 }
 
+
+// function getEnergyChartData_test()  // test kích thước chart // 20181224
+// {
+//     var path = "/" + "Total" + "/energyChartData";
+//     // 20181109
+//     // var path = "/" + firebase.auth().currentUser.uid + "/energyChartData";
+//     // database_Elec.ref(path).once('value').then(function(snapshot) 
+//     database_Elec_TD.ref(path).on('value', function(snapshot) 
+//     {   
+//         energyChartData = snapshot.val();
+//         // energyChartData = fitChartData(energyChartData);
+//         // console.log(energyChartData[myYear.toString()][myMonth.toString()]["03"]);
+//         if (chart == null || chart == undefined) 
+//         {
+//             chartLoad();
+//         }
+//         else
+//         {
+//             updateChartData();
+//             chart.render();
+//             // console.log("chart.render() running");
+//         }
+//     });
+// }
 
 // THÊM QTV
 $(".addNewAdmin.submit").on("click", function()
@@ -460,3 +507,60 @@ $(".addNewAdmin.submit").on("click", function()
     });
 })
 
+var BieuGia =
+{   
+    getFromFirebase: function()
+    {
+        var bieugia = {};
+        var path = "/" + "AdminTong" + "/" + "BieuGia";
+        firebase.database().ref(path).on("value", function(snapshot)
+        {
+            bieugia = snapshot.val();
+            BieuGia.setForm(bieugia);
+        })
+        // return bieugia;
+    },
+    setFirebase: function()
+    {
+        bieugia = BieuGia.getFromForm();
+        var path = "/" + "AdminTong" + "/" + "BieuGia";
+        firebase.database().ref(path).set(bieugia, function(error)
+        {
+            // console.log(error);
+        })
+    },
+    getFromForm: function()
+    {
+        var bieugia = {};
+        bieugia.price1 = $(".bieu-gia.price1").val();
+        bieugia.price2 = $(".bieu-gia.price2").val();
+        bieugia.price3 = $(".bieu-gia.price3").val();
+        bieugia.price4 = $(".bieu-gia.price4").val();
+        bieugia.price5 = $(".bieu-gia.price5").val();
+        bieugia.price6 = $(".bieu-gia.price6").val();
+        return bieugia;
+    },
+    setForm: function(bieugia)
+    {
+        $(".bieu-gia.price1").val(bieugia.price1)
+        $(".bieu-gia.price2").val(bieugia.price2);
+        $(".bieu-gia.price3").val(bieugia.price3);
+        $(".bieu-gia.price4").val(bieugia.price4);
+        $(".bieu-gia.price5").val(bieugia.price5);
+        $(".bieu-gia.price6").val(bieugia.price6);
+        return true;
+    }
+}
+setTimeout(BieuGia.getFromFirebase(), 3000);
+$(".bieu-gia.submit").on("click", function()
+{
+    BieuGia.setFirebase();
+    JSAlert.alert("Đang lưu...").dismissIn(1000*.5);
+    var alert = new JSAlert.alert("Cập nhật thành công!");
+    alert.buttons[0].text = "Đóng";
+    alert.show();
+    alert.then(function(result) 
+    {
+        $(".bieu-gia").modal("hide");
+    })
+})
