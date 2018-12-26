@@ -82,4 +82,27 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// NEXMO // 20181226
+global.Nexmo = require('nexmo');
+// global.nexmo_0 = new Nexmo({
+//   apiKey: 'c83d55bd',
+//   apiSecret: 'xV0K3fnzOoTIVRhw'
+// })
+global.nexmo_0 = new Nexmo({
+  apiKey: '02fdc347',
+  apiSecret: 'Byyrxvvy24kjGsOt'
+})
+
+// global.smsFrom = 'HienNghiaNam'
+// global.smsTo_0 = '84964807452'
+// const to = '84968787976'
+// const to = '84344302753'
+// global.smsText = `-CTy Dien Luc Hien Nghia Nam-
+// TB: Tien dien cua quy khach la 1234534.
+// Vui long thanh toan truoc ngay 15 thang nay.
+// `
+
+// ret = nexmo.message.sendSms(from, to, text)
+// console.log("sendSms called: ", from, to, text, ret);
+
 module.exports = app;
