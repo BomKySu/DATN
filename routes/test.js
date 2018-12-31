@@ -1,6 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var util = require('util');
+console.log("route TEST CALLED");
+
+// function doSomething() {
+//   var d = new Date(),
+//       h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), 59, 0, 0),
+//       e = h - d;
+//   if (e > 100) { // some arbitrary time period
+//       window.setTimeout(doSomething, e);
+//   }
+//   // your code
+// }
 
 //test firebaseThuDuc
 // router.get('/', function(req, res, next) {

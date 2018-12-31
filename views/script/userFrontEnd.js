@@ -214,6 +214,7 @@ displayElec = function(elecData)
         // console.log(elecData[para]);
     }
     if (elecData == null) return;
+    elecData.Voltage = Math.round(elecData.Voltage);    // làm tròn điện áp
     voltage.innerHTML = elecData.Voltage + " (V)";
     current.innerHTML = elecData.Current + " (A)";
     power.innerHTML = elecData.Power + " (W)";

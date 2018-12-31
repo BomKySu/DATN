@@ -30,4 +30,20 @@ console.log('global.database_Elec_TD configed..');
 require('../backEnd/handlePayment');
 ////20181226
 
+////20190101
+var config_Elec_GV = {
+  apiKey: "AIzaSyDV6J-2qCGizAZlqHo1gMM3Ofr0uyWCiok",
+  authDomain: "diengovap-6962f.firebaseapp.com",
+  databaseURL: "https://diengovap-6962f.firebaseio.com",
+  projectId: "diengovap-6962f",
+  storageBucket: "diengovap-6962f.appspot.com",
+  messagingSenderId: "289339575571"
+};
+// Initialize another app with a different config
+var tertiary = firebase.initializeApp(config_Elec_GV, "tertiary");
+// Retrieve the database.
+global.database_Elec_GV = tertiary.database();
+require('../backEnd/handleHourData');
+////20190101
+
 module.exports = firebase;
