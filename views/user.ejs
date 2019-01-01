@@ -133,7 +133,12 @@
                 <h4 id='energy' class="text-center">-- (kWh)</h4>
             </div>
             <div class="col-sm-2 card">
-                <p class="text-center" >  Điện năng tháng 1</p>
+                <p class="text-center" id="dienNangThangNay">Điện năng tháng 1</p>
+                <script>
+                    date = new Date(); 
+                    d = date.getMonth() + 1;    // tháng 1 có giá trị là 0
+                    $("#dienNangThangNay").text("Điện năng tháng " + d);
+                </script>
                 <h4 id='energy_thangnay' class="text-center">-- (kWh)</h4>
             </div>
             <div class="col-sm-2 card">
@@ -204,7 +209,7 @@
                     </thead>
                     <tbody id="bangTT3Thang">
                         <tr id="trThangNay">
-                            <td id="thangNay">Tháng 12</td>
+                            <td id="thangNay">Tháng </td>
                             <td id="thangNay_DienNang">30</td>
                             <td id="thangNay_Tien">46470</td>
                             <td id="thangNay_TrangThai"><!--Chưa thanh toán--></td>

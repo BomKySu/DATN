@@ -223,6 +223,7 @@ displayElec = function(elecData)
     current.style.color = 
     power.style.color = 
     energy.style.color = "#FFD700";
+    $('#energy_thangnay')[0].style.color = "#FFD700";
 
     setTimeout(function () 
     {
@@ -230,6 +231,7 @@ displayElec = function(elecData)
         current.style.color = 
         power.style.color = 
         energy.style.color = "#000000";    
+        $('#energy_thangnay')[0].style.color = "#000000";
     }, 200);    
 }
 
@@ -485,17 +487,37 @@ $("#Modal_limit").find(".btn-primary").click(function()
 });
 
 var energyRealTime;
+var energyEndOfMonthBefore;
+var energyThisMonth;
+
 function getEnergy()
 {
-    var pathRealtimeValue = "/" + user.customerId + "/RealtimeValue/Energy";
-    database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
-    {   
-        energyRealTime = snapshot.val();
-        if (energyRealTime*1 <= 0)  energyRealTime = 0;
-        energy.innerHTML = energyRealTime + " (kWh)";
-        $("#thangNay_DienNang").text(energyRealTime);
-        $("#thangNay_Tien").text(Math.round(LuyKe(energyRealTime)));
-        checkLimit();
+    var date = new Date();
+    var date2 = new Date(date.getFullYear(), date.getMonth(), 0, 23);   // lấy 23h ngày cuối cùng của tháng trước
+    var pathEndOfMonthBefore = "/" + user.customerId + moment(date2*1).format("/YYYY/M/D/H");
+    database_Elec.ref(pathEndOfMonthBefore).once('value').then(function(snapEndOfMonthBefore) 
+    {
+        energyEndOfMonthBefore = snapEndOfMonthBefore.val().Energy*1;
+
+        var pathRealtimeValue = "/" + user.customerId + "/RealtimeValue/Energy";
+        database_Elec.ref(pathRealtimeValue).on('value', function(snapshot) 
+        {   
+            // energyRealTime = snapshot.val();
+            // if (energyRealTime*1 <= 0)  energyRealTime = 0;
+            // energy.innerHTML = energyRealTime + " (kWh)";
+            // $("#thangNay_DienNang").text(energyRealTime);
+            // $("#thangNay_Tien").text(Math.round(LuyKe(energyRealTime)));
+
+            energyRealTime = snapshot.val();
+            energyThisMonth = energyRealTime*1 - energyEndOfMonthBefore*1/1000;
+            energyThisMonth = Math.round(energyThisMonth*100)/100;
+            if (energyThisMonth*1 <= 0)  energyThisMonth = 0;
+            $("#energy_thangnay").text(energyThisMonth + " (kWh)");
+            $("#thangNay_DienNang").text(energyThisMonth);
+            $("#thangNay_Tien").text(Math.round(LuyKe(energyThisMonth)));
+            
+            checkLimit();
+        });
     });
 }
  
@@ -505,7 +527,8 @@ function checkLimit()
     // console.log("energyLimit = " + energyLimit);
     // console.log("energyRealTime/energyLimit = " + energyRealTime/energyLimit);
     
-    if (energyRealTime/energyLimit >= 1)
+    // if (energyRealTime/energyLimit >= 1)
+    if (energyThisMonth/energyLimit >= 1) // 20190101
     {
         $("#textLimitValue").parent().addClass("blink-backgroud-red");
         var beep500 = setInterval(function(){ $("#audioAlert")[0].play() }, 500);
@@ -514,7 +537,8 @@ function checkLimit()
             clearInterval(beep500);     
         });;
     }
-    else if (energyRealTime/energyLimit >= 0.8)
+    // else if (energyRealTime/energyLimit >= 0.8)
+    else if (energyThisMonth/energyLimit >= 0.8) // 20190101
     {
         $("#textLimitValue").parent().addClass("blink-backgroud-red");
         var beep1000 = setInterval(function(){ $("#audioAlert")[0].play() }, 1000);
@@ -544,7 +568,7 @@ function displayTable()
             {
                 // console.log(Payment[year][month]);
                 count ++;
-                if (count >= 4) return;
+                if (count >= 10) return;
                 $("#rowMonth" + month + year).remove();
                 trForEachMonth = document.createElement('tr');
                 $(trForEachMonth)
