@@ -125,6 +125,7 @@ function doSomething() {
         e = h - d;
     if (d.getTimezoneOffset()/60 != -7)
     {
+        console.log("Timezone != +7");
         d = new Date(d*1 + (d.getTimezoneOffset()/60 + 7)*60*60*1000),  // ĐƯA VỀ GIỜ VIỆT NAM
         h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1,                          0, 0, 0),
         e = h - d;
