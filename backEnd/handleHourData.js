@@ -96,7 +96,7 @@ function prevDataToCurrentData_3()
 
     var prevValue;
     var prevPrevValue;
-    database_Elec_TD.ref(pathPrevHour).once("value").then(function(snapshot)
+    database_Elec_GV.ref(pathPrevHour).once("value").then(function(snapshot)
     {
         prevValue = snapshot.val().Energy*1;
         console.log(snapshot.val());
