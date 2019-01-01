@@ -112,7 +112,7 @@ function prevDataToCurrentData_3()
             console.log(result);
             // var pathChartData = "PE00000000000/energyChartData" + moment(nowMils).format("/YYYY/M/D/H");
             var pathChartData = "Total/energyChartData/pha1" + moment(nowMils).format("/YYYY/M/D/H");
-            database_Elec_TD.ref(pathChartData).set(result, function(error) {});
+            database_Elec_GV.ref(pathChartData).set(result, function(error) {});
         });
     });
 }
