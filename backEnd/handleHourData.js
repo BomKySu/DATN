@@ -123,6 +123,12 @@ function doSomething() {
     var d = new Date(),
         h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1, 0, 0, 0),
         e = h - d;
+    if (d.getTimezoneOffset()/60 != -7)
+    {
+        d = new Date(d*1 + (d.getTimezoneOffset()/60 + 7)*60*60*1000),  // ĐƯA VỀ GIỜ VIỆT NAM
+        h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1,                          0, 0, 0),
+        e = h - d;
+    }
     console.log("d, h, e: ", d, h, e);
     if (e > 100) { // some arbitrary time period
 		console.log("e > 100");
