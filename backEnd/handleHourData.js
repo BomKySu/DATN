@@ -130,6 +130,9 @@ function doSomething() {
         h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1,                          0, 0, 0),
         e = h - d;
     }
+    else        
+        console.log("Timezone Ofset: ", d.getTimezoneOffset()/60);
+
     console.log("d, h, e: ", d, h, e);
     if (e > 100) { // some arbitrary time period
 		console.log("e > 100");
